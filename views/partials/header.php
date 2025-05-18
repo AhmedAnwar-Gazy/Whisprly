@@ -1,6 +1,37 @@
-<header class="bg-white shadow">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900"> 
-        hello <?= $_SESSION['name'] ?? "Guest"  ?> ,<?=  $heading ?> </h1>
-    </div>
-</header>
+ <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                <span class="logo-text">Whisprly</span>
+            </div>
+
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="#">Podcasts</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Creator</a></li>
+                    <li><a href="#">Admin</a></li>
+                </ul>
+            </nav>
+
+            <div class="mobile-menu-button">
+                <button class="menu-toggle">
+                    <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                </div>
+
+            <div class="auth-buttons">
+                <button class="btn login-btn">
+                    Login
+                </button>
+                <button class="btn signup-btn">
+                    Signup
+                </button>
+            </div>
+        </div>
+    </header>
