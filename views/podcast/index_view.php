@@ -3,10 +3,8 @@
 <?php require('views/parts/navgtion.php') ?>
 <?php require('views/parts/header.php') ?>
 
-
-
 <main>
-    <h1>user_management</h1>
+  <h1>browse_podcasts</h1>
   <section>
 
 

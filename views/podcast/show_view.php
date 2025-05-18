@@ -4,7 +4,7 @@
 <?php require('views/parts/header.php') ?>
 
 <main>
-  <h1>admin_dashboard</h1>
+    <h1>podcast_series_name</h1>
   <section>
 
 
@@ -12,4 +12,5 @@
 
   </section>
 </main>
+
 <?php require('views/parts/footer.php') ?>
