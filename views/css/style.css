@@ -1,0 +1,446 @@
+/* style.css */
+
+/* General Body Styling based on Visual Identity */
+body {
+    font-family: 'Inter', sans-serif; /* Apply Inter font */
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    color: #36454F; /* Charcoal Gray text */
+    margin: 0; /* Remove default body margin */
+    padding: 0;
+    line-height: 1.6; /* Improve readability */
+}
+
+/* Header Styling */
+.site-header {
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 1rem 1.5rem; /* Responsive padding */
+}
+
+/* Container for layout */
+.container {
+    max-width: 1200px; /* Max width similar to Tailwind container */
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 1.5rem; /* Equivalent to Tailwind w-6 */
+    height: 1.5rem; /* Equivalent to Tailwind h-6 */
+    margin-right: 0.5rem; /* Equivalent to Tailwind mr-2 */
+    color: #00697B; /* Deep Teal */
+}
+
+.logo-text {
+    font-size: 1.5rem; /* Equivalent to Tailwind text-2xl */
+    font-weight: bold; /* Equivalent to Tailwind font-bold */
+    color: #36454F; /* Charcoal Gray */
+}
+
+/* Navigation Styling */
+.site-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    space-x: 2rem; /* Mimic Tailwind space-x-8 */
+    
+}
+
+.site-nav li {
+    margin-left: 2rem; /* Equivalent to space-x-8 */
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: #36454F; /* Charcoal Gray */
+    transition: color 0.3s ease; /* Transition for hover */
+}
+
+.site-nav a:hover {
+    color: #00697B; /* Deep Teal on hover */
+     /* border: 2px solid #00697B; */
+}
+
+/* Hide navigation on small screens */
+.site-nav {
+    display: none;
+}
+
+/* Mobile Menu Button Styling */
+.mobile-menu-button {
+    display: block; /* Show on small screens */
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #36454F; /* Charcoal Gray */
+}
+
+.menu-icon {
+    width: 1.5rem; /* Equivalent to Tailwind w-6 */
+    height: 1.5rem; /* Equivalent to Tailwind h-6 */
+}
+
+/* Hide mobile menu button on medium and larger screens */
+@media (min-width: 768px) { /* Equivalent to Tailwind md breakpoint */
+    .site-nav {
+        display: flex; /* Show navigation */
+    }
+
+    .mobile-menu-button {
+        display: none; /* Hide mobile button */
+    }
+}
+
+
+/* Button Styling */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Equivalent to Tailwind space-x-4 */
+}
+
+.btn {
+    padding: 0.5rem 1.5rem; /* Equivalent to Tailwind px-6 py-2 */
+    border-radius: 9999px; /* Equivalent to Tailwind rounded-full */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+    font-size: 1rem; /* Base font size */
+    font-weight: 500; /* Medium font weight */
+}
+
+.login-btn {
+    border: 1px solid #FF7F50; /* Warm Coral/Terracotta border */
+    color: #FF7F50; /* Warm Coral/Terracotta text */
+    background-color: transparent;
+}
+
+.login-btn:hover {
+    background-color: #FF7F50; /* Warm Coral/Terracotta background on hover */
+    color: white;
+}
+
+.signup-btn {
+    background-color: #00697B; /* Deep Teal background */
+    color: white;
+    border: 1px solid #00697B; /* Deep Teal border */
+}
+
+.signup-btn:hover {
+    background-color: #005a6a; /* Slightly darker Teal on hover */
+    border-color: #005a6a;
+}
+
+/* Responsive padding for header */
+@media (min-width: 768px) { /* Equivalent to Tailwind md breakpoint */
+    .site-header {
+        padding-left: 2.5rem; /* Equivalent to Tailwind px-10 */
+        padding-right: 2.5rem; /* Equivalent to Tailwind px-10 */
+    }
+}
+
+@media (min-width: 1024px) { /* Equivalent to Tailwind lg breakpoint */
+    .site-header {
+        padding-left: 4rem; /* Equivalent to Tailwind px-16 */
+        padding-right: 4rem; /* Equivalent to Tailwind px-16 */
+    }
+}
+
+
+
+/* footer.css */
+
+/* General Body Styling (ensure consistency with header or main page) */
+body {
+    font-family: 'Inter', sans-serif; /* Apply Inter font */
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    color: #36454F; /* Charcoal Gray text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Footer Styling */
+.site-footer {
+    background-color: #00697B; /* Deep Teal background */
+    color: #F8F5F0; /* Soft Cream/Off-White text for contrast */
+    padding: 3rem 1.5rem; /* Padding top/bottom and responsive side padding */
+}
+
+/* Container for layout */
+.container {
+    max-width: 1200px; /* Max width similar to Tailwind container */
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+    justify-content: space-between;
+    gap: 2rem; /* Space between sections */
+}
+
+/* Footer Section Styling */
+.footer-section {
+    flex: 1; /* Allow sections to grow */
+    min-width: 150px; /* Minimum width before wrapping */
+}
+
+.footer-section h3 {
+    font-size: 1.25rem; /* Slightly larger heading */
+    margin-bottom: 1rem;
+    color: #FF7F50; /* Warm Coral/Terracotta for headings */
+}
+
+.footer-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #F8F5F0; /* Soft Cream/Off-White link color */
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #FF7F50; /* Warm Coral/Terracotta on hover */
+}
+
+/* Brand Info Section */
+.brand-info .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.brand-info .logo-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    color: #FF7F50; /* Warm Coral/Terracotta icon */
+}
+
+.brand-info .logo-text {
+     font-size: 1.5rem;
+    font-weight: bold;
+    color: #F8F5F0; /* Soft Cream/Off-White text */
+}
+
+.brand-info p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(248, 245, 240, 0.8); /* Slightly transparent text */
+}
+
+/* Social Links Section */
+.social-icons {
+    display: flex;
+    gap: 1rem; /* Space between social icons */
+}
+
+.social-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #F8F5F0; /* Soft Cream/Off-White icon color */
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #FF7F50; /* Warm Coral/Terracotta on hover */
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) { /* Medium screens and up */
+    .site-footer {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+    .container {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+    }
+
+    .footer-section {
+        flex: 1; /* Distribute space more evenly */
+    }
+
+    .brand-info {
+        flex: 1.5; /* Give a bit more space to the brand info */
+    }
+}
+
+@media (min-width: 1024px) { /* Large screens and up */
+    .site-footer {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+
+
+
+/* cards.css */
+
+/* General Body Styling (ensure consistency with header and footer) */
+body {
+    font-family: 'Inter', sans-serif; /* Apply Inter font */
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    color: #36454F; /* Charcoal Gray text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+/* CSS for the main content wrapper to push the footer down */
+/* Apply this class to the div that wraps your main page content */
+.main-content-wrapper {
+    flex-grow: 1; /* Allow this section to grow and fill available space */
+    padding: 1.5rem 1.5rem; /* Add padding */
+}
+
+/* Container for layout */
+.container {
+    max-width: 1200px; /* Max width similar to Tailwind container */
+    margin: 0 auto; /* Center the container */
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00697B; /* Deep Teal for section titles */
+    margin-bottom: 1.5rem;
+    text-align: center; /* Center the title */
+}
+
+/* Card Grid Layout - Adjusted for primarily horizontal cards */
+.card-grid {
+    display: grid;
+    /* Adjust grid template to better accommodate horizontal cards */
+    /* This example sets up columns that are at least 300px and flex */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem; /* Space between cards */
+}
+
+/* Individual Card Styling - Defaulting to Horizontal Layout */
+.content-card {
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    border-radius: 0.5rem; /* Rounded corners */
+    border: 2px solid transparent; /* Add a transparent border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-direction: row; /* Arrange content horizontally */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease, border-color 0.3s ease; /* Smooth transitions including border-color */
+    cursor: pointer; /* Indicate clickable */
+    opacity: 0; /* Start hidden for fade-in animation */
+    animation: fadeIn 0.5s ease forwards; /* Apply fade-in animation */
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Optional: slight move up */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation delay to stagger the fade-in */
+.card-grid .content-card:nth-child(1) { animation-delay: 0.1s; }
+.card-grid .content-card:nth-child(2) { animation-delay: 0.2s; }
+.card-grid .content-card:nth-child(3) { animation-delay: 0.3s; }
+.card-grid .content-card:nth-child(4) { animation-delay: 0.4s; }
+.card-grid .content-card:nth-child(5) { animation-delay: 0.5s; }
+.card-grid .content-card:nth-child(6) { animation-delay: 0.6s; }
+/* Add more delays for more cards */
+
+
+.content-card:hover {
+    transform: translateY(-5px) scale(1.02); /* Lift and slightly scale card on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    border-color: #00697B; /* Deep Teal border on hover */
+}
+
+.card-cover {
+    width: 35%; /* Adjust width of image for horizontal layout */
+    height: auto; /* Auto height to maintain aspect ratio */
+    flex-shrink: 0; /* Prevent image from shrinking */
+    object-fit: cover; /* Ensure cover fills the space without distortion */
+    /* Remove specific aspect ratios here unless needed for specific card types */
+}
+
+.card-info {
+    padding: 1rem; /* Padding inside the card */
+    flex-grow: 1; /* Allow info section to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center content in info */
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #36454F; /* Charcoal Gray title */
+    margin-bottom: 0.5rem;
+}
+
+.card-creator {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for creator */
+    margin-bottom: 0.5rem;
+}
+
+.card-meta {
+    font-size: 0.8rem;
+    color: rgba(54, 69, 79, 0.6); /* Even lighter color for metadata */
+    margin-top: auto; /* Push meta to the bottom */
+}
+
+/* If you still want to support vertical cards, you would add overrides here */
+/*
+.vertical-card {
+    flex-direction: column;
+}
+
+.vertical-card .card-cover {
+    width: 100%;
+    aspect-ratio: unset; // Or set specific vertical aspect ratio
+}
+*/
+
+
+/* Responsive Adjustments for padding */
+@media (min-width: 768px) { /* Medium screens and up */
+    .main-content-wrapper {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) { /* Large screens and up */
+    .main-content-wrapper {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
