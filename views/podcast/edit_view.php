@@ -1,7 +1,6 @@
-<?php require('views/parts/head.php') ?>
-<?php require('views/parts/adminbar.php') ?>
-<?php require('views/parts/navgtion.php') ?>
-<?php require('views/parts/header.php') ?>
+<?php  require('views/partials/head.php') ?>
+<?php  require('views/partials/nav.php') ?>
+<?php require('views/partials/header.php') ?>
 <?php $errors = ($_SESSION['errors'] ?? '' ) ; unset($_SESSION['errors']) ; ?>
 
 <main>
@@ -9,8 +8,8 @@
   <section>
 
 
-
+<h1>hiiiiiiiiiiii</h1>
 
   </section>
 </main>
-<?php require('views/parts/footer.php') ?>
+<?php require('views/partials/footer.php') ?>

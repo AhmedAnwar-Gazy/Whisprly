@@ -3,7 +3,7 @@ $heading = "Home";
 
 $_SESSION['name']= "ahmed";
 
-require "views/index_view.php";
+require "views/whisprly_view.php";
 
 ?>
 

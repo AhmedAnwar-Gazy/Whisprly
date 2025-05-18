@@ -1,9 +1,7 @@
 <?php http_response_code(401); // مهم لضبط كود الحالة الصحيح ?>
-<?php require('views/parts/head.php'); ?>
-<?php require('views/parts/adminbar.php'); ?>
-<?php require('views/parts/navgtion.php'); ?>
-<?php require('views/parts/header.php'); ?>
-
+<?php  require('views/partials/head.php') ?>
+<?php  require('views/partials/nav.php') ?>
+<?php require('views/partials/header.php') ?>
 <main class="safha_error_container">
     <div class="risala_card">
         <div class="error_code">٤٠١</div>
@@ -15,4 +13,4 @@
     </div>
 </main>
 
-<?php require('views/parts/footer.php'); ?>
+<?php require('views/partials/footer.php') ?>

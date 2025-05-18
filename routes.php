@@ -1,6 +1,6 @@
 <?php
 
-$router->get('/', 'controlers/index.php');
+$router->get('/', 'controlers/whisprly.php');
 
 $router->get('/about', 'controlers/about.php');
 
@@ -27,3 +27,7 @@ $router->get('/login','controlers/sessions/create.php')->only('guest');
 $router->delete('/logout','controlers/sessions/destroy.php')->only('auth');
 $router->post('/login','controlers/sessions/store.php');
 
+
+
+
+$router->post('/podcast/edit', 'controlers/podcast/edit.php');
