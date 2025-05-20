@@ -17,6 +17,7 @@ $podcasts = $db->query("SELECT
                         FROM podcasts
                         WHERE status = 'published'
                         ORDER BY created_at DESC")->fetchAll();
+                        
 
 require "views/pages/podcast/list_view.php";
 
