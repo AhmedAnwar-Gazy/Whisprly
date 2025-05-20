@@ -44,7 +44,7 @@ try {
     error_log($e->getMessage());
     abort(500);
 }
-
+dd($episode);
 require "views/pages/episode/show_view.php";
 
 

@@ -46,6 +46,7 @@ try {
     abort(500);
 }
 
+
 require "views/pages/book/show_view.php";
 
 

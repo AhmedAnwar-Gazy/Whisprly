@@ -43,6 +43,7 @@ body {
     font-size: 1.5rem; /* Equivalent to Tailwind text-2xl */
     font-weight: bold; /* Equivalent to Tailwind font-bold */
     color: #36454F; /* Charcoal Gray */
+    text-decoration: none;
 }
 
 /* Navigation Styling */
@@ -125,6 +126,7 @@ body {
     border: 1px solid #FF7F50; /* Warm Coral/Terracotta border */
     color: #FF7F50; /* Warm Coral/Terracotta text */
     background-color: transparent;
+    text-decoration: none;
 }
 
 .login-btn:hover {
@@ -136,6 +138,8 @@ body {
     background-color: #00697B; /* Deep Teal background */
     color: white;
     border: 1px solid #00697B; /* Deep Teal border */
+        text-decoration: none;
+
 }
 
 .signup-btn:hover {

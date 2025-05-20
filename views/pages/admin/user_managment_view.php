@@ -197,6 +197,9 @@ body {
 
 </style>
 
+     <?php require('views/partials/search.php') ?>
+
+
  <main class="main-content-wrapper">
         <section class="user-management-section">
             <div class="container">

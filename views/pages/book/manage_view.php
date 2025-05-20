@@ -3,6 +3,7 @@
 <?php require('views/partials/header.php') ?>
 
 
+      <?php require('views/partials/search.php') ?>
 
 <main>
     <h1></h1>
