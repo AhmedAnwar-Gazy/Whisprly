@@ -106,11 +106,14 @@ $router->get('/contact', 'views/contact_view.php');
 
 $router->get('/content_moderation_view', 'views/admin/content_moderation_view.php');
 $router->get('/category_management_view', 'views/admin/category_management_view.php');
+$router->get('/dashboard_admin_view', 'views/admin/dashboard_admin_view.php');
+$router->get('/reports_view', 'views/admin/reports_view.php');
+$router->get('/user_managment_view', 'views/admin/user_managment_view.php');
 
 
 
-$router->get('/manage_my_content_view', 'controlers/creator/manage_my_content_view.php');
-$router->get('/creator_dashboard_view', 'controlers/creator/creator_dashboard_view.php');
+$router->get('/manage_my_content_view', 'views/creator/manage_my_content_view.php');
+$router->get('/creator_dashboard_view', 'views/creator/creator_dashboard_view.php');
 
 
 
