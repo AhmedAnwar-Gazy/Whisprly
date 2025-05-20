@@ -10,9 +10,9 @@ $db = App::resolve(Database::class);
 
 try {
     $db->query(
-        "DELETE FROM campaigns WHERE campaign_id = :campaign_id",
+        "DELETE FROM book WHERE book_id = :book_id",
         [
-            'campaign_id' => $_POST['campaign_id']
+            'book_id' => $_POST['book_id']
         ]
     );
     http_response_code(204);
