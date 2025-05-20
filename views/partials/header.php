@@ -9,11 +9,11 @@
 
             <nav class="site-nav">
                 <ul>
-                    <li><a href="#">Podcasts</a></li>
-                    <li><a href="#">Books</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li><a href="#">Creator</a></li>
-                    <li><a href="#">Admin</a></li>
+                    <li><a href="/podcast_index">Podcasts</a></li>
+                    <li><a href="/book_index">Books</a></li>
+                    <li><a href="/podcast_list">Library</a></li>
+                    <!-- <li><a href="#">Creator</a></li>
+                    <li><a href="#">Admin</a></li> -->
                 </ul>
             </nav>
 
