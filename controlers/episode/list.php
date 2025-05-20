@@ -1,51 +1,56 @@
 <?php
-$heading = "one test";
+$heading = "Episodes";
 
 use core\App;
 use core\Database;
 
-
 $db = App::resolve(Database::class);
 
+// Get the podcast_id from the URL, or default to null/handle error
+$podcastId = $_GET['podcast_id'] ?? null;
 
-$userID = 1;
+if (!$podcastId) {
+    // Handle error: no podcast ID provided, or redirect
+    echo "Error: Podcast ID not specified.";
+    exit();
+}
+
+// Fetch episodes for a specific podcast
+$episodes = $db->query("SELECT
+                            episode_id,
+                            podcast_id,
+                            title,
+                            audio_file,
+                            duration,
+                            release_date
+                        FROM episodes
+                        WHERE podcast_id = :podcast_id
+                        ORDER BY release_date DESC", [
+                            'podcast_id' => $podcastId
+                        ])->fetchAll();
+
+// Optionally, fetch podcast title for the heading
+$podcast = $db->query("SELECT title FROM podcasts WHERE podcast_id = :podcast_id", [
+    'podcast_id' => $podcastId
+])->fetch();
+
+if ($podcast) {
+    $heading = "Episodes for: " . htmlspecialchars($podcast['title']);
+} else {
+    $heading = "Episodes (Podcast not found)";
+}
 
 
-// يعرض الحملات التي قد تبرعت له
-// يعني ششجمع العناصر بي النسبه لي علاقت المستخدم بهم
-// $note = $db->query("SELECT * from charity_campaigns where id = :id ", [
-//   'id' => $_GET['id'],
-// ])->findOrFail();
-
-$campaigns = $db->query("SELECT
-A.campaign_id,
-A.category_id,
-SUM(B.COST) AS collected_money,
-A.partner_id,
-A.name,
-A.short_description,
-A.full_description,
-A.cost,
-A.state,
-A.start_at,
-A.photo,
-max(B.donate_date) as donate_date
-FROM campaigns A join users_donate_campaigns B ON (A.campaign_id = B.campaign_id)
-group by A.campaign_id
-
-having A.campaign_id IN
-		(
-			select campaign_id
-			FROM USERS_DONATE_CAMPAIGNS
-			where USER_ID = :USER_ID
-        )
-order by donate_date desc;
-", [
-	'USER_ID' => $userID
-])->fetchAll();
-
-//authorize($note['other_id'] == $userID);
+require "views/pages/episodes/list_view.php";
 
 
 
-require "views/pages/charity_campaigns/list_view.php";
+
+
+
+
+
+
+
+
+
