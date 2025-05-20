@@ -79,4 +79,4 @@ try {
 
 
 
-require "views/pages/charity_campaigns/manage_view.php";
+require "views/pages/admin/manage_view.php";

@@ -36,6 +36,3 @@ $methode = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 $router->route($uri,$methode);
 
 
-
-dd($_SERVER);
-

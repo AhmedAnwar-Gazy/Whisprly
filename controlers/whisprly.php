@@ -1,11 +1,6 @@
-<?php       
+<?php
 $heading = "Home";
 
-$_SESSION['name']= "ahmed";
+$_SESSION['name'] = "ahmed";
 
-require "views/whisprly_view.php";
-
-?>
-
-
-
+require "views/pages/whisprly_view.php";

@@ -6,18 +6,20 @@ use core\Database;
 
 
 $db = App::resolve(Database::class);
-
 try {
     $db->query(
-        "DELETE FROM campaigns WHERE campaign_id = :campaign_id",
+        "DELETE FROM podcasts 
+         WHERE podcast_id = :podcast_id ",
         [
-            'campaign_id' => $_POST['campaign_id']
+            'podcast_id' => $_POST['podcast_id']
+           
         ]
     );
-    http_response_code(204);
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    abort(500);
+    $_SESSION['error'] = "حدث خطأ أثناء حفظ البعانات";
+    header("Location: " . $_SERVER["HTTP_REFERER"]);
+    exit();
 }
 
 
