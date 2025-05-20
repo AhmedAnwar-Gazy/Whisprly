@@ -4,91 +4,96 @@ use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-$page = "episodes_index";
-start_page:
-$page_episode_ids = [];
-$heading = "All Episodes";
-if(!isset($_GET['page_number'])) $_GET['page_number'] = 1;
+$episodes=$db->query(" select * from episodes;")->fetchAll();
 
-$search = $_GET['search'] ?? '';
-$filter_podcast_id = $_GET['filter_podcast_id'] ?? 'all'; // Filter by specific podcast
 
-if(!isset($_SESSION['episodes_count_all'])){
-    $_SESSION['episodes_count_all'] = $db->query(
-        "SELECT count(*) as count FROM episodes;"
-    )->fetchAll()[0]['count'];
-} else {
-    $episodes_current_count = $db->query( "SELECT count(*) as count FROM episodes;")->fetchAll()[0]['count'];
-    if($episodes_current_count != $_SESSION['episodes_count_all']){
-        if($episodes_current_count > $_SESSION['episodes_count_all']){
-            if(count($_SESSION['episodes_pages'][$_GET['page_number']] ?? []) < 10){
-                $_SESSION['episodes_pages'][$_GET['page_number']] = [];
-            } else {
-                $latest_page = intval($_SESSION['episodes_count_all']/10 + 1);
-                $_SESSION['episodes_pages'][$latest_page] = [];
-            }
-        } else {
-            $_SESSION['episodes_pages'] = [];
-        }
-        $_SESSION['episodes_count_all'] = $episodes_current_count;
-        goto start_page;
-    }
-}
 
-$pages_count['episodes'] = ceil($_SESSION['episodes_count_all'] / 10);
-if ($pages_count['episodes'] == 0) $pages_count['episodes'] = 1; // Ensure at least one page
-$has_next = $_GET['page_number'] < $pages_count['episodes'];
 
-$filtered = (!empty($search) || ($filter_podcast_id !== 'all'));
+// $page = "episodes_index";
+// start_page:
+// $page_episode_ids = [];
+// $heading = "All Episodes";
+// if(!isset($_GET['page_number'])) $_GET['page_number'] = 1;
 
-try {
-    // Get all podcasts for the filter dropdown
-    $podcasts_for_filter = $db->query("SELECT podcast_id, title FROM podcasts ORDER BY title")->fetchAll();
+// $search = $_GET['search'] ?? '';
+// $filter_podcast_id = $_GET['filter_podcast_id'] ?? 'all'; // Filter by specific podcast
 
-    $query = "SELECT * FROM episodes WHERE 1=1"; // Start with a true condition
+// if(!isset($_SESSION['episodes_count_all'])){
+//     $_SESSION['episodes_count_all'] = $db->query(
+//         "SELECT count(*) as count FROM episodes;"
+//     )->fetchAll()[0]['count'];
+// } else {
+//     $episodes_current_count = $db->query( "SELECT count(*) as count FROM episodes;")->fetchAll()[0]['count'];
+//     if($episodes_current_count != $_SESSION['episodes_count_all']){
+//         if($episodes_current_count > $_SESSION['episodes_count_all']){
+//             if(count($_SESSION['episodes_pages'][$_GET['page_number']] ?? []) < 10){
+//                 $_SESSION['episodes_pages'][$_GET['page_number']] = [];
+//             } else {
+//                 $latest_page = intval($_SESSION['episodes_count_all']/10 + 1);
+//                 $_SESSION['episodes_pages'][$latest_page] = [];
+//             }
+//         } else {
+//             $_SESSION['episodes_pages'] = [];
+//         }
+//         $_SESSION['episodes_count_all'] = $episodes_current_count;
+//         goto start_page;
+//     }
+// }
 
-    $params = [];
+// $pages_count['episodes'] = ceil($_SESSION['episodes_count_all'] / 10);
+// if ($pages_count['episodes'] == 0) $pages_count['episodes'] = 1; // Ensure at least one page
+// $has_next = $_GET['page_number'] < $pages_count['episodes'];
 
-    if ($filtered) {
-        if (!empty($search)) {
-            $query .= " AND MATCH(title) AGAINST (:search IN NATURAL LANGUAGE MODE)";
-            $params[':search'] = $search;
-        }
-        if ($filter_podcast_id !== 'all' && is_numeric($filter_podcast_id)) {
-            $query .= " AND podcast_id = :podcast_id";
-            $params[':podcast_id'] = $filter_podcast_id;
-        }
-        $episodes = $db->query($query, $params)->fetchAll();
-    } elseif(isset($_SESSION['episodes_pages']) && isset($_SESSION['episodes_pages'][$_GET['page_number']]) && count($_SESSION['episodes_pages'][$_GET['page_number']]) > 0){
-        $ids = implode(",", $_SESSION['episodes_pages'][$_GET['page_number']]);
-        $query .= " AND episode_id IN ({$ids}) ORDER BY episode_id;";
-        $episodes = $db->query($query)->fetchAll();
-    } else {
-        if(isset($_SESSION['episodes_pages']) && !empty($_SESSION['episodes_pages'])){
-            $excluded_ids = [];
-            foreach($_SESSION['episodes_pages'] as $page_ids){
-                if(is_array($page_ids)) {
-                    $excluded_ids = array_merge($excluded_ids, $page_ids);
-                }
-            }
-            if (!empty($excluded_ids)) {
-                $query .= " AND episode_id NOT IN (".implode(",", $excluded_ids).")";
-            }
-        }
-        $query .= " ORDER BY release_date DESC LIMIT 10 OFFSET :offset;";
-        $params[':offset'] = ($_GET['page_number'] - 1) * 10;
-        $episodes = $db->query($query, $params)->fetchAll();
+// $filtered = (!empty($search) || ($filter_podcast_id !== 'all'));
 
-        foreach($episodes as $episode){
-            $page_episode_ids[] = $episode['episode_id'];
-        }
-        $_SESSION['episodes_pages'][$_GET['page_number']] = $page_episode_ids;
-    }
+// try {
+//     // Get all podcasts for the filter dropdown
+//     $podcasts_for_filter = $db->query("SELECT podcast_id, title FROM podcasts ORDER BY title")->fetchAll();
 
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    abort(500);
-}
+//     $query = "SELECT * FROM episodes WHERE 1=1"; // Start with a true condition
+
+//     $params = [];
+
+//     if ($filtered) {
+//         if (!empty($search)) {
+//             $query .= " AND MATCH(title) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+//             $params[':search'] = $search;
+//         }
+//         if ($filter_podcast_id !== 'all' && is_numeric($filter_podcast_id)) {
+//             $query .= " AND podcast_id = :podcast_id";
+//             $params[':podcast_id'] = $filter_podcast_id;
+//         }
+//         $episodes = $db->query($query, $params)->fetchAll();
+//     } elseif(isset($_SESSION['episodes_pages']) && isset($_SESSION['episodes_pages'][$_GET['page_number']]) && count($_SESSION['episodes_pages'][$_GET['page_number']]) > 0){
+//         $ids = implode(",", $_SESSION['episodes_pages'][$_GET['page_number']]);
+//         $query .= " AND episode_id IN ({$ids}) ORDER BY episode_id;";
+//         $episodes = $db->query($query)->fetchAll();
+//     } else {
+//         if(isset($_SESSION['episodes_pages']) && !empty($_SESSION['episodes_pages'])){
+//             $excluded_ids = [];
+//             foreach($_SESSION['episodes_pages'] as $page_ids){
+//                 if(is_array($page_ids)) {
+//                     $excluded_ids = array_merge($excluded_ids, $page_ids);
+//                 }
+//             }
+//             if (!empty($excluded_ids)) {
+//                 $query .= " AND episode_id NOT IN (".implode(",", $excluded_ids).")";
+//             }
+//         }
+//         $query .= " ORDER BY release_date DESC LIMIT 10 OFFSET :offset;";
+//         $params[':offset'] = ($_GET['page_number'] - 1) * 10;
+//         $episodes = $db->query($query, $params)->fetchAll();
+
+//         foreach($episodes as $episode){
+//             $page_episode_ids[] = $episode['episode_id'];
+//         }
+//         $_SESSION['episodes_pages'][$_GET['page_number']] = $page_episode_ids;
+//     }
+
+// } catch (PDOException $e) {
+//     error_log($e->getMessage());
+//     abort(500);
+// }
 
 require "views/pages/episode/index_view.php";
 

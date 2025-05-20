@@ -4,90 +4,97 @@ use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-$page = "books_index";
-start_page:
-$page_book_ids = [];
-$heading = "All Books";
-if(!isset($_GET['page_number'])) $_GET['page_number'] = 1;
 
-$search = $_GET['search'] ?? '';
-$filter_topic = $_GET['filter_topic'] ?? 'all';
+$books=$db->query(" select * from books;")->fetchAll();
 
-if(!isset($_SESSION['books_count_all'])){
-    $_SESSION['books_count_all'] = $db->query(
-        "SELECT count(*) as count FROM books;"
-    )->fetchAll()[0]['count'];
-} else {
-    $books_current_count = $db->query( "SELECT count(*) as count FROM books;")->fetchAll()[0]['count'];
-    if($books_current_count != $_SESSION['books_count_all']){
-        if($books_current_count > $_SESSION['books_count_all']){
-            if(count($_SESSION['books_pages'][$_GET['page_number']] ?? []) < 10){
-                $_SESSION['books_pages'][$_GET['page_number']] = [];
-            } else {
-                $latest_page = intval($_SESSION['books_count_all']/10 + 1);
-                $_SESSION['books_pages'][$latest_page] = [];
-            }
-        } else {
-            $_SESSION['books_pages'] = [];
-        }
-        $_SESSION['books_count_all'] = $books_current_count;
-        goto start_page;
-    }
-}
 
-$pages_count['books'] = ceil($_SESSION['books_count_all'] / 10);
-if ($pages_count['books'] == 0) $pages_count['books'] = 1; // Ensure at least one page
-$has_next = $_GET['page_number'] < $pages_count['books'];
 
-$filtered = (!empty($search) || ($filter_topic !== 'all'));
 
-try {
-    // Get unique topics for filtering
-    $topics = $db->query("SELECT DISTINCT topic FROM books WHERE topic IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
 
-    $query = "SELECT * FROM books WHERE 1=1"; // Start with a true condition
-    $params = [];
+// $page = "books_index";
+// start_page:
+// $page_book_ids = [];
+// $heading = "All Books";
+// if(!isset($_GET['page_number'])) $_GET['page_number'] = 1;
 
-    if ($filtered) {
-        if (!empty($search)) {
-            $query .= " AND MATCH(title, description, topic) AGAINST (:search IN NATURAL LANGUAGE MODE)";
-            $params[':search'] = $search;
-        }
-        if ($filter_topic !== 'all') {
-            $query .= " AND topic = :topic";
-            $params[':topic'] = $filter_topic;
-        }
-        $books = $db->query($query, $params)->fetchAll();
-    } elseif(isset($_SESSION['books_pages']) && isset($_SESSION['books_pages'][$_GET['page_number']]) && count($_SESSION['books_pages'][$_GET['page_number']]) > 0){
-        $ids = implode(",", $_SESSION['books_pages'][$_GET['page_number']]);
-        $query .= " AND book_id IN ({$ids}) ORDER BY book_id;";
-        $books = $db->query($query)->fetchAll();
-    } else {
-        if(isset($_SESSION['books_pages']) && !empty($_SESSION['books_pages'])){
-            $excluded_ids = [];
-            foreach($_SESSION['books_pages'] as $page_ids){
-                if(is_array($page_ids)) {
-                    $excluded_ids = array_merge($excluded_ids, $page_ids);
-                }
-            }
-            if (!empty($excluded_ids)) {
-                $query .= " AND book_id NOT IN (".implode(",", $excluded_ids).")";
-            }
-        }
-        $query .= " ORDER BY created_at DESC LIMIT 10 OFFSET :offset;";
-        $params[':offset'] = ($_GET['page_number'] - 1) * 10;
-        $books = $db->query($query, $params)->fetchAll();
+// $search = $_GET['search'] ?? '';
+// $filter_topic = $_GET['filter_topic'] ?? 'all';
 
-        foreach($books as $book){
-            $page_book_ids[] = $book['book_id'];
-        }
-        $_SESSION['books_pages'][$_GET['page_number']] = $page_book_ids;
-    }
+// if(!isset($_SESSION['books_count_all'])){
+//     $_SESSION['books_count_all'] = $db->query(
+//         "SELECT count(*) as count FROM books;"
+//     )->fetchAll()[0]['count'];
+// } else {
+//     $books_current_count = $db->query( "SELECT count(*) as count FROM books;")->fetchAll()[0]['count'];
+//     if($books_current_count != $_SESSION['books_count_all']){
+//         if($books_current_count > $_SESSION['books_count_all']){
+//             if(count($_SESSION['books_pages'][$_GET['page_number']] ?? []) < 10){
+//                 $_SESSION['books_pages'][$_GET['page_number']] = [];
+//             } else {
+//                 $latest_page = intval($_SESSION['books_count_all']/10 + 1);
+//                 $_SESSION['books_pages'][$latest_page] = [];
+//             }
+//         } else {
+//             $_SESSION['books_pages'] = [];
+//         }
+//         $_SESSION['books_count_all'] = $books_current_count;
+//         goto start_page;
+//     }
+// }
 
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    abort(500);
-}
+// $pages_count['books'] = ceil($_SESSION['books_count_all'] / 10);
+// if ($pages_count['books'] == 0) $pages_count['books'] = 1; // Ensure at least one page
+// $has_next = $_GET['page_number'] < $pages_count['books'];
+
+// $filtered = (!empty($search) || ($filter_topic !== 'all'));
+
+// try {
+//     // Get unique topics for filtering
+//     $topics = $db->query("SELECT DISTINCT topic FROM books WHERE topic IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+
+//     $query = "SELECT * FROM books WHERE 1=1"; // Start with a true condition
+//     $params = [];
+
+//     if ($filtered) {
+//         if (!empty($search)) {
+//             $query .= " AND MATCH(title, description, topic) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+//             $params[':search'] = $search;
+//         }
+//         if ($filter_topic !== 'all') {
+//             $query .= " AND topic = :topic";
+//             $params[':topic'] = $filter_topic;
+//         }
+//         $books = $db->query($query, $params)->fetchAll();
+//     } elseif(isset($_SESSION['books_pages']) && isset($_SESSION['books_pages'][$_GET['page_number']]) && count($_SESSION['books_pages'][$_GET['page_number']]) > 0){
+//         $ids = implode(",", $_SESSION['books_pages'][$_GET['page_number']]);
+//         $query .= " AND book_id IN ({$ids}) ORDER BY book_id;";
+//         $books = $db->query($query)->fetchAll();
+//     } else {
+//         if(isset($_SESSION['books_pages']) && !empty($_SESSION['books_pages'])){
+//             $excluded_ids = [];
+//             foreach($_SESSION['books_pages'] as $page_ids){
+//                 if(is_array($page_ids)) {
+//                     $excluded_ids = array_merge($excluded_ids, $page_ids);
+//                 }
+//             }
+//             if (!empty($excluded_ids)) {
+//                 $query .= " AND book_id NOT IN (".implode(",", $excluded_ids).")";
+//             }
+//         }
+//         $query .= " ORDER BY created_at DESC LIMIT 10 OFFSET :offset;";
+//         $params[':offset'] = ($_GET['page_number'] - 1) * 10;
+//         $books = $db->query($query, $params)->fetchAll();
+
+//         foreach($books as $book){
+//             $page_book_ids[] = $book['book_id'];
+//         }
+//         $_SESSION['books_pages'][$_GET['page_number']] = $page_book_ids;
+//     }
+
+// } catch (PDOException $e) {
+//     error_log($e->getMessage());
+//     abort(500);
+// }
 
 require "views/pages/book/index_view.php";
 

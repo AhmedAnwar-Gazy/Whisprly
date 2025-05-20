@@ -14,18 +14,18 @@
             <div class="footer-section footer-nav">
                 <h3>Discover</h3>
                 <ul>
-                    <li><a href="#">Podcasts</a></li>
-                    <li><a href="#">Books</a></li>
+                    <li><a href="/podcast_index">Podcasts</a></li>
+                    <li><a href="/book_list">Books</a></li>
                     <li><a href="#">Browse Categories</a></li>
-                    <li><a href="#">Trending</a></li>
+                    <li><a href="/podcast_list">Trending</a></li>
                 </ul>
             </div>
 
             <div class="footer-section footer-nav">
                 <h3>Whisprly</h3>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
                     <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>

@@ -27,6 +27,9 @@ body {
 .container {
     max-width: 1200px; /* Max width similar to Tailwind container */
     margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    padding: 0 1.5rem; /* Padding for smaller screens */
 }
 
 .page-title {
@@ -70,6 +73,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
+
 .search-button:hover {
     background-color: #005a6a; /* Slightly darker Teal on hover */
 }
@@ -92,8 +96,9 @@ body {
 
 /* Podcast Series Grid View */
 .podcast-series-grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid columns for series cards */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr)); /* Responsive grid columns for series cards */
     gap: 1.5rem; /* Space between cards */
     margin-bottom: 2rem;
 }
