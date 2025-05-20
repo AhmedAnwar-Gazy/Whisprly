@@ -1,0 +1,167 @@
+/* subscriptions.css */
+
+/* General Body Styling (ensure consistency with header and footer) */
+body {
+    font-family: 'Inter', sans-serif; /* Apply Inter font */
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    color: #36454F; /* Charcoal Gray text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+/* CSS for the main content wrapper to push the footer down */
+.main-content-wrapper {
+    flex-grow: 1; /* Allow this section to grow and fill available space */
+    padding: 1.5rem 1.5rem; /* Add padding */
+}
+
+/* Container for layout */
+.container {
+    max-width: 800px; /* Container width for subscriptions content */
+    margin: 0 auto; /* Center the container */
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00697B; /* Deep Teal for page title */
+    margin-bottom: 2rem;
+    text-align: center; /* Center the title */
+}
+
+/* Subscribed Series List */
+.subscribed-series-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual Subscribed Series Item */
+.subscribed-series-item {
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    border: 1px solid #d1d5db; /* Light border */
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically on small screens */
+    align-items: center; /* Center items horizontally */
+    gap: 1rem; /* Space between elements */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.series-cover-small {
+    width: 80px; /* Fixed width for the cover */
+    height: 80px; /* Fixed height */
+    border-radius: 0.25rem;
+    object-fit: cover;
+    flex-shrink: 0; /* Prevent cover from shrinking */
+}
+
+.series-info {
+    flex-grow: 1; /* Allow info to take available space */
+    text-align: center; /* Center text on small screens */
+}
+
+.series-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #36454F; /* Charcoal Gray title */
+    margin-bottom: 0.25rem;
+}
+
+.series-creator {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color */
+    margin-bottom: 0.5rem;
+}
+
+.view-series-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #00697B; /* Deep Teal link color */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.view-series-link:hover {
+    color: #E2725B; /* Warm Coral/Terracotta on hover */
+}
+
+.series-actions {
+    display: flex;
+    flex-direction: column; /* Stack actions vertically on small screens */
+    align-items: center; /* Center actions horizontally */
+    gap: 0.75rem; /* Space between actions */
+    flex-shrink: 0; /* Prevent actions from shrinking */
+}
+
+.new-episodes-indicator {
+    display: inline-block;
+    background-color: #FF7F50; /* Warm Coral/Terracotta background */
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+.unsubscribe-button {
+    background-color: #E2725B; /* Warm Coral/Terracotta background */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.unsubscribe-button:hover {
+    background-color: #d1624c; /* Slightly darker Coral on hover */
+}
+
+
+/* Responsive Adjustments */
+@media (min-width: 600px) { /* Adjust breakpoint as needed */
+     .subscribed-series-item {
+        flex-direction: row; /* Arrange elements horizontally */
+        justify-content: space-between; /* Space out elements */
+        align-items: center; /* Align items vertically */
+    }
+
+    .series-info {
+        text-align: left; /* Align text to the left */
+        flex-grow: 1;
+    }
+
+    .series-actions {
+        flex-direction: row; /* Arrange actions horizontally */
+        align-items: center; /* Align actions vertically */
+    }
+}
+
+@media (min-width: 768px) { /* Medium screens and up */
+    .main-content-wrapper {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) { /* Large screens and up */
+    .main-content-wrapper {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+
