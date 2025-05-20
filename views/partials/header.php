@@ -26,12 +26,18 @@
                 </div>
 
             <div class="auth-buttons">
-                <button class="btn login-btn">
+                <a href="/login" class="btn login-btn">
+                    Login
+                </a>
+                <a href="/register" class="btn signup-btn">
+                    Signup
+                </a>
+                <!-- <button class="btn login-btn">
                     Login
                 </button>
                 <button class="btn signup-btn">
                     Signup
-                </button>
+                </button> -->
             </div>
         </div>
     </header>
