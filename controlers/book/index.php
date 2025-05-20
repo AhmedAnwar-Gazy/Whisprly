@@ -89,7 +89,7 @@ try {
     abort(500);
 }
 
-require "views/pages/books/index_view.php";
+require "views/pages/book/index_view.php";
 
 
 

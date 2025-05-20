@@ -46,7 +46,7 @@ try {
     abort(500);
 }
 
-require "views/pages/books/show_view.php";
+require "views/pages/book/show_view.php";
 
 
 

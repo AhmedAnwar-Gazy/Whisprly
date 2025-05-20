@@ -58,7 +58,7 @@ try {
     abort(500);
 }
 
-require "views/pages/podcasts/show_view.php";
+require "views/pages/podcast/show_view.php";
 
 
 

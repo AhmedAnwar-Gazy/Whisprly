@@ -57,7 +57,7 @@ try {
     abort(500);
 }
 
-require "views/pages/books/manage_view.php";
+require "views/pages/book/manage_view.php";
 
 
 

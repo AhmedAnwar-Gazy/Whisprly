@@ -98,7 +98,7 @@ try {
     );
 
     // Redirect to the manage podcasts page or the podcast's show page
-    header("Location: /podcasts/manage");
+    header("Location: /podcast/manage");
     exit();
 
 } catch (PDOException $e) {

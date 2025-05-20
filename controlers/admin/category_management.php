@@ -49,7 +49,7 @@ try {
     abort(500); // Internal Server Error
 }
 
-require "views/admin/category_management_view.php";
+require "views/pages/admin/category_management_view.php";
 
 
 

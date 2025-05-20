@@ -45,7 +45,7 @@ try {
     abort(500);
 }
 
-require "views/pages/episodes/show_view.php";
+require "views/pages/episode/show_view.php";
 
 
 

@@ -41,7 +41,7 @@ if ($podcast) {
 }
 
 
-require "views/pages/episodes/list_view.php";
+require "views/pages/episode/list_view.php";
 
 
 

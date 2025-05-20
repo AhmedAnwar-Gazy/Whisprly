@@ -55,7 +55,7 @@ try {
     abort(500); // Or handle the error gracefully
 }
 
-require "views/pages/podcasts/manage_view.php";
+require "views/pages/podcast/manage_view.php";
 
 
 
