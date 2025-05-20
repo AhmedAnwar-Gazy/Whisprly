@@ -19,6 +19,8 @@ $books = $db->query("SELECT
                     FROM books
                     ORDER BY created_at DESC")->fetchAll();
 
+                    
+
 require "views/pages/book/list_view.php";
 
 

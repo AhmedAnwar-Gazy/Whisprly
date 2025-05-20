@@ -11,9 +11,9 @@ $currentUserId = $_SESSION['user']['user_id'] ?? 1; // Replace with your actual 
 // Get the podcast_id from the URL
 $podcastId = $_GET['podcast_id'] ?? null;
 
-if (!$podcastId || !is_numeric($podcastId)) {
-    abort(400); // Bad Request: Invalid or missing podcast ID
-}
+// if (!$podcastId || !is_numeric($podcastId)) {
+//     abort(400); // Bad Request: Invalid or missing podcast ID
+// }
 
 try {
     // Fetch the podcast details
@@ -37,9 +37,9 @@ try {
     }
 
     // Authorization: Ensure the current user created this podcast
-    if ($podcast['created_by'] !== $currentUserId) {
-        abort(403); // Forbidden: User does not own this podcast
-    }
+    // if ($podcast['created_by'] !== $currentUserId) {
+    //     abort(403); // Forbidden: User does not own this podcast
+    // }
 
     // You might want to fetch a list of possible categories if you have a separate categories table
     // $categories = $db->query("SELECT category_id, name FROM categories")->fetchAll();
@@ -48,6 +48,7 @@ try {
     error_log($e->getMessage());
     abort(500);
 }
+
 
 require "views/pages/podcast/edit_view.php";
 
