@@ -4,7 +4,7 @@ use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-$podcasts=$db->query(" select * from podcasts;",[])->fetchAll();
+$podcasts=$db->query(" select * from podcasts;")->fetchAll();
 
 
 
