@@ -56,7 +56,6 @@
     cursor: pointer;
 }
 </style>
-
 <?php require('views/partials/search.php') ?>
 
 <main>
