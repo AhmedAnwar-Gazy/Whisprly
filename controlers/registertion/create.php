@@ -1,4 +1,5 @@
 <?php
 
-require 'views/registertion/create_view.php';
+
+require 'views/pages/registertion/create_view.php';
 

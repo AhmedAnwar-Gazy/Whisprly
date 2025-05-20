@@ -20,11 +20,11 @@
 // $router->get('/notes/edit', 'controlers/notes/edit.php');
 
 
-$router->get('/register', 'controlers/registertion/create.php')->only('guest');
+$router->get('/register', 'controlers/registertion/create.php');
 $router->post('/register', 'controlers/registertion/store.php');
 
-$router->get('/login', 'controlers/sessions/create.php')->only('guest');
-$router->delete('/logout', 'controlers/sessions/destroy.php')->only('auth');
+$router->get('/login', 'controlers/sessions/create.php');
+$router->delete('/logout', 'controlers/sessions/destroy.php');
 $router->post('/login', 'controlers/sessions/store.php');
 
 
