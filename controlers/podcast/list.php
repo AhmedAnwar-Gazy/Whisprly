@@ -5,18 +5,10 @@ use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-
+$userID=1;
 // Fetch all published podcasts
-$podcasts = $db->query("SELECT
-                            podcast_id,
-                            title,
-                            description,
-                            category,
-                            cover_image,
-                            created_at
-                        FROM podcasts
-                        WHERE status = 'published'
-                        ORDER BY created_at DESC")->fetchAll();
+$podcasts = $db->query("select * from  podcasts p left join subscriptions s on p.podcast_id = s.podcast_id 
+where s.user_id=1")->fetchAll();
                         
 
 require "views/pages/podcast/list_view.php";
