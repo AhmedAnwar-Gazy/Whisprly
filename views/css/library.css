@@ -1,0 +1,303 @@
+/* library.css */
+
+/* General Body Styling (ensure consistency with header and footer) */
+body {
+    font-family: 'Inter', sans-serif; /* Apply Inter font */
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    color: #36454F; /* Charcoal Gray text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+/* CSS for the main content wrapper to push the footer down */
+.main-content-wrapper {
+    flex-grow: 1; /* Allow this section to grow and fill available space */
+    padding: 1.5rem 1.5rem; /* Add padding */
+}
+
+/* Container for layout */
+.container {
+    max-width: 900px; /* Container width for library content */
+    margin: 0 auto; /* Center the container */
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00697B; /* Deep Teal for page title */
+    margin-bottom: 2rem;
+    text-align: center; /* Center the title */
+}
+
+/* Tabs/Section Navigation */
+.library-tabs {
+    display: flex;
+    justify-content: center; /* Center tabs */
+    gap: 1rem; /* Space between tabs */
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Allow tabs to wrap */
+}
+
+.tab-button {
+    background-color: #E2725B; /* Warm Coral/Terracotta background */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button:hover:not(.active) {
+    background-color: #d1624c; /* Slightly darker Coral on hover */
+}
+
+.tab-button.active {
+    background-color: #00697B; /* Deep Teal for active tab */
+    cursor: default;
+}
+
+/* Library Content Sections */
+.library-content {
+    display: none; /* Hide content by default */
+}
+
+.library-content.active {
+    display: block; /* Show active content */
+}
+
+.section-heading {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00697B; /* Deep Teal heading */
+    margin-top: 2rem; /* Space above section heading */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #d1d5db; /* Separator line */
+    padding-bottom: 0.75rem;
+}
+
+/* List Styling (General) */
+.series-list,
+.episode-list,
+.book-list,
+.playlist-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Item Styling (General) */
+.series-item,
+.episode-item,
+.book-item,
+.playlist-item {
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    border: 1px solid #d1d5db; /* Light border */
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Space between elements */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.item-cover {
+    border-radius: 0.25rem;
+    object-fit: cover;
+    flex-shrink: 0; /* Prevent cover from shrinking */
+}
+
+.item-cover.small {
+    width: 60px;
+    height: 60px;
+}
+
+.series-item .item-cover,
+.book-item .item-cover {
+    width: 80px;
+    height: auto;
+    aspect-ratio: 2 / 3; /* Default to book aspect ratio, adjust for series if needed */
+}
+
+.series-item .item-cover {
+     aspect-ratio: 1 / 1; /* Square for series covers */
+}
+
+
+.item-info {
+    flex-grow: 1; /* Allow info to take available space */
+}
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #36454F; /* Charcoal Gray title */
+    margin-bottom: 0.25rem;
+}
+
+.item-creator,
+.item-series,
+.item-author {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color */
+    margin-bottom: 0.25rem;
+}
+
+.item-bookmark {
+    font-size: 0.8rem;
+    color: rgba(54, 69, 79, 0.6); /* Even lighter color */
+}
+
+.view-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #00697B; /* Deep Teal link color */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    flex-shrink: 0; /* Prevent link from shrinking */
+}
+
+.view-link:hover {
+    color: #E2725B; /* Warm Coral/Terracotta on hover */
+}
+
+/* Episode Item Specifics */
+.episode-item {
+    justify-content: space-between; /* Space out info and actions */
+}
+
+.episode-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.play-button,
+.bookmark-button {
+    background-color: #E2725B; /* Warm Coral/Terracotta background */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.bookmark-button {
+    padding: 0.5rem; /* Square button for icon only */
+}
+
+
+.play-button:hover,
+.bookmark-button:hover {
+    background-color: #d1624c; /* Slightly darker Coral on hover */
+}
+
+/* Playlist Item Specifics */
+.playlist-item {
+    justify-content: space-between; /* Space out info and actions */
+}
+
+.playlist-info {
+    flex-grow: 1;
+}
+
+.playlist-title {
+     font-size: 1.1rem;
+    font-weight: bold;
+    color: #36454F; /* Charcoal Gray title */
+    margin-bottom: 0.25rem;
+}
+
+.playlist-meta {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8);
+}
+
+.playlist-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.create-playlist-button {
+    background-color: #00697B; /* Deep Teal background */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem; /* Space below the button */
+}
+
+.create-playlist-button:hover {
+    background-color: #005a6a; /* Slightly darker Teal on hover */
+}
+
+.edit-button,
+.delete-button {
+     background: none;
+     border: none;
+     cursor: pointer;
+     color: #36454F; /* Charcoal Gray icon color */
+     font-size: 1rem;
+     transition: color 0.3s ease;
+}
+
+.edit-button:hover {
+    color: #00697B; /* Deep Teal on hover */
+}
+
+.delete-button:hover {
+    color: #E2725B; /* Warm Coral/Terracotta on hover */
+}
+
+
+/* Responsive Adjustments for padding */
+@media (min-width: 768px) { /* Medium screens and up */
+    .main-content-wrapper {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+    .series-item,
+    .episode-item,
+    .book-item,
+    .playlist-item {
+        flex-direction: row; /* Arrange elements horizontally on larger screens */
+        align-items: center; /* Align items vertically */
+    }
+
+    .item-info {
+        text-align: left; /* Align text to the left */
+    }
+}
+
+@media (min-width: 1024px) { /* Large screens and up */
+    .main-content-wrapper {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+

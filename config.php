@@ -8,6 +8,8 @@ return [
         "dbname" => "whesply",
         "dbpassword" => "",
         "charset" => "utf8mb4",
+        "username" => "root",
+        "password" => "77128779"
     ],
     "services" => [
         "mail" => [

@@ -1,5 +1,5 @@
 <?php  require('views/partials/head.php') ?>
-<?php  require('views/partials/nav.php') ?>
+<?php  //require('views/partials/nav.php') ?>
 <?php require('views/partials/header.php') ?>
 
 <main>
@@ -12,4 +12,12 @@
 
   </section>
 </main>
+<main class="main-content-wrapper">
+        <section class="container">
+            
+
+            <?php for($i=0 ; $i<5 ; $i++){ require('partials/side_card.php'); }?> 
+      
+    </section>
+  </main>
 <?php require('views/partials/footer.php') ?>
