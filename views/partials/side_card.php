@@ -123,16 +123,17 @@ body {
 }
 
 /* If you still want to support vertical cards, you would add overrides here */
-/*
+
 .vertical-card {
     flex-direction: column;
 }
 
 .vertical-card .card-cover {
     width: 100%;
-    aspect-ratio: unset; // Or set specific vertical aspect ratio
+    aspect-ratio: unset;
+    /* Or set specific vertical aspect ratio*/
 }
-*/
+
 
 
 /* Responsive Adjustments for padding */
