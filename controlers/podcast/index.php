@@ -5,11 +5,6 @@ use core\Database;
 
 $db = App::resolve(Database::class);
 
-$test = $db->query(
-    "SELECT * FROM podcasts;"
-)->fetchAll();
-
-dd($test);
 
 $page = "podcasts_index";
 start_page:
