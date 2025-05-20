@@ -87,70 +87,70 @@ $router->get('/podcast_update', 'controlers/podcast/update.php');
 
 
 
-$router->get('/register_view', 'views/registertion/create_view.php');
-$router->post('/register', 'views/registertion/store_view.php');
+$router->get('/register_view', 'views/pages/registertion/create_view.php');
+$router->post('/register', 'views/pages/registertion/store_view.php');
 
-$router->get('/login', 'views/sessions/create.php');
-$router->delete('/logout', 'views/sessions/destroy.php');
-$router->post('/login', 'views/sessions/store.php');
-
-
-
-$router->get('/', 'views/whisprly_view.php');
-
-$router->get('/about', 'views/about_view.php');
-
-$router->get('/contact', 'views/contact_view.php');
+$router->get('/login', 'views/pages/sessions/create.php');
+$router->delete('/logout', 'views/pages/sessions/destroy.php');
+$router->post('/login', 'views/pages/sessions/store.php');
 
 
 
-$router->get('/content_moderation_view', 'views/admin/content_moderation_view.php');
-$router->get('/category_management_view', 'views/admin/category_management_view.php');
-$router->get('/dashboard_admin_view', 'views/admin/dashboard_admin_view.php');
-$router->get('/reports_view', 'views/admin/reports_view.php');
-$router->get('/user_managment_view', 'views/admin/user_managment_view.php');
+$router->get('/', 'views/pages/whisprly_view.php');
+
+$router->get('/about', 'views/pages/about_view.php');
+
+$router->get('/contact', 'views/pages/contact_view.php');
 
 
 
-$router->get('/manage_my_content_view', 'views/creator/manage_my_content_view.php');
-$router->get('/creator_dashboard_view', 'views/creator/creator_dashboard_view.php');
+$router->get('/content_moderation_view', 'views/pages/admin/content_moderation_view.php');
+$router->get('/category_management_view', 'views/pages/admin/category_management_view.php');
+$router->get('/dashboard_admin_view', 'views/pages/admin/dashboard_admin_view.php');
+$router->get('/reports_view', 'views/pages/admin/reports_view.php');
+$router->get('/user_managment_view', 'views/pages/admin/user_managment_view.php');
+
+
+
+$router->get('/manage_my_content_view', 'views/pages/creator/manage_my_content_view.php');
+$router->get('/creator_dashboard_view', 'views/pages/creator/creator_dashboard_view.php');
 
 
 
 
-$router->get('/book_create_view', 'views/book/create_view.php');
-$router->get('/book_destroy', 'views/book/destroy.php');
-$router->get('/edit_view', 'views/book/edit_view.php');
-$router->get('/book_index_view', 'views/book/index_view.php');
-$router->get('/book_list_view', 'views/book/list_view.php');
-$router->get('/book_manage_view', 'views/book/manage_view.php');
-$router->get('/book_show_view', 'views/book/show_view.php');
-$router->get('/book_store', 'views/book/store.php');
-$router->get('/book_edit_view', 'views/book/edit_view.php');
+$router->get('/book_create_view', 'views/pages/book/create_view.php');
+$router->get('/book_destroy', 'views/pages/book/destroy.php');
+$router->get('/edit_view', 'views/pages/book/edit_view.php');
+$router->get('/book_index_view', 'views/pages/book/index_view.php');
+$router->get('/book_list_view', 'views/pages/book/list_view.php');
+$router->get('/book_manage_view', 'views/pages/book/manage_view.php');
+$router->get('/book_show_view', 'views/pages/book/show_view.php');
+$router->get('/book_store', 'views/pages/book/store.php');
+$router->get('/book_edit_view', 'views/pages/book/edit_view.php');
 
 
 
-$router->get('/episode_create_view', 'views/episode/create_view.php');
-$router->get('/episode_destroy', 'views/episode/destroy.php');
-$router->get('/episode_edit_view', 'views/episode/edit_view.php');
-$router->get('/episode_index_view', 'views/episode/index_view.php');
-$router->get('/episode_list_view', 'views/episode/list_view.php');
-$router->get('/episode_manage_view', 'views/episode/manage_view.php');
-$router->get('/episode_show_view', 'views/episode/show_view.php');
-$router->get('/episode_store', 'views/episode/store.php');
-$router->get('/episode_update', 'views/episode/update.php');
+$router->get('/episode_create_view', 'views/pages/episode/create_view.php');
+$router->get('/episode_destroy', 'views/pages/episode/destroy.php');
+$router->get('/episode_edit_view', 'views/pages/episode/edit_view.php');
+$router->get('/episode_index_view', 'views/pages/episode/index_view.php');
+$router->get('/episode_list_view', 'views/pages/episode/list_view.php');
+$router->get('/episode_manage_view', 'views/pages/episode/manage_view.php');
+$router->get('/episode_show_view', 'views/pages/episode/show_view.php');
+$router->get('/episode_store', 'views/pages/episode/store.php');
+$router->get('/episode_update', 'views/pages/episode/update.php');
 
 
 
-$router->get('/podcast_create_view', 'views/podcast/create_view.php');
-$router->get('/podcast_destroy', 'views/podcast/destroy.php');
-$router->get('/podcast_edit_view', 'views/podcast/edit_view.php');
-$router->get('/podcast_index_view', 'views/podcast/index_view.php');
-$router->get('/podcast_list_view', 'views/podcast/list_view.php');
-$router->get('/podcast_manage_view', 'views/podcast/manage_view.php');
-$router->get('/podcast_show_view', 'views/podcast/show_view.php');
-$router->get('/podcast_store', 'views/podcast/store.php');
-$router->get('/podcast_update', 'viewss/podcast/update.php');
+$router->get('/podcast_create_view', 'views/pages/podcast/create_view.php');
+$router->get('/podcast_destroy', 'views/pages/podcast/destroy.php');
+$router->get('/podcast_edit_view', 'views/pages/podcast/edit_view.php');
+$router->get('/podcast_index_view', 'views/pages/podcast/index_view.php');
+$router->get('/podcast_list_view', 'views/pages/podcast/list_view.php');
+$router->get('/podcast_manage_view', 'views/pages/podcast/manage_view.php');
+$router->get('/podcast_show_view', 'views/pages/podcast/show_view.php');
+$router->get('/podcast_store', 'views/pages/podcast/store.php');
+$router->get('/podcast_update', 'viewss/pages/podcast/update.php');
 
 
 
