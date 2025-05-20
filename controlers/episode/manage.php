@@ -59,7 +59,7 @@ try {
     abort(500);
 }
 
-require "views/pages/episodes/manage_view.php";
+require "views/pages/episode/manage_view.php";
 
 
 

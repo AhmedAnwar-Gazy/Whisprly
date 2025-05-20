@@ -90,7 +90,7 @@ try {
     abort(500);
 }
 
-require "views/pages/episodes/index_view.php";
+require "views/pages/episode/index_view.php";
 
 
 

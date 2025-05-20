@@ -49,7 +49,7 @@ try {
     abort(500);
 }
 
-require "views/pages/books/edit_view.php";
+require "views/pages/book/edit_view.php";
 
 
 

@@ -90,7 +90,7 @@ try {
     );
 
     // Redirect to the podcast's manage episodes page
-    header("Location: /podcasts/episodes/manage?podcast_id=" . $podcastId);
+    header("Location: /podcast/episode/manage?podcast_id=" . $podcastId);
     exit();
 
 } catch (PDOException $e) {

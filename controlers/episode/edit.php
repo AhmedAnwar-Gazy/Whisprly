@@ -51,7 +51,7 @@ try {
     abort(500);
 }
 
-require "views/pages/episodes/edit_view.php";
+require "views/pages/episode/edit_view.php";
 
 
 

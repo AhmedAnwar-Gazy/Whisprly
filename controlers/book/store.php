@@ -93,7 +93,7 @@ try {
     );
 
     // Redirect to a success page or the manage books page
-    header("Location: /books/manage");
+    header("Location: /book/manage");
     exit();
 
 } catch (PDOException $e) {

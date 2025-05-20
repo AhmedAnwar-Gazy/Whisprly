@@ -26,6 +26,6 @@ $db = App::resolve(Database::class);
 
 
 
-require "views/book/create_view.php";
+require "views/pages/book/create_view.php";
 
 

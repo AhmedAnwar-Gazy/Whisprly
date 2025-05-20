@@ -96,7 +96,7 @@ try {
     abort(500);
 }
 
-require "views/pages/podcasts/index_view.php";
+require "views/pages/podcast/index_view.php";
 
 
 

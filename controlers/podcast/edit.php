@@ -49,7 +49,7 @@ try {
     abort(500);
 }
 
-require "views/pages/podcasts/edit_view.php";
+require "views/pages/podcast/edit_view.php";
 
 
 

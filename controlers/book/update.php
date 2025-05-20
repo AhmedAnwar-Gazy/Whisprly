@@ -81,7 +81,7 @@ if (isset($_POST['linked_podcast_id']) && !empty($_POST['linked_podcast_id'])) {
 // If there are validation errors
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
-    header("Location: /books/edit?id=" . $bookId);
+    header("Location: /book/edit?id=" . $bookId);
     exit();
 }
 
@@ -118,7 +118,7 @@ try {
     );
 
     // Redirect to the manage books page or the book's show page
-    header("Location: /books/manage");
+    header("Location: /book/manage");
     exit();
 
 } catch (PDOException $e) {
