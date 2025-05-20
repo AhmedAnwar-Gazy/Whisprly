@@ -7,6 +7,7 @@ $container = new Container();
 
 $container->bind('core\Database', function(){
     $config = require "config.php";
+    dd($config['database']);
     return new Database($config['database']);
     
 });
