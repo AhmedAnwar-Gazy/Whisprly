@@ -43,6 +43,7 @@ body {
     font-size: 1.5rem; /* Equivalent to Tailwind text-2xl */
     font-weight: bold; /* Equivalent to Tailwind font-bold */
     color: #36454F; /* Charcoal Gray */
+    text-decoration: none;
 }
 
 /* Navigation Styling */

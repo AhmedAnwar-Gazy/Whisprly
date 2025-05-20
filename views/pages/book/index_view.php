@@ -24,9 +24,13 @@ body {
 }
 
 /* Container for layout */
-.container {
+.container-book {
     max-width: 1200px; /* Max width similar to Tailwind container */
     margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    padding: 0 1.5rem; /* Padding for smaller screens */
+
 }
 
 .page-title {
@@ -93,9 +97,10 @@ body {
 /* Book Grid View */
 .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Responsive grid columns for book cards */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid columns for book cards */
     gap: 1.5rem; /* Space between cards */
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 /* Individual Book Card Styling */
@@ -240,23 +245,10 @@ body {
 
  <main class="main-content-wrapper">
         <section class="browse-books-section">
-            <div class="container">
+            <div class="container-book">
                 <h1 class="page-title">Browse Books</h1>
 
-                <div class="search-filter-area">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search books by title, author, or topic..." class="search-input">
-                        <button class="search-button">Search</button>
-                    </div>
-                    <div class="filter-options">
-                        <select class="filter-select">
-                            <option value="">All Genres</option>
-                            <option value="fiction">Fiction</option>
-                            <option value="non-fiction">Non-Fiction</option>
-                            <option value="mystery">Mystery</option>
-                            </select>
-                        </div>
-                </div>
+                <?php require('views/partials/search.php') ?>
 
                 <div class="book-grid">
                     <div class="book-card">
