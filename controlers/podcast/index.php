@@ -4,91 +4,95 @@ use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-$page = "podcasts_index";
-start_page:
-$page_podcast_ids = [];
-$heading = "All Podcasts";
-if(!isset($_GET['page_number'])) $_GET['page_number'] = 1;
+$podcasts=$db->query(" select * from podcasts;",[])->fetchAll();
 
-$search = $_GET['search'] ?? '';
-$filter_category = $_GET['filter_category'] ?? 'all';
-$filter_status = $_GET['filter_status'] ?? 'published'; // Default to 'published'
 
-if(!isset($_SESSION['podcasts_count_all'])){
-    $_SESSION['podcasts_count_all'] = $db->query(
-        "SELECT count(*) as count FROM podcasts WHERE status = 'published';"
-    )->fetchAll()[0]['count'];
-} else {
-    $podcasts_current_count = $db->query( "SELECT count(*) as count FROM podcasts WHERE status = 'published';")->fetchAll()[0]['count'];
-    if($podcasts_current_count != $_SESSION['podcasts_count_all']){
-        if($podcasts_current_count > $_SESSION['podcasts_count_all']){
-            if(count($_SESSION['podcasts_pages'][$_GET['page_number']] ?? []) < 10){
-                $_SESSION['podcasts_pages'][$_GET['page_number']] = [];
-            } else {
-                $latest_page = intval($_SESSION['podcasts_count_all']/10 + 1);
-                $_SESSION['podcasts_pages'][$latest_page] = [];
-            }
-        } else {
-            $_SESSION['podcasts_pages'] = [];
-        }
-        $_SESSION['podcasts_count_all'] = $podcasts_current_count;
-        goto start_page;
-    }
-}
 
-$pages_count['podcasts'] = ceil($_SESSION['podcasts_count_all'] / 10);
-if ($pages_count['podcasts'] == 0) $pages_count['podcasts'] = 1; // Ensure at least one page
-$has_next = $_GET['page_number'] < $pages_count['podcasts'];
+// $page = "podcasts_index";
+// start_page:
+// $page_podcast_ids = [];
+// $heading = "All Podcasts";
+// if(!isset($_GET['page_number'])) $_GET['page_number'] = 1;
 
-$filtered = (!empty($search) || ($filter_category !== 'all') || ($filter_status !== 'published'));
+// $search = $_GET['search'] ?? '';
+// $filter_category = $_GET['filter_category'] ?? 'all';
+// $filter_status = $_GET['filter_status'] ?? 'published'; // Default to 'published'
 
-try {
-    // Get unique categories for filtering
-    $categories = $db->query("SELECT DISTINCT category FROM podcasts WHERE category IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+// if(!isset($_SESSION['podcasts_count_all'])){
+//     $_SESSION['podcasts_count_all'] = $db->query(
+//         "SELECT count(*) as count FROM podcasts WHERE status = 'published';"
+//     )->fetchAll()[0]['count'];
+// } else {
+//     $podcasts_current_count = $db->query( "SELECT count(*) as count FROM podcasts WHERE status = 'published';")->fetchAll()[0]['count'];
+//     if($podcasts_current_count != $_SESSION['podcasts_count_all']){
+//         if($podcasts_current_count > $_SESSION['podcasts_count_all']){
+//             if(count($_SESSION['podcasts_pages'][$_GET['page_number']] ?? []) < 10){
+//                 $_SESSION['podcasts_pages'][$_GET['page_number']] = [];
+//             } else {
+//                 $latest_page = intval($_SESSION['podcasts_count_all']/10 + 1);
+//                 $_SESSION['podcasts_pages'][$latest_page] = [];
+//             }
+//         } else {
+//             $_SESSION['podcasts_pages'] = [];
+//         }
+//         $_SESSION['podcasts_count_all'] = $podcasts_current_count;
+//         goto start_page;
+//     }
+// }
 
-    $query = "SELECT * FROM podcasts WHERE status = :status_filter";
-    $params = [':status_filter' => $filter_status];
+// $pages_count['podcasts'] = ceil($_SESSION['podcasts_count_all'] / 10);
+// if ($pages_count['podcasts'] == 0) $pages_count['podcasts'] = 1; // Ensure at least one page
+// $has_next = $_GET['page_number'] < $pages_count['podcasts'];
 
-    if ($filtered) {
-        if (!empty($search)) {
-            $query .= " AND MATCH(title, description) AGAINST (:search IN NATURAL LANGUAGE MODE)";
-            $params[':search'] = $search;
-        }
-        if ($filter_category !== 'all') {
-            $query .= " AND category = :category";
-            $params[':category'] = $filter_category;
-        }
-        $podcasts = $db->query($query, $params)->fetchAll();
-    } elseif(isset($_SESSION['podcasts_pages']) && isset($_SESSION['podcasts_pages'][$_GET['page_number']]) && count($_SESSION['podcasts_pages'][$_GET['page_number']]) > 0){
-        $ids = implode(",", $_SESSION['podcasts_pages'][$_GET['page_number']]);
-        $query .= " AND podcast_id IN ({$ids}) ORDER BY podcast_id;";
-        $podcasts = $db->query($query, [':status_filter' => $filter_status])->fetchAll();
-    } else {
-        if(isset($_SESSION['podcasts_pages']) && !empty($_SESSION['podcasts_pages'])){
-            $excluded_ids = [];
-            foreach($_SESSION['podcasts_pages'] as $page_ids){
-                if(is_array($page_ids)) {
-                    $excluded_ids = array_merge($excluded_ids, $page_ids);
-                }
-            }
-            if (!empty($excluded_ids)) {
-                $query .= " AND podcast_id NOT IN (".implode(",", $excluded_ids).")";
-            }
-        }
-        $query .= " ORDER BY created_at DESC LIMIT 10 OFFSET :offset;";
-        $params[':offset'] = ($_GET['page_number'] - 1) * 10;
-        $podcasts = $db->query($query, $params)->fetchAll();
+// $filtered = (!empty($search) || ($filter_category !== 'all') || ($filter_status !== 'published'));
 
-        foreach($podcasts as $podcast){
-            $page_podcast_ids[] = $podcast['podcast_id'];
-        }
-        $_SESSION['podcasts_pages'][$_GET['page_number']] = $page_podcast_ids;
-    }
+// try {
+//     // Get unique categories for filtering
+//     $categories = $db->query("SELECT DISTINCT category FROM podcasts WHERE category IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
 
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    abort(500);
-}
+//     $query = "SELECT * FROM podcasts WHERE status = :status_filter";
+//     $params = [':status_filter' => $filter_status];
+
+//     if ($filtered) {
+//         if (!empty($search)) {
+//             $query .= " AND MATCH(title, description) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+//             $params[':search'] = $search;
+//         }
+//         if ($filter_category !== 'all') {
+//             $query .= " AND category = :category";
+//             $params[':category'] = $filter_category;
+//         }
+//         $podcasts = $db->query($query, $params)->fetchAll();
+//     } elseif(isset($_SESSION['podcasts_pages']) && isset($_SESSION['podcasts_pages'][$_GET['page_number']]) && count($_SESSION['podcasts_pages'][$_GET['page_number']]) > 0){
+//         $ids = implode(",", $_SESSION['podcasts_pages'][$_GET['page_number']]);
+//         $query .= " AND podcast_id IN ({$ids}) ORDER BY podcast_id;";
+//         $podcasts = $db->query($query, [':status_filter' => $filter_status])->fetchAll();
+//     } else {
+//         if(isset($_SESSION['podcasts_pages']) && !empty($_SESSION['podcasts_pages'])){
+//             $excluded_ids = [];
+//             foreach($_SESSION['podcasts_pages'] as $page_ids){
+//                 if(is_array($page_ids)) {
+//                     $excluded_ids = array_merge($excluded_ids, $page_ids);
+//                 }
+//             }
+//             if (!empty($excluded_ids)) {
+//                 $query .= " AND podcast_id NOT IN (".implode(",", $excluded_ids).")";
+//             }
+//         }
+//         $query .= " ORDER BY created_at DESC LIMIT 10 OFFSET :offset;";
+//         $params[':offset'] = ($_GET['page_number'] - 1) * 10;
+//         $podcasts = $db->query($query, $params)->fetchAll();
+
+//         foreach($podcasts as $podcast){
+//             $page_podcast_ids[] = $podcast['podcast_id'];
+//         }
+//         $_SESSION['podcasts_pages'][$_GET['page_number']] = $page_podcast_ids;
+//     }
+
+// } catch (PDOException $e) {
+//     error_log($e->getMessage());
+//     abort(500);
+// }
 
 require "views/pages/podcast/index_view.php";
 
