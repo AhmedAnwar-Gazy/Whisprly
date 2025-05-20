@@ -24,9 +24,12 @@ body {
 }
 
 /* Container for layout */
-.container {
+.containerr {
     max-width: 1200px; /* Max width similar to Tailwind container */
     margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    padding: 0 1.5rem; /* Padding for smaller screens */
 }
 
 /* Series Header Section */
@@ -225,6 +228,8 @@ body {
     flex-direction: column; /* Stack content vertically */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
     cursor: pointer; /* Indicate clickable */
+    width: 100%;
+
 }
 
 .related-book-card:hover {
@@ -331,7 +336,7 @@ body {
 
 <main class="main-content-wrapper">
         <section class="podcast-series-detail-section">
-            <div class="container">
+            <div class="containerr">
                 <div class="series-header">
                     <img src="https://placehold.co/300x300/00697B/F8F5F0?text=Series+Cover" alt="Podcast Series Cover" class="series-cover-large">
                     <div class="series-info-large">

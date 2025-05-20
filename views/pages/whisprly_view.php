@@ -16,7 +16,7 @@
         <section class="container">
             
 
-            <?php for($i=0 ; $i<5 ; $i++){ require('views/partials/side_card.php'); }?> 
+            <?php for($i=0 ; $i<4 ; $i++){ require('views/partials/side_card.php'); }?> 
       
     </section>
   </main>

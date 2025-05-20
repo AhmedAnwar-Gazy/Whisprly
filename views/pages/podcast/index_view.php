@@ -24,9 +24,12 @@ body {
 }
 
 /* Container for layout */
-.container {
+.container-pod {
     max-width: 1200px; /* Max width similar to Tailwind container */
     margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    padding: 0 1.5rem; /* Padding for smaller screens */
 }
 
 .page-title {
@@ -70,6 +73,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
+
 .search-button:hover {
     background-color: #005a6a; /* Slightly darker Teal on hover */
 }
@@ -92,10 +96,12 @@ body {
 
 /* Podcast Series Grid View */
 .podcast-series-grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid columns for series cards */
+    grid-template-columns: repeat(auto-fill, minmax(270px, 2fr)); /* Responsive grid columns for series cards */
     gap: 1.5rem; /* Space between cards */
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 /* Individual Podcast Series Card Styling */
@@ -214,32 +220,12 @@ body {
 
 
 </style>
-
 <main class="main-content-wrapper">
         <section class="browse-podcasts-section">
-            <div class="container">
+            <div class="container-prod">
                 <h1 class="page-title">Browse Podcasts</h1>
 
-                <div class="search-filter-area">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search podcasts by name, tag, or speaker..." class="search-input">
-                        <button class="search-button">Search</button>
-                    </div>
-                    <div class="filter-options">
-                        <select class="filter-select">
-                            <option value="">All Categories</option>
-                            <option value="technology">Technology</option>
-                            <option value="business">Business</option>
-                            <option value="comedy">Comedy</option>
-                            </select>
-                         <select class="filter-select">
-                            <option value="">Sort By</option>
-                            <option value="popularity">Popularity</option>
-                            <option value="trending">Trending</option>
-                            <option value="newest">Newest</option>
-                        </select>
-                        </div>
-                </div>
+               <?php require('views/partials/search.php') ?>
 
                 <div class="podcast-series-grid">
                     <div class="podcast-series-card">
