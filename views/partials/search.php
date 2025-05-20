@@ -1,7 +1,7 @@
  
 
 
-                <?php if ($_SERVER ["SCRIPT_URL"]== "/podcast_index_view" || $_SERVER ["SCRIPT_URL"]== "/podcast_manage_view" || $_SERVER ["SCRIPT_URL"]== "/episode_index_view" || $_SERVER ["SCRIPT_URL"]== "/episode_manage_view" || $_SERVER ["SCRIPT_URL"]== "/book_index_view" || $_SERVER ["SCRIPT_URL"]== "/book_manage_view" )  : ?>
+                <?php if ($_SERVER ["SCRIPT_URL"]== "/podcast_index_view" || $_SERVER ["SCRIPT_URL"]== "/podcast_manage_view" || $_SERVER ["SCRIPT_URL"]== "/podcast_list_view" || $_SERVER ["SCRIPT_URL"]== "/episode_index_view" || $_SERVER ["SCRIPT_URL"]== "/episode_manage_view" || $_SERVER ["SCRIPT_URL"]== "/book_index_view" || $_SERVER ["SCRIPT_URL"]== "/book_manage_view" )  : ?>
 
                     <div class="search-filter-area">
                     <div class="search-bar">
