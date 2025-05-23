@@ -226,32 +226,33 @@
   <h1></h1>
   <section>
 
-<!-- <body>
+<body>
   
   <iframe src="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width" width="90%" height="1000hv" frameborder="0">
     This browser does not support PDFs. Please <a href="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf">download the PDF</a> instead.
   </iframe>
-
-</body> -->
-
+ <hr>
+ <hr>
+ <hr>
+</body>
 
 <body>
 
     <div class="podcast-player-container">
         <div class="podcast-header">
-            <img src="https://via.placeholder.com/100x100?text=Podcast+Cover" alt="Podcast Episode Cover" class="podcast-cover">
+            <img src="/views/midea/images/image.png" alt="Podcast Episode Cover" class="podcast-cover">
             <div class="episode-info">
                 <span class="podcast-title">My Awesome Podcast</span>
                 <span class="episode-title">Episode 1: The Beginning</span>
             </div>
         </div>
 
-        <audio id="audioPlayer" src="your-audio-file.mp3" preload="metadata"></audio>
+        <audio id="audioPlayer" src="/views/midea/sounds/JavaThreading.mp3" preload="metadata"></audio>
 
         <div class="controls">
             <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
-                <i class="fas fa-play"></i>
-            </button>
+                <img src="/views/midea/icons/play.png" alt="Play Icon">
+                </button>
 
             <div class="progress-container">
                 <span id="currentTime" class="time-display">0:00</span>
@@ -267,82 +268,106 @@
         </div>
     </div>
 
-    <!-- <script src="script.js"></script> -->
+    <script>
+        // --- Utility Functions ---
+        // This function needs to be defined BEFORE it's used
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
+
+        // Wrap your code in DOMContentLoaded to ensure elements are loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Get references to HTML elements ---
+            // Declare all variables using const or let
+            const audioPlayer = document.getElementById('audioPlayer');
+            const playPauseButton = document.getElementById('playPauseButton');
+            // This line assumes you're still using Font Awesome <i> tag for the icon.
+            // If you changed to <img>, you'll need to adapt this.
+            // For the <img> tag, you'd change the src directly.
+            const playPauseIcon = playPauseButton.querySelector('img'); // Change to img if using <img>
+            const progressBar = document.getElementById('progressBar');
+            const currentTimeSpan = document.getElementById('currentTime');
+            const durationTimeSpan = document.getElementById('durationTime');
+            const volumeControl = document.getElementById('volumeControl');
+
+            let isSeeking = false; // Flag to prevent timeupdate from overriding manual seek
+
+
+            // --- Event Listeners ---
+
+            // Play/Pause functionality
+            playPauseButton.addEventListener('click', () => {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    // If using <img>, change the src to 'pause.png'
+                    playPauseIcon.src = '/views/midea/icons/pause.png'; // Assuming you have a pause.png
+                    playPauseButton.setAttribute('aria-label', 'Pause');
+                } else {
+                    audioPlayer.pause();
+                    // If using <img>, change the src to 'play.png'
+                    playPauseIcon.src = '/views/midea/icons/play.png'; // Assuming you have a play.png
+                    playPauseButton.setAttribute('aria-label', 'Play');
+                }
+            });
+
+            // Update progress bar and current time
+            audioPlayer.addEventListener('timeupdate', () => {
+                if (!isSeeking) {
+                    const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                    progressBar.value = progress;
+                    progressBar.style.setProperty('--progress-value', `${progress}%`); // For custom track fill
+                    currentTimeSpan.textContent = formatTime(audioPlayer.currentTime);
+                }
+            });
+
+            // Set duration when audio metadata is loaded
+            audioPlayer.addEventListener('loadedmetadata', () => {
+                durationTimeSpan.textContent = formatTime(audioPlayer.duration);
+                progressBar.max = 100; // Ensure max is 100 for percentage
+                progressBar.value = 0; // Reset progress bar
+                progressBar.style.setProperty('--progress-value', '0%');
+            });
+
+            // Handle audio ending
+            audioPlayer.addEventListener('ended', () => {
+                // If using <img>, change the src to 'play.png'
+                playPauseIcon.src = '/views/midea/icons/play.png';
+                playPauseButton.setAttribute('aria-label', 'Play');
+                audioPlayer.currentTime = 0; // Reset to start
+                progressBar.value = 0; // Reset progress bar
+                progressBar.style.setProperty('--progress-value', '0%');
+                currentTimeSpan.textContent = formatTime(0);
+            });
+
+            // Manual scrubbing (drag/click on progress bar)
+            progressBar.addEventListener('input', () => { // 'input' fires continuously while dragging
+                isSeeking = true;
+                const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+                currentTimeSpan.textContent = formatTime(seekTime);
+                progressBar.style.setProperty('--progress-value', `${progressBar.value}%`); // Update visual fill
+            });
+
+            progressBar.addEventListener('change', () => { // 'change' fires when drag is released
+                const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+                audioPlayer.currentTime = seekTime;
+                isSeeking = false;
+            });
+
+            // Volume control
+            volumeControl.addEventListener('input', () => {
+                const volume = volumeControl.value / 100;
+                audioPlayer.volume = volume;
+                volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`); // For custom track fill
+            });
+
+            // Initialize volume slider position based on default audio volume
+            volumeControl.value = audioPlayer.volume * 100;
+            volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`);
+        }); // End of DOMContentLoaded
+    </script>
 </body>
-
-
-<script>
-  // --- Event Listeners ---
-
-// Play/Pause functionality
-playPauseButton.addEventListener('click', () => {
-    if (audioPlayer.paused) {
-        audioPlayer.play();
-        playPauseIcon.classList.remove('fa-play');
-        playPauseIcon.classList.add('fa-pause');
-        playPauseButton.setAttribute('aria-label', 'Pause');
-    } else {
-        audioPlayer.pause();
-        playPauseIcon.classList.remove('fa-pause');
-        playPauseIcon.classList.add('fa-play');
-        playPauseButton.setAttribute('aria-label', 'Play');
-    }
-});
-
-// Update progress bar and current time
-audioPlayer.addEventListener('timeupdate', () => {
-    if (!isSeeking) {
-        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-        progressBar.value = progress;
-        progressBar.style.setProperty('--progress-value', `${progress}%`); // For custom track fill
-        currentTimeSpan.textContent = formatTime(audioPlayer.currentTime);
-    }
-});
-
-// Set duration when audio metadata is loaded
-audioPlayer.addEventListener('loadedmetadata', () => {
-    durationTimeSpan.textContent = formatTime(audioPlayer.duration);
-    progressBar.max = 100; // Ensure max is 100 for percentage
-    progressBar.value = 0; // Reset progress bar
-    progressBar.style.setProperty('--progress-value', '0%');
-});
-
-// Handle audio ending
-audioPlayer.addEventListener('ended', () => {
-    playPauseIcon.classList.remove('fa-pause');
-    playPauseIcon.classList.add('fa-play');
-    playPauseButton.setAttribute('aria-label', 'Play');
-    audioPlayer.currentTime = 0; // Reset to start
-    progressBar.value = 0; // Reset progress bar
-    progressBar.style.setProperty('--progress-value', '0%');
-    currentTimeSpan.textContent = formatTime(0);
-});
-
-// Manual scrubbing (drag/click on progress bar)
-progressBar.addEventListener('input', () => { // 'input' fires continuously while dragging
-    isSeeking = true;
-    const seekTime = (progressBar.value / 100) * audioPlayer.duration;
-    currentTimeSpan.textContent = formatTime(seekTime);
-    progressBar.style.setProperty('--progress-value', `${progressBar.value}%`); // Update visual fill
-});
-
-progressBar.addEventListener('change', () => { // 'change' fires when drag is released
-    const seekTime = (progressBar.value / 100) * audioPlayer.duration;
-    audioPlayer.currentTime = seekTime;
-    isSeeking = false;
-});
-
-// Volume control
-volumeControl.addEventListener('input', () => {
-    const volume = volumeControl.value / 100;
-    audioPlayer.volume = volume;
-    volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`); // For custom track fill
-});
-
-// Initialize volume slider position based on default audio volume
-volumeControl.value = audioPlayer.volume * 100;
-volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`);
-</script>
 
   </section>
 </main>
