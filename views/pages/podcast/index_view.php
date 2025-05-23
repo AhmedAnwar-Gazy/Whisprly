@@ -134,6 +134,10 @@ body {
     flex-grow: 1; /* Allow info section to grow */
     display: flex;
     flex-direction: column;
+     white-space: nowrap; /* FIX: Prevent title from wrapping */
+    overflow: hidden; /* FIX: Hide overflow */
+    text-overflow: ellipsis; /* FIX: Add ellipsis for overflowed text */
+
 }
 
 .series-title {
@@ -144,6 +148,21 @@ body {
 }
 
 .series-creator {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for creator */
+    margin-bottom: 0.5rem;
+}
+.series-description {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for creator */
+    margin-bottom: 0.5rem;
+}
+.series-category {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for creator */
+    margin-bottom: 0.5rem;
+}
+.series-episode {
     font-size: 0.9rem;
     color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for creator */
     margin-bottom: 0.5rem;
@@ -218,6 +237,9 @@ body {
     }
 }
 
+a{
+    text-decoration: none;
+}
 
 </style>
 <?php //dd($podcasts) ?>
@@ -232,15 +254,15 @@ body {
                 <div class="podcast-series-grid">
                 <?php if (isset($podcasts)): foreach ($podcasts as $podcast): ?>
                 
-              <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($podcasts['podcast_id']) ?>">
+              <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($podcast['podcast_id']) ?>">
                     <div class="podcast-series-card">
-                        <img src="<?= htmlspecialchars($podcasts['cover_image'] ?? "11.png") ?>" alt="Podcast Series Cover" class="series-cover">
+                        <img src="/views/midea/images/<?=htmlspecialchars($podcast['cover_image'] ?? "image.png") ?>" alt="Podcast Series Cover" class="series-cover">
                         <div class="series-info">
-                            <h3 class="series-title"><?= htmlspecialchars($podcasts['title']) ?></h3>
-                            <p class="series-creator"><?= htmlspecialchars($podcasts['creator_name']) ?></p>
-                            <p class="series-description"><?= htmlspecialchars($podcasts['description']) ?></p>
-                            <p class="series-category"><?= htmlspecialchars($podcasts['category']) ?></p>
-                            <p class="series-episode"><?= htmlspecialchars($podcasts['episode_count']) ?></p>
+                            <h3 class="series-title"><?= htmlspecialchars($podcast['title']) ?></h3>
+                            <p class="series-creator"><?= htmlspecialchars($podcast['creator_name']) ?></p>
+                            <p class="series-description"><?= htmlspecialchars($podcast['description']) ?></p>
+                            <p class="series-category"><?= htmlspecialchars($podcast['category']) ?></p>
+                            <p class="series-episode"><?= htmlspecialchars($podcast['episode_count']) ?></p>
                         </div>
                     </div>
                 </a>

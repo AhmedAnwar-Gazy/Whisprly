@@ -83,7 +83,7 @@ try {
 // --- 7. Render the View ---
 // This line includes the HTML view file, passing all the fetched data and filter states
 // to be rendered in the browser.
-require "views/public/books/index_view.php";
+require "views/pages/book/index_view.php";
 
 
 
@@ -185,7 +185,6 @@ require "views/public/books/index_view.php";
 //     abort(500);
 // }
 
-require "views/pages/book/index_view.php";
 
 
 

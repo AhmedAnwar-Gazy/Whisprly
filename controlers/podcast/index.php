@@ -176,7 +176,6 @@ require "views/pages/podcast/index_view.php";
 //     abort(500);
 // }
 
-require "views/pages/podcast/index_view.php";
 
 
 

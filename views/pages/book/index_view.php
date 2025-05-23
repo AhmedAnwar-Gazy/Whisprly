@@ -133,6 +133,9 @@ body {
     flex-grow: 1; /* Allow info section to grow */
     display: flex;
     flex-direction: column;
+    white-space: nowrap; /* FIX: Prevent title from wrapping */
+    overflow: hidden; /* FIX: Hide overflow */
+    text-overflow: ellipsis; /* FIX: Add ellipsis for overflowed text */
 }
 
 .book-title {
@@ -143,6 +146,11 @@ body {
 }
 
 .book-author {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for author */
+    margin-bottom: 0.5rem;
+}
+.book-topic {
     font-size: 0.9rem;
     color: rgba(54, 69, 79, 0.8); /* Slightly lighter color for author */
     margin-bottom: 0.5rem;
@@ -180,7 +188,7 @@ body {
 .access-type.external-link {
     background-color: #FF7F50; /* Warm Coral/Terracotta background */
     color: white;
-}
+}   
 
 
 /* Pagination Styling */
@@ -240,30 +248,44 @@ body {
     }
 }
 
+a{
+    text-decoration: none;
+}
 
 </style>
+<?php //dd($books) ?>
+<?php require('views/partials/search.php') ?>
 
+<h1 class="page-title">Browse Books</h1>
  <main class="main-content-wrapper">
         <section class="browse-books-section">
             <div class="container-book">
-                <h1 class="page-title">Browse Books</h1>
 
-                <?php require('views/partials/search.php') ?>
 
                 <div class="book-grid">
+
+                    <?php if (isset($books)): foreach ($books as $book): ?>
+
+                        
+                    <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($book['book_id']) ?>">
                     <div class="book-card">
-                        <img src="https://placehold.co/300x450/FF7F50/F8F5F0?text=Book+Cover" alt="Book Cover" class="book-cover">
+                        <img src="/views/midea/images/<?=htmlspecialchars($book['cover_image'] ?? "image.png") ?>" alt="Book Cover" class="book-cover">
                         <div class="book-info">
-                            <h3 class="book-title">Book Title Example</h3>
-                            <p class="book-author">By Author Name</p>
-                            <p class="book-description">A brief description of the book...</p>
+                            <h3 class="book-title"><?= htmlspecialchars($book['title']) ?></h3>
+                            <p class="book-author"><?= htmlspecialchars($book['uploader_name']) ?></p>
+                            <p class="book-description"><?= htmlspecialchars($book['description']) ?></p>
+                            <p class="book-topic"><?= htmlspecialchars($book['topic']) ?></p>
                             <div class="book-access">
                                 <span class="access-type in-app">Readable In-App</span>
                                 </div>
                         </div>
                     </div>
+                    </a>    
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+            </div>
 
-                    <div class="book-card">
+                    <!-- <div class="book-card">
                         <img src="https://placehold.co/300x450/00697B/F8F5F0?text=Book+Cover+2" alt="Book Cover" class="book-cover">
                         <div class="book-info">
                             <h3 class="book-title">Another Interesting Read</h3>
@@ -298,7 +320,7 @@ body {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="pagination">
                     <button class="pagination-button">&laquo; Previous</button>
