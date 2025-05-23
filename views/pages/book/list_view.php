@@ -239,14 +239,14 @@
 
     <div class="podcast-player-container">
         <div class="podcast-header">
-            <img src="https://via.placeholder.com/100x100?text=Podcast+Cover" alt="Podcast Episode Cover" class="podcast-cover">
+            <img src="" alt="Podcast Episode Cover" class="podcast-cover">
             <div class="episode-info">
                 <span class="podcast-title">My Awesome Podcast</span>
                 <span class="episode-title">Episode 1: The Beginning</span>
             </div>
         </div>
 
-        <audio id="audioPlayer" src="your-audio-file.mp3" preload="metadata"></audio>
+        <audio id="audioPlayer" src="views/midea/sounds/Java Threading Essentials (2)_01.mp3" preload="metadata"></audio>
 
         <div class="controls">
             <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
