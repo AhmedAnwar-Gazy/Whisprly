@@ -2,6 +2,7 @@
 <?php require('views/partials/nav.php') ?>
 <?php require('views/partials/header.php') ?>
 
+<?php dd($podcast) ?>
 
 <style>
 

@@ -29,9 +29,12 @@ body {
 }
 
 /* Container for layout */
-.container {
+.containe-reg {
     max-width: 600px; /* Container width for the form */
     margin: 0 auto; /* Center the container */
+     display: flex;
+    flex-direction: column; /* Stack children vertically */
+    padding: 0 1.5rem; /* Padding for smaller screens */
 }
 
 .page-title {
@@ -179,7 +182,7 @@ body {
 
   <main class="main-content-wrapper">
         <section class="create-user-section">
-            <div class="container">
+            <div class="container-reg">
                 <h1 class="page-title">Create Your Whisprly Account</h1>
 
                 <form class="create-user-form">
