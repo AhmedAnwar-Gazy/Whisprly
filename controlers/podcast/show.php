@@ -52,26 +52,23 @@ try {
         'podcast_id' => $podcastId
     ])->fetchAll();
 
-    $episodes = $db->query("
-    SELECT
-        episode_id,
-        title,
-        audio_file,
-        duration,
-        release_date
-    FROM episodes
-    WHERE podcast_id = :podcast_id
-    ORDER BY release_date DESC
-", [
-    'podcast_id' => $podcastId
-])->fetchAll();
+    $books = $db->query("
+        SELECT
+            b.*
+        FROM books b
+        left JOIN book_categories bc  ON bc.book_id = b.book_id
+        WHERE bc.category_id = 1 ;
+")->fetchAll();
 
 } catch (PDOException $e) {
     error_log($e->getMessage());
     abort(500);
 }
 
+ //dd($books);
+
 require "views/pages/podcast/show_view.php";
+
 
 
 

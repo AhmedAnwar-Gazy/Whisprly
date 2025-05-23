@@ -27,7 +27,6 @@ try {
             b.title,
             b.description,
             b.pdf_file,
-            b.topic,
             b.created_at,
             u.name AS uploader_name,
             p.title AS linked_podcast_title, 
