@@ -8,9 +8,10 @@ use core\Database;
 $db = App::resolve(Database::class);
 $podcastId=$_POST['podcast_id'];
 
- if (!$podcastId || !is_numeric($podcastId)) {
+if (!$podcastId || !is_numeric($podcastId)) {
     abort(400); // Bad Request: Invalid or missing book ID
 }
+
 try {
     $db->query(
         "DELETE FROM podcasts 
@@ -22,9 +23,7 @@ try {
     );
 } catch (PDOException $e) {
     error_log($e->getMessage());
-    $_SESSION['error'] = "حدث خطأ أثناء حفظ البعانات";
-    header("Location: " . $_SERVER["HTTP_REFERER"]);
-    exit();
+    abort(500);
 }
 
 

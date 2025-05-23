@@ -18,10 +18,10 @@ try {
 
     // --- 1. Fetch all distinct categories for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allCategories = $db->query("SELECT DISTINCT category FROM podcasts ORDER BY category ASC")->fetchAll();
+    $allCategories = $db->query("SELECT name FROM categories")->fetchAll();
 
-$query = $db->query("select * from  podcasts p left join subscriptions s on p.podcast_id = s.podcast_id 
-where s.user_id=1")->fetchAll();
+$query = "select * from  podcasts p left join subscriptions s on p.podcast_id = s.podcast_id 
+where s.user_id=1";
                         
 
 
@@ -69,7 +69,7 @@ where s.user_id=1")->fetchAll();
 }
 
 
-
+//dd( $podcasts);
 
 require "views/pages/podcast/list_view.php";
 

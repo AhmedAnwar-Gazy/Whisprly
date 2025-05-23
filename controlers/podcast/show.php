@@ -21,7 +21,6 @@ try {
             p.podcast_id,
             p.title,
             p.description,
-            p.category,
             p.cover_image,
             p.created_at,
             u.name AS creator_name
@@ -52,6 +51,20 @@ try {
     ", [
         'podcast_id' => $podcastId
     ])->fetchAll();
+
+    $episodes = $db->query("
+    SELECT
+        episode_id,
+        title,
+        audio_file,
+        duration,
+        release_date
+    FROM episodes
+    WHERE podcast_id = :podcast_id
+    ORDER BY release_date DESC
+", [
+    'podcast_id' => $podcastId
+])->fetchAll();
 
 } catch (PDOException $e) {
     error_log($e->getMessage());

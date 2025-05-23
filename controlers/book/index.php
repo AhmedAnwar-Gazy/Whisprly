@@ -30,12 +30,12 @@ try {
             b.topic,
             b.created_at,
             u.name AS uploader_name,
-            p.title AS linked_podcast_title, -- Title of the linked podcast
+            p.title AS linked_podcast_title, 
             p.podcast_id AS linked_podcast_id
         FROM books b
         JOIN users u ON b.uploaded_by = u.user_id
         LEFT JOIN podcasts p ON b.linked_podcast_id = p.podcast_id
-        WHERE 1=1 -- A placeholder for easy addition of WHERE clauses
+        WHERE 1=1
     ";
 
     // Initialize an array to hold parameters for the prepared statement

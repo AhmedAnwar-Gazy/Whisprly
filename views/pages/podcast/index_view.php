@@ -261,8 +261,7 @@ a{
                             <h3 class="series-title"><?= htmlspecialchars($podcast['title']) ?></h3>
                             <p class="series-creator"><?= htmlspecialchars($podcast['creator_name']) ?></p>
                             <p class="series-description"><?= htmlspecialchars($podcast['description']) ?></p>
-                            <p class="series-category"><?= htmlspecialchars($podcast['category']) ?></p>
-                            <p class="series-episode"><?= htmlspecialchars($podcast['episode_count']) ?></p>
+                            <!-- <p class="series-episode"><?= htmlspecialchars($podcast['episode_count']) ?></p> -->
                         </div>
                     </div>
                 </a>

@@ -21,7 +21,7 @@ try {
 
     // --- 1. Fetch all distinct categories for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allCategories = $db->query("SELECT DISTINCT category FROM podcasts ORDER BY category ASC")->fetchAll();
+    $allCategories = $db->query("SELECT name FROM categories")->fetchAll();
 
     // --- 2. Construct the Base SQL Query ---
     $query = "
@@ -29,18 +29,16 @@ try {
             p.podcast_id,
             p.title,
             p.description,
-            p.category,
             p.cover_image,
             p.created_at,
-            u.name AS creator_name,
-            COUNT(e.episode_id) AS episode_count
+            u.name AS creator_name
         FROM podcasts p
         JOIN users u ON p.created_by = u.user_id
         LEFT JOIN episodes e ON p.podcast_id = e.podcast_id
-        WHERE p.status = 'published' -- CRITICAL: Only show published podcasts to the public
+        WHERE p.status = 'published' 
     ";
 
-    // Initialize an array to hold parameters for the prepared statement
+    //Initialize an array to hold parameters for the prepared statement
     $params = [];
 
     // --- 3. Add Full-Text Search Filter ---
@@ -74,7 +72,6 @@ try {
 
     // --- 6. Execute the Query ---
     $podcasts = $db->query($query, $params)->fetchAll();
-
 } catch (PDOException $e) {
     // Log any database errors for debugging
     error_log($e->getMessage());
@@ -83,21 +80,5 @@ try {
 }
 
 
+
 require "views/pages/podcast/index_view.php";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
