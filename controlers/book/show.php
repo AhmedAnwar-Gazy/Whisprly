@@ -6,13 +6,13 @@ use core\Database;
 
 $db = App::resolve(Database::class);
 
-// Get the book_id from the URL
+
 $bookId = $_GET['book_id'] ?? null;
 
-if (!$bookId) {
-    echo "Error: Book ID not specified.";
-    exit();
+ if (!$bookId || !is_numeric($bookId)) {
+    abort(400); // Bad Request: Invalid or missing book ID
 }
+
 
 try {
     // Fetch book details

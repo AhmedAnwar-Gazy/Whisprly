@@ -9,10 +9,10 @@ $db = App::resolve(Database::class);
 // Get the podcast_id from the URL
 $podcastId = $_GET['podcast_id'] ?? null;
 
-if (!$podcastId) {
-    echo "Error: Podcast ID not specified.";
-    exit();
+ if (!$podcastId || !is_numeric($podcastId)) {
+    abort(400); // Bad Request: Invalid or missing book ID
 }
+
 
 try {
     // Fetch podcast details
@@ -70,39 +70,3 @@ require "views/pages/podcast/show_view.php";
 
 
 
-
-
-
-
-
-
-// <?php
-// $heading = "one test";
-// use core\App ;
-// use core\Database ;
-
-
-// $db = App::resolve(Database::class);
-
-
-
-
-// try{
-//   $campaigns = $db->query("select g.campaign_id, g.category_id, g.partner_id, sum(u.cost) as collected_money, count(u.user_id) as donators_count,g.name, g.short_description, g.full_description, g.cost, g.state, g.start_at, g.stop_at, g.end_at,g.photo
-//   from campaigns g left join users_donate_campaigns u on (g.campaign_id = u.campaign_id) group by(g.campaign_id) having g.campaign_id = :campaign_id ", [
-//     'campaign_id' => $_GET['campaign_id'],
-//   ])->fetchAll();
-  
-// } catch (PDOException $e) {
-//     error_log($e->getMessage());
-//     abort(500);
-// }
-
-
-
-
-// visible($campaigns);
-
-
-
-// require "views/podcasts/show_view.php";

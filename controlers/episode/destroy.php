@@ -6,12 +6,17 @@ use core\Database;
 
 
 $db = App::resolve(Database::class);
+$episodeId = $_GET['episode_id'] ?? null;
+
+ if (!$bookId || !is_numeric($bookId)) {
+    abort(400); // Bad Request: Invalid or missing book ID
+}
 
 try {
     $db->query(
         "DELETE FROM episodes WHERE episode_id = :episode_id",
         [
-            'episode_id' => $_POST['episode_id']
+            'episode_id' => $episodeId
         ]
     );
     http_response_code(204);
