@@ -24,9 +24,12 @@ body {
 }
 
 /* Container for layout */
-.container {
+.container-book {
     max-width: 900px; /* Container width for book details */
     margin: 0 auto; /* Center the container */
+     display: flex;
+    flex-direction: column; /* Stack children vertically */
+    padding: 0 1.5rem; /* Padding for smaller screens */
 }
 
 /* Book Header Section */
@@ -273,7 +276,7 @@ body {
 
  <main class="main-content-wrapper">
         <section class="book-detail-section">
-            <div class="container">
+            <div class="container-book">
                 <div class="book-header">
                     <img src="https://placehold.co/300x450/FF7F50/F8F5F0?text=Book+Cover" alt="Book Cover" class="book-cover-large">
                     <div class="book-info-large">
