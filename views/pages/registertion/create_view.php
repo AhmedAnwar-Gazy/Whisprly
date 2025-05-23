@@ -1,43 +1,247 @@
   <?php require('views/partials/head.php') ?>
   <?php require('views/partials/nav.php') ?>
 
+  <style>
+    /* create-user.css */
 
-  <main>
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-        <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">register for new account</h2>
-      </div>
+/* General Body Styling (ensure consistency with header and footer) */
+body {
+    font-family: 'Inter', sans-serif; /* Apply Inter font */
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    color: #36454F; /* Charcoal Gray text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
 
-      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-4" action="/register" method="POST">
-          <div>
-            <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address :</label>
-            <div class="mt-2">
-              <input type="email" name="email" id="email" autocomplete="email" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+/* Universal Box Sizing for consistent layout behavior */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* CSS for the main content wrapper to push the footer down */
+.main-content-wrapper {
+    flex-grow: 1; /* Allow this section to grow and fill available space */
+    padding: 1.5rem 1.5rem; /* Add padding */
+}
+
+/* Container for layout */
+.container {
+    max-width: 600px; /* Container width for the form */
+    margin: 0 auto; /* Center the container */
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00697B; /* Deep Teal for page title */
+    margin-bottom: 2rem;
+    text-align: center; /* Center the title */
+}
+
+/* Form Styling */
+.create-user-form {
+    background-color: #F8F5F0; /* Soft Cream/Off-White background */
+    border: 1px solid #d1d5db; /* Light border */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed #e5e7eb; /* Dashed separator */
+}
+
+.form-group:last-of-type { /* Target the last form-group before the submit button/note */
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none; /* No border for the last item */
+}
+
+.form-label {
+    display: block; /* Make label a block element */
+    font-size: 1rem;
+    font-weight: 500;
+    color: #36454F;
+    margin-bottom: 0.75rem;
+}
+
+.form-input {
+    display: block; /* Make inputs block elements */
+    width: 100%; /* Full width */
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    color: #36454F;
+    background-color: white; /* White background for inputs */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.password-note {
+    font-size: 0.85rem;
+    color: rgba(54, 69, 79, 0.7);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.backend-note {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8);
+    background-color: rgba(0, 105, 123, 0.05); /* Light teal background */
+    border-left: 4px solid #00697B; /* Teal border */
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.backend-note i {
+    color: #00697B; /* Deep Teal icon */
+}
+
+
+/* Submit Button Styling */
+.submit-group {
+    text-align: center;
+    margin-top: 2rem;
+    border-bottom: none; /* Ensure no border for the submit group */
+    padding-bottom: 0;
+}
+
+.submit-button {
+    background-color: #00697B; /* Deep Teal background */
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.submit-button:hover {
+    background-color: #005a6a; /* Slightly darker Teal on hover */
+}
+
+
+/* Responsive Adjustments */
+@media (min-width: 600px) { /* Adjust breakpoint as needed */
+    .form-group {
+        display: flex; /* Use flexbox for label and input */
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 0;
+        flex-shrink: 0;
+        width: 150px; /* Fixed width for labels for alignment */
+        text-align: right; /* Align labels to the right */
+    }
+
+    .form-input {
+        flex-grow: 1; /* Allow inputs to grow */
+    }
+
+    .submit-group {
+        text-align: right; /* Align submit button to the right */
+    }
+}
+
+@media (min-width: 768px) { /* Medium screens and up */
+    .main-content-wrapper {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) { /* Large screens and up */
+    .main-content-wrapper {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+  </style>
+
+  <main class="main-content-wrapper">
+        <section class="create-user-section">
+            <div class="container">
+                <h1 class="page-title">Create Your Whisprly Account</h1>
+
+                <form class="create-user-form">
+
+                    <div class="form-group">
+                        <label for="user-name" class="form-label">Full Name:</label>
+                        <input type="text" id="user-name" name="name" class="form-input" required maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-email" class="form-label">Email Address:</label>
+                        <input type="email" id="user-email" name="email" class="form-input" required maxlength="150">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-password" class="form-label">Password:</label>
+                        <input type="password" id="user-password" name="password" class="form-input" required minlength="8">
+                        <p class="password-note">Minimum 8 characters.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password" class="form-label">Confirm Password:</label>
+                        <input type="password" id="confirm-password" class="form-input" required minlength="8">
+                    </div>
+
+                    <input type="hidden" name="role" value="listener">
+                    <p class="backend-note">
+                        <i class="fas fa-info-circle"></i> Accounts are created as 'Listener' by default. You can apply to be a 'Creator' later.
+                    </p>
+
+                    <div class="form-group submit-group">
+                        <button type="submit" class="submit-button"><i class="fas fa-user-plus"></i> Create Account</button>
+                    </div>
+
+                </form>
             </div>
-          </div>
-          <div class="flex items-center justify-between text-red-500 text-sm/6">
-            <?= $erorrs["email"] ?? " " ?>
-          </div>
+        </section>
+    </main>
 
-          <div>
-            <label for="password" class="block text-sm/6 font-medium text-gray-900">Password :</label>
-            <div class="mt-2">
-              <input type="password" name="password" id="password" autocomplete="current-password" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-            </div>
-          </div>
+    <script>
+        // Basic JavaScript for password confirmation
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById('user-password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
 
-          <div class="flex items-center justify-between text-red-500 text-sm/6">
-            <?= $erorrs["password"] ?? " " ?>
-          </div>
+            function validatePassword() {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordInput.setCustomValidity("Passwords don't match.");
+                } else {
+                    confirmPasswordInput.setCustomValidity('');
+                }
+            }
 
-          <div class="mt-6">
-            <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">register</button>
-          </div>
-        </form>
+            if (passwordInput && confirmPasswordInput) {
+                passwordInput.addEventListener('change', validatePassword);
+                confirmPasswordInput.addEventListener('keyup', validatePassword);
+            }
 
-      </div>
-    </div>
-  </main>
+            // You would add more JavaScript here for:
+            // - Form submission handling (sending data to backend)
+            // - Password hashing (done on backend as per SRS)
+            // - Email validation etc.
+        });
+    </script>
   <?php require('views/partials/footer.php') ?>

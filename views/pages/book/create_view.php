@@ -4,7 +4,8 @@
 <?php $errors = ($_SESSION['errors'] ?? '');
 unset($_SESSION['errors']); ?>
 
-<style>/* upload-book.css */
+<style>
+/* create-book.css */
 
 /* General Body Styling (ensure consistency with header and footer) */
 body {
@@ -19,6 +20,11 @@ body {
     min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
 
+/* Universal Box Sizing for consistent layout behavior */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* CSS for the main content wrapper to push the footer down */
 .main-content-wrapper {
     flex-grow: 1; /* Allow this section to grow and fill available space */
@@ -26,9 +32,11 @@ body {
 }
 
 /* Container for layout */
-.container {
-    max-width: 800px; /* Container width for the form */
+.containerb {
+    max-width: 700px; /* Container width for the form */
     margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column;
 }
 
 .page-title {
@@ -39,8 +47,8 @@ body {
     text-align: center; /* Center the title */
 }
 
-/* Upload Form Styling */
-.upload-form {
+/* Form Styling */
+.create-book-form {
     background-color: #F8F5F0; /* Soft Cream/Off-White background */
     border: 1px solid #d1d5db; /* Light border */
     border-radius: 0.5rem;
@@ -54,7 +62,7 @@ body {
     border-bottom: 1px dashed #e5e7eb; /* Dashed separator */
 }
 
-.form-group:last-child {
+.form-group:last-of-type { /* Target the last form-group before the submit button/note */
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none; /* No border for the last item */
@@ -95,6 +103,13 @@ body {
     box-sizing: border-box;
 }
 
+.file-note {
+    font-size: 0.85rem;
+    color: rgba(54, 69, 79, 0.7);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
 .form-section-heading {
     font-size: 1.3rem;
     font-weight: bold;
@@ -104,67 +119,6 @@ body {
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #e5e7eb; /* Light separator */
 }
-
-.form-subsection-heading {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #36454F; /* Charcoal Gray heading */
-    margin-bottom: 1rem;
-}
-
-/* Upload Method Toggle */
-.upload-method-toggle {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.toggle-button {
-    background-color: #E2725B; /* Warm Coral/Terracotta background */
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.toggle-button:hover:not(.active) {
-    background-color: #d1624c; /* Slightly darker Coral on hover */
-}
-
-.toggle-button.active {
-    background-color: #00697B; /* Deep Teal for active button */
-    cursor: default;
-}
-
-/* Content Fields (Toggled) */
-.content-fields {
-    display: none; /* Hide by default */
-    /* Remove padding-bottom and border-bottom from these groups as they are part of the toggle section */
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.content-fields.active {
-    display: block; /* Show when active */
-}
-
-.content-fields .form-group {
-    /* Restore padding and border for groups *within* the active content fields */
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px dashed #e5e7eb;
-}
-
-.content-fields .form-group:last-child {
-     margin-bottom: 0;
-     padding-bottom: 0;
-     border-bottom: none;
-}
-
 
 /* Related Podcasts Linking */
 .related-podcasts-linking {
@@ -244,11 +198,31 @@ body {
     color: #d1624c; /* Slightly darker Coral on hover */
 }
 
+.backend-note {
+    font-size: 0.9rem;
+    color: rgba(54, 69, 79, 0.8);
+    background-color: rgba(0, 105, 123, 0.05); /* Light teal background */
+    border-left: 4px solid #00697B; /* Teal border */
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.backend-note i {
+    color: #00697B; /* Deep Teal icon */
+}
+
 
 /* Submit Button Styling */
 .submit-group {
     text-align: center;
     margin-top: 2rem;
+    border-bottom: none; /* Ensure no border for the submit group */
+    padding-bottom: 0;
 }
 
 .submit-button {
@@ -273,7 +247,33 @@ body {
 
 /* Responsive Adjustments */
 @media (min-width: 600px) { /* Adjust breakpoint as needed */
-    /* Adjust layout for form elements if needed on larger screens */
+    .form-group {
+        display: flex; /* Use flexbox for label and input */
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 0;
+        flex-shrink: 0;
+        width: 150px; /* Fixed width for labels for alignment */
+        text-align: right; /* Align labels to the right */
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea,
+    .form-input-file {
+        flex-grow: 1; /* Allow inputs to grow */
+    }
+
+    .submit-group {
+        text-align: right; /* Align submit button to the right */
+    }
+
+    .related-podcasts-linking {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+    }
 }
 
 @media (min-width: 768px) { /* Medium screens and up */
@@ -290,154 +290,77 @@ body {
     }
 }
 
+
 </style>
 
  <main class="main-content-wrapper">
-        <section class="upload-book-section">
-            <div class="container">
-                <h1 class="page-title">Upload Book</h1>
+        <section class="create-book-section">
+            <div class="containerb">
+                <h1 class="page-title">Create New Book</h1>
 
-                <form class="upload-form">
+                <form class="create-book-form">
 
                     <div class="form-group">
                         <label for="book-title" class="form-label">Book Title:</label>
-                        <input type="text" id="book-title" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="book-author" class="form-label">Author:</label>
-                        <input type="text" id="book-author" class="form-input" required>
+                        <input type="text" id="book-title" name="title" class="form-input" required maxlength="150">
                     </div>
 
                     <div class="form-group">
                         <label for="book-description" class="form-label">Description:</label>
-                        <textarea id="book-description" class="form-textarea" rows="6" required></textarea>
+                        <textarea id="book-description" name="description" class="form-textarea" rows="8"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="book-genre" class="form-label">Genre:</label>
-                        <select id="book-genre" class="form-select" required>
-                            <option value="">-- Select Genre --</option>
+                        <label for="book-pdf-file" class="form-label">PDF File:</label>
+                        <input type="file" id="book-pdf-file" name="pdf_file" class="form-input-file" accept=".pdf" required>
+                        <p class="file-note">Upload the PDF file for your book.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="book-cover-image" class="form-label">Cover Image:</label>
+                        <input type="file" id="book-cover-image" name="cover_image" class="form-input-file" accept="image/*">
+                        <p class="file-note">Upload a cover image for your book (e.g., JPEG, PNG).</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="book-topic" class="form-label">Topic/Genre:</label>
+                        <select id="book-topic" name="topic" class="form-select" required>
+                            <option value="">-- Select a Topic/Genre --</option>
                             <option value="fiction">Fiction</option>
                             <option value="non-fiction">Non-Fiction</option>
                             <option value="mystery">Mystery</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="science-fiction">Science Fiction</option>
+                            <option value="biography">Biography</option>
+                            <option value="history">History</option>
                             <option value="self-help">Self-Help</option>
+                            <option value="technology">Technology</option>
                             </select>
                     </div>
 
                     <div class="form-group">
-                         <h2 class="form-section-heading">Book Content</h2>
-                         <div class="upload-method-toggle">
-                             <button type="button" class="toggle-button active" data-method="upload-pdf">Upload PDF</button>
-                             <button type="button" class="toggle-button" data-method="link-external">Link Externally</button>
-                         </div>
-                    </div>
-
-
-                    <div id="upload-pdf-fields" class="form-group content-fields active">
-                        <label for="book-pdf" class="form-label">Book File (PDF):</label>
-                        <input type="file" id="book-pdf" class="form-input-file" accept=".pdf" required>
-                    </div>
-
-                    <div id="link-external-fields" class="form-group content-fields">
-                         <div class="form-group">
-                            <label for="external-link" class="form-label">External Link (e.g., Amazon, Google Books):</label>
-                            <input type="url" id="external-link" class="form-input" placeholder="https://...">
-                         </div>
-                          <div class="form-group">
-                            <label for="affiliate-id" class="form-label">Affiliate ID (Optional):</label>
-                            <input type="text" id="affiliate-id" class="form-input" placeholder="Your Affiliate ID">
-                         </div>
-                         <div class="form-group">
-                             <label for="book-cover-external" class="form-label">Book Cover Image:</label>
-                             <input type="file" id="book-cover-external" class="form-input-file" accept="image/*" required>
-                         </div>
-                     </div>
-
-
-                    <div id="upload-cover-fields" class="form-group content-fields active">
-                        <label for="book-cover-pdf" class="form-label">Book Cover Image:</label>
-                        <input type="file" id="book-cover-pdf" class="form-input-file" accept="image/*" required>
-                    </div>
-
-
-                    <div class="form-group">
                         <h2 class="form-section-heading">Link Related Podcasts</h2>
                         <div class="related-podcasts-linking">
-                            <input type="text" id="podcast-search" class="form-input" placeholder="Search for existing podcast series">
+                            <input type="text" id="podcast-search" class="form-input" placeholder="Search for existing podcast series to link">
                             <button type="button" class="search-podcast-button"><i class="fas fa-search"></i> Search Podcast</button>
                         </div>
                         <div class="linked-podcasts-list">
-                            <div class="linked-podcast-item">
-                                <img src="https://placehold.co/50x50/00697B/F8F5F0?text=Podcast" alt="Podcast Cover" class="linked-podcast-cover">
-                                <span class="linked-podcast-title">Linked Podcast Title</span>
-                                <button type="button" class="remove-linked-podcast"><i class="fas fa-times-circle"></i></button>
+                           
                             </div>
-                            </div>
+                        <p class="file-note">You can link this book to one or more relevant podcast series.</p>
                     </div>
 
+                    <p class="backend-note">
+                        <i class="fas fa-info-circle"></i> Your user ID will be automatically associated with this book upon submission.
+                    </p>
+
                     <div class="form-group submit-group">
-                        <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Submit for Review</button>
+                        <button type="submit" class="submit-button"><i class="fas fa-plus-circle"></i> Create Book</button>
                     </div>
 
                 </form>
             </div>
         </section>
     </main>
-
-    <script>
-        // Basic JavaScript to toggle upload method fields
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleButtons = document.querySelectorAll('.upload-method-toggle .toggle-button');
-            const contentFields = document.querySelectorAll('.content-fields');
-
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetMethod = button.dataset.method;
-
-                    // Deactivate all buttons and hide all content fields
-                    toggleButtons.forEach(btn => btn.classList.remove('active'));
-                    contentFields.forEach(fields => fields.classList.remove('active'));
-
-                    // Activate the clicked button
-                    button.classList.add('active');
-
-                    // Show the corresponding content fields and manage required attributes
-                    const targetFields = document.getElementById(targetMethod + '-fields');
-                    if (targetFields) {
-                        targetFields.classList.add('active');
-                        // Manage required attributes based on active section
-                        targetFields.querySelectorAll('[required]').forEach(input => {
-                             input.removeAttribute('required'); // Remove required from all first
-                        });
-                         if (targetMethod === 'upload-pdf') {
-                            document.getElementById('book-pdf').setAttribute('required', 'required');
-                            document.getElementById('book-cover-pdf').setAttribute('required', 'required');
-                         } else if (targetMethod === 'link-external') {
-                            document.getElementById('external-link').setAttribute('required', 'required');
-                             document.getElementById('book-cover-external').setAttribute('required', 'required'); // Cover might still be required
-                         }
-                    }
-                });
-            });
-
-             // Initialize required attributes for the default active section
-             const initialActiveFields = document.querySelector('.content-fields.active');
-             if (initialActiveFields) {
-                  if (initialActiveFields.id === 'upload-pdf-fields') {
-                      document.getElementById('book-pdf').setAttribute('required', 'required');
-                      document.getElementById('book-cover-pdf').setAttribute('required', 'required');
-                   } else if (initialActiveFields.id === 'link-external-fields') {
-                       document.getElementById('external-link').setAttribute('required', 'required');
-                       document.getElementById('book-cover-external').setAttribute('required', 'required');
-                   }
-             }
-
-
-            // You would add more JavaScript here for:
-            // - Searching/linking related podcasts
-            // - Handling file uploads
-            // - Submitting the form data to your backend
-        });
-    </script>
 <?php require('views/partials/footer.php') ?>
