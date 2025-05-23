@@ -9,11 +9,12 @@ $db = App::resolve(Database::class);
 // Get the podcast_id from the URL, or default to null/handle error
 $podcastId = $_GET['podcast_id'] ?? null;
 
-if (!$podcastId) {
-    // Handle error: no podcast ID provided, or redirect
-    echo "Error: Podcast ID not specified.";
-    exit();
+
+ if (!$podcastId || !is_numeric($podcastId)) {
+    abort(400); // Bad Request: Invalid or missing book ID
 }
+
+
 
 // Fetch episodes for a specific podcast
 $episodes = $db->query("SELECT

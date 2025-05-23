@@ -6,12 +6,17 @@ use core\Database;
 
 
 $db = App::resolve(Database::class);
+$podcastId=$_POST['podcast_id'];
+
+ if (!$podcastId || !is_numeric($podcastId)) {
+    abort(400); // Bad Request: Invalid or missing book ID
+}
 try {
     $db->query(
         "DELETE FROM podcasts 
          WHERE podcast_id = :podcast_id ",
         [
-            'podcast_id' => $_POST['podcast_id']
+            'podcast_id' => $podcastId
            
         ]
     );
