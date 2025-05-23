@@ -228,10 +228,10 @@
 
 <body>
   
-  <iframe src="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width" width="90%" height="1000hv" frameborder="0">
+  <!-- <iframe src="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width" width="90%" height="1000hv" frameborder="0">
     This browser does not support PDFs. Please <a href="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf">download the PDF</a> instead.
   </iframe>
- <hr>
+ <hr> -->
  <hr>
  <hr>
 </body>

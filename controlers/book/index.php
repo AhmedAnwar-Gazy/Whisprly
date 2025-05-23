@@ -17,23 +17,14 @@ try {
 
     // --- 1. Fetch all distinct topics for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allTopics = $db->query("SELECT DISTINCT topic FROM books ORDER BY topic ASC")->fetchAll();
+    $allTopics = $db->query("SELECT name FROM categories")->fetchAll();
 
     // --- 2. Construct the Base SQL Query ---
 
     $query = "
         SELECT
-            b.book_id,
-            b.title,
-            b.description,
-            b.pdf_file,
-            b.created_at,
-            u.name AS uploader_name,
-            p.title AS linked_podcast_title, 
-            p.podcast_id AS linked_podcast_id
+            b.* 
         FROM books b
-        JOIN users u ON b.uploaded_by = u.user_id
-        LEFT JOIN podcasts p ON b.linked_podcast_id = p.podcast_id
         WHERE 1=1
     ";
 
@@ -75,7 +66,7 @@ try {
     // Abort and show a 500 error page to the user
     abort(500); // Assumes your application has an 'abort' function for error handling
 }
-
+//dd($books);
 
 require "views/pages/book/index_view.php";
 

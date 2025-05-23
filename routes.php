@@ -36,6 +36,9 @@ $router->get('/about', 'controlers/about.php');
 $router->get('/contact', 'controlers/contact.php');
 
 
+$router->get('/data', 'controlers/data.php');
+
+
 
 $router->get('/admin/content_moderation', 'controlers/admin/content_moderation.php');
 $router->get('/admin/category_management', 'controlers/admin/category_management.php');

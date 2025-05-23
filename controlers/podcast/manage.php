@@ -19,7 +19,7 @@ try {
 
     // --- 1. Fetch all distinct categories for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allCategories = $db->query("SELECT DISTINCT category FROM podcasts ORDER BY category ASC")->fetchAll();
+    $allCategories = $db->query("SELECT name FROM categories")->fetchAll();
 
     // --- 2. Construct the Base SQL Query ---
     $query = "
@@ -27,7 +27,6 @@ try {
             p.podcast_id,
             p.title,
             p.description,
-            p.category,
             p.cover_image,
             p.created_at,
             u.name AS creator_name,
@@ -79,7 +78,7 @@ try {
     // Abort and show a 500 error page to the user
     abort(500); // Assumes your application has an 'abort' function for error handling
 }
-
+//dd($podcasts);
 
 require "views/pages/podcast/manage_view.php";
 

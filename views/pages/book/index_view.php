@@ -264,7 +264,7 @@ a{
 
                 <div class="book-grid">
 
-                    <?php if (isset($books)): foreach ($books as $book): ?>
+                    <?php  if (isset($books)): foreach ($books as $book): ?>
 
                         
                     <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($book['book_id']) ?>">
@@ -272,9 +272,8 @@ a{
                         <img src="/views/midea/images/<?=htmlspecialchars($book['cover_image'] ?? "image.png") ?>" alt="Book Cover" class="book-cover">
                         <div class="book-info">
                             <h3 class="book-title"><?= htmlspecialchars($book['title']) ?></h3>
-                            <p class="book-author"><?= htmlspecialchars($book['uploader_name']) ?></p>
+                            <p class="book-author"><?= htmlspecialchars($book['created_by']) ?></p>
                             <p class="book-description"><?= htmlspecialchars($book['description']) ?></p>
-                            <p class="book-topic"><?= htmlspecialchars($book['topic']) ?></p>
                             <div class="book-access">
                                 <span class="access-type in-app">Readable In-App</span>
                                 </div>
