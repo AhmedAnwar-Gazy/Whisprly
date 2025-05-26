@@ -1,7 +1,7 @@
 <?php  require('views/partials/head.php') ?>
 <?php  require('views/partials/nav.php') ?>
 <?php require('views/partials/header.php') ?>
-
+<?php require('views/partials/search.php') ?>
 <style>/* browse.css */
 
 /* General Body Styling (ensure consistency with header and footer) */
@@ -243,9 +243,9 @@ a{
 
 </style>
 <?php //dd($podcasts) ?>
- <?php require('views/partials/search.php') ?>
 
-<h1 class="page-title">Browse Podcasts</h1>
+
+<!-- <h1 class="page-title">Browse Podcasts</h1> -->
 
 <main class="main-content-wrapper">
         <section class="browse-podcasts-section">

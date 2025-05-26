@@ -1,5 +1,4 @@
 <?php
 
 
-require 'views/pages/registertion/create_view.php';
-
+require 'views/pages/user/signin_view.php';
