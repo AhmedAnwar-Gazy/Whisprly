@@ -3,7 +3,7 @@
 <?php
 // Set the heading for the page
 $heading = "All Podcasts";
-dd($_GET['filter']);
+//dd($_GET['filter']);
 // Include necessary core classes
 use core\App;
 use core\Database;
