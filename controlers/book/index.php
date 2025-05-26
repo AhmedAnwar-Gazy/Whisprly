@@ -11,7 +11,7 @@ try {
     // Get the search term from the URL query parameter 'search'. Default to empty string.
     $search = $_GET['search'] ?? '';
     // Get the topic filter from the URL query parameter 'topic'. Default to 'all'.
-    $topicFilter = $_GET['topic'] ?? 'all';
+    $topicFilter = $_GET['category'] ?? 'all';
     // Get the sorting order for 'created_at'. Default to 'desc' (newest first).
     $sortByCreatedAt = $_GET['sort_by_created_at'] ?? 'desc'; // 'asc' for oldest first, 'desc' for newest first
 
@@ -22,9 +22,7 @@ try {
     // --- 2. Construct the Base SQL Query ---
 
     $query = "
-        SELECT
-            b.* 
-        FROM books b
+        SELECT books.* FROM books LEFT JOIN book_categories on books.book_id = book_categories.book_id 
         WHERE 1=1
     ";
 
@@ -37,24 +35,24 @@ try {
     // 'title', 'description', and 'topic' columns in your 'books' table.
     // Example SQL to add index: ALTER TABLE books ADD FULLTEXT(title, description, topic);
     if (!empty($search)) {
-        $query .= " AND MATCH(b.title, b.description, b.topic) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
+        $query .= " AND MATCH(books.title, books.description) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
         $params['search'] = $search; // Bind the search term parameter
     }
 
     // --- 4. Add Topic Filtering ---
     // If a specific topic is selected (not 'all'), add the topic filter.
     if ($topicFilter !== 'all' && !empty($topicFilter)) {
-        $query .= " AND b.topic = :topic_filter";
+        $query .= " AND book_categories.category_id = :topic_filter";
         $params['topic_filter'] = $topicFilter; // Bind the topic filter parameter
     }
 
     // --- 5. Finalize Query with Ordering ---
     // Add ordering by 'created_at' based on the 'sort_by_created_at' parameter
     if ($sortByCreatedAt === 'asc') {
-        $query .= " ORDER BY b.created_at ASC;";
+        $query .= " ORDER BY books.created_at ASC;";
     } else {
         // Default to descending order (newest first)
-        $query .= " ORDER BY b.created_at DESC;";
+        $query .= " ORDER BY books.created_at DESC;";
     }
 
     // --- 6. Execute the Query ---

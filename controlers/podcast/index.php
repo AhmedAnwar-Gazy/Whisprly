@@ -64,14 +64,14 @@ try {
 
     // --- 5. Finalize Query with Grouping and Ordering ---
     // Group by podcast_id to ensure COUNT(e.episode_id) works correctly for each podcast.
-    $query .= " GROUP BY p.podcast_id";
+    $query .= " GROUP BY p.podcast_id ";
 
     // Add ordering by 'created_at' based on the 'sort_by_created_at' parameter
     if ($sortByCreatedAt === 'asc') {
         $query .= " ORDER BY p.created_at ASC;";
     } else {
         // Default to descending order (newest first)
-        $query .= " ORDER BY p.created_at DESC;";
+        $query .= " ORDER BY p.created_at DESC ;";
     }
 
     // --- 6. Execute the Query ---

@@ -20,8 +20,9 @@ try {
     // This allows you to populate a <select> dropdown in your HTML view.
     $allCategories = $db->query("SELECT * FROM categories")->fetchAll();
 
-$query = "select * from  podcasts p left join subscriptions s on p.podcast_id = s.podcast_id 
-where s.user_id=1";
+$query = "       select DISTINCT  p.* from  podcasts p left join subscriptions s on p.podcast_id = s.podcast_id
+       LEFT JOIN podcast_categories pc on p.podcast_id = pc.podcast_id 
+			where s.user_id=1  ";
                         
 
 
@@ -38,17 +39,17 @@ where s.user_id=1";
         $query .= " AND MATCH(p.title, p.description) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
         $params['search'] = $search; // Bind the search term parameter
     }
-
+    //dd($categoryFilter);
     // --- 4. Add Category Filtering ---
     // If a specific category is selected (not 'all'), add the category filter.
     if ($categoryFilter !== 'all' && !empty($categoryFilter)) {
-        $query .= " AND p.category = :category_filter";
+        $query .= " AND pc.category_id = :category_filter";
         $params['category_filter'] = $categoryFilter; // Bind the category filter parameter
     }
 
     // --- 5. Finalize Query with Grouping and Ordering ---
     // Group by podcast_id to ensure COUNT(e.episode_id) works correctly for each podcast.
-    $query .= " GROUP BY p.podcast_id";
+    //$query .= " GROUP BY p.podcast_id";
 
     // Add ordering by 'created_at' based on the 'sort_by_created_at' parameter
     if ($sortByCreatedAt === 'asc') {
