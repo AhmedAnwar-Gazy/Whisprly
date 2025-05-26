@@ -242,6 +242,8 @@ body {
 
                 <div class="content-list">
                     <?php if (isset($podcastQuery)): foreach ($podcastQuery as $podcast): ?>
+                    <a href="/podcast_show/<?= htmlspecialchars($podcast['podcast_id']) ?>" class="content-item podcast-item">
+
                     <div class="content-item podcast-item">
                         <div class="item-info">
                             <span class="item-type"><i class="fas fa-podcast"></i> Podcast Episode</span>
@@ -262,12 +264,15 @@ body {
                             <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </div>
                     </div>
+                    </a>
                     <?php endforeach; ?>
                     <?php endif; ?>
 
 
                     
                     <?php if (isset($episodeQuery)): foreach ($episodeQuery as $episode): ?>
+                    <a href="/episode_show/<?= htmlspecialchars($episode['episode_id']) ?>" class="content-item episode-item">
+
                     <div class="content-item podcast-item">
                         <div class="item-info">
                             <span class="item-type"><i class="fas fa-podcast"></i> Podcast Episode</span>
@@ -289,12 +294,15 @@ body {
                             <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </div>
                     </div>
+                    </a>
                 <?php endforeach; ?>
                     <?php endif; ?>
 
 
 
                     <?php if (isset($podcastQuery)): foreach ($bookQuery as $book): ?>
+                    <a href="/book_show/<?= htmlspecialchars($book['book_id']) ?>" class="content-item book-item">
+
                     <div class="content-item book-item">
                         <div class="item-info">
                             <span class="item-type"><i class="fas fa-book-open"></i> Book</span>
@@ -316,6 +324,7 @@ body {
                         </div>
                     </div>
                 </div>
+                </a>
                 <?php endforeach; ?>
                     <?php endif; ?>
 
