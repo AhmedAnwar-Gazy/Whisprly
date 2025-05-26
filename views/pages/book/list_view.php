@@ -1,6 +1,7 @@
 <?php  require('views/partials/head.php') ?>
 <?php  require('views/partials/nav.php') ?>
 <?php require('views/partials/header.php') ?>
+<?php require('views/partials/search.php') ?>
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;

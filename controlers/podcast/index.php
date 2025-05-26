@@ -3,7 +3,7 @@
 <?php
 // Set the heading for the page
 $heading = "All Podcasts";
-
+//dd($_GET['filter']);
 // Include necessary core classes
 use core\App;
 use core\Database;
@@ -21,7 +21,7 @@ try {
 
     // --- 1. Fetch all distinct categories for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allCategories = $db->query("SELECT name FROM categories")->fetchAll();
+    $allCategories = $db->query("SELECT * FROM categories")->fetchAll();
 
     // --- 2. Construct the Base SQL Query ---
     $query = "

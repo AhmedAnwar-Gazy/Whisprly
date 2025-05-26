@@ -1,4 +1,4 @@
 <?php
 
-require 'views/pages/sessions/create_view.php';
+require 'views/pages/user/login_view.php';
 

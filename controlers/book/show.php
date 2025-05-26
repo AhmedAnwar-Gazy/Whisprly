@@ -17,20 +17,10 @@ $bookId = $_GET['book_id'] ?? null;
 try {
     // Fetch book details
     $book = $db->query("
-        SELECT
-            b.book_id,
-            b.title,
-            b.description,
-            b.pdf_file,
-            b.topic,
-            b.created_at,
-            u.name AS uploader_name,
-            p.title AS linked_podcast_title,
-            p.podcast_id AS linked_podcast_id
-        FROM books b
-        JOIN users u ON b.uploaded_by = u.user_id
-        LEFT JOIN podcasts p ON b.linked_podcast_id = p.podcast_id
-        WHERE b.book_id = :book_id
+               SELECT
+           *
+        FROM books 
+        WHERE book_id = :book_id
     ", [
         'book_id' => $bookId
     ])->fetch();
