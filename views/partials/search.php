@@ -7,7 +7,7 @@
              <button class="search-button"  name="submit">Search</button>
          </div>
          <div class="filter-options">
-             <select class="filter-select" name="filter" >
+             <select class="filter-select" name="category" >
                  <option value="all" <?= ($_GET['filter'] ?? 'all') === 'all' ? 'selected' : '' ?>>All Categories</option>
                  <?php foreach ($allCategories as $category): ?>
                      <option value="<?= htmlspecialchars($category['category_id']) ?>"

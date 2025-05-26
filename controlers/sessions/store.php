@@ -18,7 +18,7 @@ if (! Validator::email($email)) {
 if (! Validator::string($password)) {
     $erorrs['password'] = "password is not valid ";
 }
-
+//dd($password);
 if (! empty($erorrs)) {
     require 'views/sessions/create_view.php';
 }
@@ -38,4 +38,4 @@ if ($user) {
 
 $erorrs['email'] = "There No Matching Email Or Password Like this";
 
-require 'views/sessions/create_view.php';
+require 'views/pages/user/login_view.php';

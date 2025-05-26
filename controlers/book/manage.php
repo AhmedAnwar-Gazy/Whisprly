@@ -11,7 +11,7 @@ $currentUserId = $_SESSION['user']['user_id'] ?? 1; // Current logged-in user
 try {
     $search = $_GET['search'] ?? '';
     $topicFilter = $_GET['topic'] ?? 'all';
-
+    $allCategories = $db->query("SELECT * FROM categories")->fetchAll();
     // Optionally fetch distinct topics for a filter dropdown
     $topics = $db->query("SELECT DISTINCT topic FROM books WHERE uploaded_by = :current_user_id ORDER BY topic", [
         'current_user_id' => $currentUserId
@@ -37,7 +37,7 @@ try {
 
     // Add Search Filter
     if (!empty($search)) {
-        $query .= " AND MATCH(title, description, topic) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+        $query .= " AND MATCH(title, description, topic) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
         $params['search'] = $search;
     }
 

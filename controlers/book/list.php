@@ -5,7 +5,7 @@ use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-
+$allCategories = $db->query("SELECT * FROM categories")->fetchAll();
 // Fetch all books
 $books = $db->query("        
         SELECT
