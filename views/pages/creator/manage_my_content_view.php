@@ -24,9 +24,14 @@ body {
 }
 
 /* Container for layout */
-.container {
+.container-creator-manage {
     max-width: 900px; /* Container width for content list */
     margin: 0 auto; /* Center the container */
+     display: flex;
+        flex-direction: column;
+        /* Stack children vertically */
+        padding: 0 1.5rem;
+        /* Padding for smaller screens */
 }
 
 .page-title {
@@ -232,18 +237,19 @@ body {
 
 <main class="main-content-wrapper">
         <section class="manage-content-section">
-            <div class="container">
+            <div class="container-creator-manage">
                 <h1 class="page-title">Manage My Content</h1>
 
                 <div class="content-list">
+                    <?php if (isset($podcastQuery)): foreach ($podcastQuery as $podcast): ?>
                     <div class="content-item podcast-item">
                         <div class="item-info">
                             <span class="item-type"><i class="fas fa-podcast"></i> Podcast Episode</span>
-                            <h3 class="item-title">Episode Title: The Latest Trends</h3>
-                            <p class="item-date">Uploaded: 2023-11-15</p>
+                            <h3 class="item-title">Episode Title: <?= htmlspecialchars($podcast['title']) ?></h3>
+                            <p class="item-date">Uploaded: <?= htmlspecialchars($podcast['created_at']) ?></p>
                         </div>
                         <div class="item-status">
-                            <span class="status-indicator pending"><i class="fas fa-clock"></i> Pending Approval</span>
+                            <span class="status-indicator pending"><i class="fas fa-clock"></i> <?= htmlspecialchars($podcast['status']) ?></span>
                         </div>
                         <div class="item-analytics">
                              <div class="analytics-stat">
@@ -256,16 +262,48 @@ body {
                             <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </div>
                     </div>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
 
+
+                    
+                    <?php if (isset($episodeQuery)): foreach ($episodeQuery as $episode): ?>
+                    <div class="content-item podcast-item">
+                        <div class="item-info">
+                            <span class="item-type"><i class="fas fa-podcast"></i> Podcast Episode</span>
+                            <h3 class="item-title">Episode Title: <?= htmlspecialchars($episode['title']) ?></h3>
+                            <p class="item-date">Uploaded: <?= htmlspecialchars($episode['release_date']) ?></p>
+                        </div>
+                        <!-- <div class="item-status">
+                            <span class="status-indicator rejected"><i class="fas fa-times-circle"></i> Rejected</span>
+                            <p class="rejection-reason">Reason: Contains copyrighted music.</p>
+                        </div> -->
+                        <div class="item-analytics">
+                            <div class="analytics-stat">
+                                <span class="stat-number">0</span>
+                                <span class="stat-label">Plays</span>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                    <?php endif; ?>
+
+
+
+                    <?php if (isset($podcastQuery)): foreach ($bookQuery as $book): ?>
                     <div class="content-item book-item">
                         <div class="item-info">
                             <span class="item-type"><i class="fas fa-book-open"></i> Book</span>
-                            <h3 class="item-title">My New Book: A Journey</h3>
-                            <p class="item-date">Uploaded: 2023-11-10</p>
+                            <h3 class="item-title">My New Book: <?= htmlspecialchars($book['title']) ?></h3>
+                            <p class="item-date">Uploaded: <?= htmlspecialchars($book['created_at']) ?></p>
                         </div>
-                        <div class="item-status">
+                        <!-- <div class="item-status">
                             <span class="status-indicator approved"><i class="fas fa-check-circle"></i> Approved</span>
-                        </div>
+                        </div> -->
                          <div class="item-analytics">
                              <div class="analytics-stat">
                                 <span class="stat-number">500</span>
@@ -277,29 +315,10 @@ body {
                             <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </div>
                     </div>
+                </div>
+                <?php endforeach; ?>
+                    <?php endif; ?>
 
-                     <div class="content-item podcast-item">
-                        <div class="item-info">
-                            <span class="item-type"><i class="fas fa-podcast"></i> Podcast Episode</span>
-                            <h3 class="item-title">Episode Title: Interview with Expert</h3>
-                            <p class="item-date">Uploaded: 2023-11-01</p>
-                        </div>
-                        <div class="item-status">
-                            <span class="status-indicator rejected"><i class="fas fa-times-circle"></i> Rejected</span>
-                             <p class="rejection-reason">Reason: Contains copyrighted music.</p>
-                        </div>
-                         <div class="item-analytics">
-                             <div class="analytics-stat">
-                                <span class="stat-number">0</span>
-                                <span class="stat-label">Plays</span>
-                             </div>
-                             </div>
-                        <div class="item-actions">
-                            <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
-                            <button class="delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
-                        </div>
-                    </div>
-                    </div>
 
                 </div>
         </section>
