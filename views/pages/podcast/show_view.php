@@ -758,20 +758,20 @@
     <section class="podcast-series-detail-section">
         <div class="containerr">
             <div class="series-header">
-                <img src="https://placehold.co/300x300/00697B/F8F5F0?text=Series+Cover" alt="Podcast Series Cover" class="series-cover-large">
+                <img src="views\media\images/<?php echo $podcast[0]["cover_image"] ?>" alt="Podcast Series Cover" class="series-cover-large">
                 <div class="series-info-large">
-                    <h1 class="series-title-large">Podcast Series Title</h1>
-                    <p class="series-creator-large">By Creator Name</p>
-                    <p class="series-description-large">A detailed description of the podcast series, covering its themes, format, and target audience. This section provides potential listeners with enough information to decide if they want to subscribe.</p>
-                    <div class="series-meta-tags">
+                    <h1 class="series-title-large"><?php echo $podcast[0]["title"] ?></h1>
+                    <p class="series-creator-large">By <?php echo $podcast[0]["creator_name"] ?></p>
+                    <p class="series-description-large"><?php echo $podcast[0]["description"] ?></p>
+                    <!-- <div class="series-meta-tags">
                         <span class="meta-tag">Technology</span>
                         <span class="meta-tag">Innovation</span>
                         <span class="meta-tag">Business</span>
-                    </div>
+                    </div> -->
                     <div class="action-buttons-group"> <button class="subscribe-button">
                             <i class="fas fa-plus-circle"></i> Subscribe
                         </button>
-                        <button id="readBookButton" class="read-book-button" data-pdf-src="/views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
+                        <button id="readBookButton" class="read-book-button" data-pdf-src="/views/midea/pdfs/<?php echo $books[0]["pdf_file"] ?>#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
                             <i class="fas fa-book-reader"></i> Read Full Book
                         </button>
                     </div>
@@ -782,12 +782,12 @@
                 <div class="podcast-header">
                     <img src="/views/midea/images/image.png" alt="Podcast Episode Cover" class="podcast-cover">
                     <div class="episode-info">
-                        <span class="podcast-title">My Awesome Podcast</span>
-                        <span class="episode-title">Episode 1: The Beginning</span>
+                        <span class="podcast-title"><?php echo $podcast[0]["title"] ?></span>
+                        <span class="episode-title"><?php echo $episodes[0]["title"] ?></span>
                     </div>
                 </div>
 
-                <audio id="audioPlayer" src="/views/midea/sounds/JavaThreading.mp3" preload="metadata"></audio>
+                <audio id="audioPlayer" src="/views/midea/sounds/<?php echo $episodes[0]["audio_file"] ?>" preload="metadata"></audio>
 
                 <div class="controls">
                     <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
@@ -811,18 +811,24 @@
                 <h2>Episodes</h2>
                 <ul>
                     <li class="episode-item">
-                        <div class="episode-details">
-                            <span class="episode-number">#1</span>
-                            <h3 class="episode-title">Episode Title One</h3>
-                            <span class="episode-duration">35 min</span>
-                            <span class="episode-date">Released: 2023-10-27</span>
-                        </div>
-                        <div class="episode-actions">
-                            <button class="play-button"><i class="fas fa-play"></i> Play</button>
-                            <button class="download-button"><i class="fas fa-download"></i> Download</button>
-                        </div>
+                        <?php if (isset($episodes)): foreach ($episodes as $episode): ?>
+                            <a href="episode_show?episode_id=<?htmlspecialchars($episode['episode_id']) ?>" class="episode_item">
+                                
+                                <div class="episode-details">
+                                    <span class="episode-number"><?= htmlspecialchars($episode['episode_id']) ?></span>
+                                    <h3 class="episode-title"><?= htmlspecialchars($episode['title']) ?></h3>
+                                    <span class="episode-duration"><?= htmlspecialchars($episode['duration']) ?> min</span>
+                                    <span class="episode-date">Released: <?= htmlspecialchars($episode['release_date']) ?></span>
+                                </div>
+                                <div class="episode-actions">
+                                    <button class="play-button"><i class="fas fa-play"></i> Play</button>
+                                    <button class="download-button"><i class="fas fa-download"></i> Download</button>
+                                </div>
+                            </a>
+                             <?php endforeach; ?>
+                    <?php endif; ?>
                     </li>
-                    <li class="episode-item">
+                    <!-- <li class="episode-item">
                         <div class="episode-details">
                             <span class="episode-number">#2</span>
                             <h3 class="episode-title">Episode Title Two: Deep Dive</h3>
@@ -845,7 +851,7 @@
                             <button class="play-button"><i class="fas fa-play"></i> Play</button>
                             <button class="download-button"><i class="fas fa-download"></i> Download</button>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -871,7 +877,7 @@
                 <h2>Read Along (Example Book)</h2>
                 <div class="pdf-viewer-container">
                     <iframe id="pdfViewerIframe" src="" width="100%" height="700px" frameborder="0">
-                        This browser does not support PDFs. Please <a href="/views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf">download the PDF</a> instead.
+                        This browser does not support PDFs. Please <a href="/views/midea/pdfs/<?php echo $books[0]["pdf_file"] ?>">download the PDF</a> instead.
                     </iframe>
                 </div>
             </div>
