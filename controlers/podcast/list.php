@@ -18,7 +18,7 @@ try {
 
     // --- 1. Fetch all distinct categories for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allCategories = $db->query("SELECT name FROM categories")->fetchAll();
+    $allCategories = $db->query("SELECT * FROM categories")->fetchAll();
 
 $query = "select * from  podcasts p left join subscriptions s on p.podcast_id = s.podcast_id 
 where s.user_id=1";
@@ -35,7 +35,7 @@ where s.user_id=1";
     // 'title' and 'description' columns in your 'podcasts' table.
     // Example SQL to add index: ALTER TABLE podcasts ADD FULLTEXT(title, description);
     if (!empty($search)) {
-        $query .= " AND MATCH(p.title, p.description) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+        $query .= " AND MATCH(p.title, p.description) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
         $params['search'] = $search; // Bind the search term parameter
     }
 

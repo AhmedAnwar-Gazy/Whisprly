@@ -17,7 +17,7 @@ try {
 
     // --- 1. Fetch all distinct topics for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allTopics = $db->query("SELECT name FROM categories")->fetchAll();
+    $allCategories = $db->query("SELECT * FROM categories")->fetchAll();
 
     // --- 2. Construct the Base SQL Query ---
 
@@ -37,7 +37,7 @@ try {
     // 'title', 'description', and 'topic' columns in your 'books' table.
     // Example SQL to add index: ALTER TABLE books ADD FULLTEXT(title, description, topic);
     if (!empty($search)) {
-        $query .= " AND MATCH(b.title, b.description, b.topic) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+        $query .= " AND MATCH(b.title, b.description, b.topic) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
         $params['search'] = $search; // Bind the search term parameter
     }
 

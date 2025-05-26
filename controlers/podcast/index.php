@@ -1,6 +1,7 @@
 
 
 <?php
+//dd($categoryFilter);
 // Set the heading for the page
 $heading = "All Podcasts";
 //dd($_GET['filter']);
@@ -35,7 +36,8 @@ try {
         FROM podcasts p
         JOIN users u ON p.created_by = u.user_id
         LEFT JOIN episodes e ON p.podcast_id = e.podcast_id
-        WHERE p.status = 'published' 
+        LEFT JOIN podcast_categories on p.podcast_id = podcast_categories.podcast_id 
+        WHERE p.status = 'published'
     ";
 
     //Initialize an array to hold parameters for the prepared statement
@@ -47,14 +49,16 @@ try {
     // 'title' and 'description' columns in your 'podcasts' table.
     // Example SQL to add index: ALTER TABLE podcasts ADD FULLTEXT(title, description);
     if (!empty($search)) {
-        $query .= " AND MATCH(p.title, p.description) AGAINST (:search IN NATURAL LANGUAGE MODE)";
+        ///dd("hi");
+        $query .= " AND MATCH(p.title, p.description) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
         $params['search'] = $search; // Bind the search term parameter
     }
 
     // --- 4. Add Category Filtering ---
     // If a specific category is selected (not 'all'), add the category filter.
+    
     if ($categoryFilter !== 'all' && !empty($categoryFilter)) {
-        $query .= " AND p.category = :category_filter";
+        $query .= " AND  category_id = :category_filter";
         $params['category_filter'] = $categoryFilter; // Bind the category filter parameter
     }
 

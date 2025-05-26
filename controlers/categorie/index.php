@@ -17,7 +17,7 @@ try {
 
     // --- 1. Fetch all distinct topics for the filter dropdown ---
     // This allows you to populate a <select> dropdown in your HTML view.
-    $allTopics = $db->query("SELECT name FROM categories")->fetchAll();
+    $allTopics = $db->query("SELECT * FROM categories")->fetchAll();
 
     // --- 2. Construct the Base SQL Query ---
 
