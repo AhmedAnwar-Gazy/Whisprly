@@ -874,7 +874,7 @@
             </div>
 
             <div id="pdfViewerSection" class="pdf-viewer-section">
-                <h2>Read Along (Example Book)</h2>
+                <h2>Read Along (<?php echo $books[0]["pdf_file"] ?>)</h2>
                 <div class="pdf-viewer-container">
                     <iframe id="pdfViewerIframe" src="" width="100%" height="700px" frameborder="0">
                         This browser does not support PDFs. Please <a href="/views/midea/pdfs/<?php echo $books[0]["pdf_file"] ?>">download the PDF</a> instead.

@@ -247,14 +247,17 @@ body {
         <section class="episode-listening-section">
             <div class="container-epi">
                 <div class="episode-info-header">
-                    <h1 class="episode-title-large">Episode Title Goes Here</h1>
-                    <p class="series-link">From: <a href="#" class="series-name-link">[Podcast Series Name]</a></p>
+                    <h1 class="episode-title-large"><?php echo $episode[0]["title"] ?></h1>
+                    <p class="series-link">From: <a href="#" class="series-name-link"><?php echo $episode[0]["podcast_title"] ?></a></p>
+                    <p class="series-link">By <a href="#" class="series-name-link"><?php echo $episode[0]["creator_name"] ?></a></p>
+                    <p class="series-link">Duration: <a href="#" class="series-name-link"><?php echo $episode[0]["duration"] ?></a></p>
+                    <p class="series-link">Release date: <a href="#" class="series-name-link"><?php echo $episode[0]["release_date"] ?></a></p>
                 </div>
 
                 <div class="audio-player-area">
                     <div class="audio-player">
                         <audio controls>
-                            <source src="/views/midea/sounds/JavaThreading.mp3" type="audio/mpeg">
+                            <source src="/views/midea/sounds/<?php echo $episode[0]["audio_file"] ?>" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -272,7 +275,7 @@ body {
                     </div>
                 </div>
 
-                <div class="show-notes">
+                <!-- <div class="show-notes">
                     <h2>Show Notes</h2>
                     <div class="show-notes-content">
                         <p>This is where the detailed show notes or description for the episode will go. It can include summaries, timestamps, links to resources mentioned in the episode, and more.</p>
@@ -284,7 +287,7 @@ body {
                         </ul>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="episode-actions-bottom">
                     <button class="action-button add-to-library-button">

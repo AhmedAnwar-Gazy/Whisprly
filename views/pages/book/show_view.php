@@ -278,14 +278,14 @@ body {
         <section class="book-detail-section">
             <div class="container-book">
                 <div class="book-header">
-                    <img src="https://placehold.co/300x450/FF7F50/F8F5F0?text=Book+Cover" alt="Book Cover" class="book-cover-large">
+                    <img src="views/media/images/<?php echo $book[0]["book_cover"] ?? "book_cover.png" ?>" alt="Book Cover" class="book-cover-large">
                     <div class="book-info-large">
-                        <h1 class="book-title-large">Book Title Goes Here</h1>
-                        <p class="book-author-large">By Author Name</p>
-                        <p class="book-description-large">A detailed description of the book, covering its plot, themes, and style. This section provides potential readers with enough information to decide if they want to read it.</p>
+                        <h1 class="book-title-large"><?php echo $book[0]["title"] ?></h1>
+                        <p class="book-author-large">By <?php echo $book[0]["created_by"] ?></p>
+                        <p class="book-description-large"><?php echo $book[0]["description"] ?></p>
                         <div class="book-meta">
                             <span class="meta-item"><strong>Genre:</strong> [Genre]</span>
-                            <span class="meta-item"><strong>Publication Date:</strong> [Date]</span>
+                            <span class="meta-item"><strong>Publication Date:</strong> <?php echo $book[0]["created_at"] ?></span>
                         </div>
 
                         <div class="book-access-options">
@@ -311,7 +311,7 @@ body {
                                 <a href="#" class="related-podcast-link">Listen Now</a>
                             </div>
                         </div>
-                         <div class="related-podcast-card">
+                         <!-- <div class="related-podcast-card">
                              <img src="https://placehold.co/150x150/FF7F50/F8F5F0?text=Podcast+Cover+2" alt="Related Podcast Cover" class="related-podcast-cover">
                             <div class="related-podcast-info">
                                 <h3 class="related-podcast-title">Another Related Podcast</h3>
@@ -326,8 +326,8 @@ body {
                                 <p class="related-podcast-creator">By Third Creator</p>
                                 <a href="#" class="related-podcast-link">Listen Now</a>
                             </div>
-                        </div>
-                        </div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </section>
