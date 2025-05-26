@@ -91,11 +91,11 @@ $router->get('/podcast_update', 'controlers/podcast/update.php');
 
 
 $router->get('/register_view', 'views/pages/registertion/create_view.php');
-$router->post('/register', 'views/pages/registertion/store_view.php');
+$router->post('/register_view', 'views/pages/registertion/store_view.php');
 
-$router->get('/login', 'views/pages/sessions/create.php');
-$router->delete('/logout', 'views/pages/sessions/destroy.php');
-$router->post('/login', 'views/pages/sessions/store.php');
+$router->get('/login_view', 'views/pages/sessions/create.php');
+$router->delete('/logout_view', 'views/pages/sessions/destroy.php');
+$router->post('/login_view', 'views/pages/sessions/store.php');
 
 
 

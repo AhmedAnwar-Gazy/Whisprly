@@ -319,7 +319,6 @@
 <?php require('views/partials/search.php') ?>
 
 <h1 class="page-title">Whisprly Home</h1>
-<h1>hello ,<?= $_SESSION['user']['email'] ?? 'user' ?> welcome home</h1>
 
 
 <main class="main-content-wrapper">

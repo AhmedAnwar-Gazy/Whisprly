@@ -230,7 +230,7 @@ unset($_SESSION['errors']); ?>
         <div class="container-reg">
             <h1 class="page-title">Create Your Whisprly Account</h1>
 
-            <form class="create-user-form" action="/registertion_stor" method="post" enctype="multipart/form-data">
+            <form class="create-user-form" action="/register" method="post" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label for="user-name" class="form-label">Full Name:</label>
@@ -253,8 +253,8 @@ unset($_SESSION['errors']); ?>
                     <input type="password" id="confirm-password" class="form-input" required minlength="8">
                 </div>
                 <div class="form-group">
-                    <label for="photo">your photo</label>
-                    <input type="file" id="photo" name="photo" accept="image/*">
+                    <label for="photo">your photo </label>
+                    <input class="form-input"  type="file" id="photo" name="photo" accept="image/*">
                 </div>
 
                 <input type="hidden" name="role" value="listener">
