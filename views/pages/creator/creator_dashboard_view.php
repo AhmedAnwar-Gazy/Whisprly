@@ -24,9 +24,14 @@ body {
 }
 
 /* Container for layout */
-.container {
+.container-creator-dashboard {
     max-width: 900px; /* Container width for dashboard content */
     margin: 0 auto; /* Center the container */
+     display: flex;
+        flex-direction: column;
+        /* Stack children vertically */
+        padding: 0 1.5rem;
+        /* Padding for smaller screens */
 }
 
 .page-title {
@@ -232,23 +237,31 @@ body {
 
 <main class="main-content-wrapper">
         <section class="creator-dashboard-section">
-            <div class="container">
+            <div class="container-creator-dashboard">
                 <h1 class="page-title">Creator Dashboard</h1>
 
                 <div class="dashboard-overview">
                     <h2 class="section-heading">Overview</h2>
                     <div class="overview-stats">
                         <div class="stat-item">
-                            <span class="stat-number">15</span>
-                            <span class="stat-label">Total Uploads</span>
+                            <span class="stat-number"><?php echo $totalPodcasts[0]['count'] ?></span>
+                            <span class="stat-label">Total Podcasts</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number"><?php echo $pendingPodcasts[0]['count'] ?></span>
+                            <span class="stat-label">Total Pending Podcasts </span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number"><?php echo $totalEpisodes[0]['count'] ?></span>
+                            <span class="stat-label">Total Episodes</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number">1,250</span>
                             <span class="stat-label">Total Followers/Subscribers</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">5,870</span>
-                            <span class="stat-label">Recent Plays (Last 30 days)</span>
+                            <span class="stat-number"><?php echo $totalBooks[0]['count'] ?></span>
+                            <span class="stat-label">Total Books</span>
                         </div>
                         </div>
                 </div>
@@ -263,7 +276,7 @@ body {
                 </div>
 
 
-                <div class="recent-uploads">
+                 <!-- <div class="recent-uploads">
                     <h2 class="section-heading">Recent Uploads</h2>
                     <ul class="upload-list">
                         <li class="upload-item">
@@ -297,7 +310,7 @@ body {
                             </div>
                         </li>
                         </ul>
-                </div>
+                </div> -->
 
             </div>
         </section>
