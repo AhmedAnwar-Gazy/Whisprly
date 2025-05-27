@@ -1,375 +1,385 @@
-<?php  require('views/partials/head.php') ?>
-<?php  require('views/partials/nav.php') ?>
+<?php require('views/partials/head.php') ?>
+<?php require('views/partials/nav.php') ?>
 <?php require('views/partials/header.php') ?>
 <?php require('views/partials/search.php') ?>
 <style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    color: #333;
-}
-
-.podcast-player-container {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    width: 100%;
-    max-width: 500px;
-    box-sizing: border-box;
-}
-
-.podcast-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.podcast-cover {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-right: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.episode-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.podcast-title {
-    font-size: 0.9em;
-    color: #555;
-    margin-bottom: 3px;
-}
-
-.episode-title {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #222;
-}
-
-/* Controls Section */
-.controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.control-button {
-    background: none;
-    border: none;
-    font-size: 2.2em;
-    color: #333;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    transition: color 0.2s ease-in-out;
-    outline: none; /* Remove outline on focus */
-}
-
-.control-button:hover {
-    color: #007aff; /* Apple Blue */
-}
-
-.control-button:active {
-    transform: translateY(1px); /* Slight press effect */
-}
-
-/* Progress Bar */
-.progress-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.time-display {
-    font-size: 0.8em;
-    color: #777;
-    width: 40px; /* Fixed width to prevent jumping */
-    text-align: center;
-}
-
-.progress-bar {
-    -webkit-appearance: none; /* Remove default styling */
-    width: 100%;
-    height: 6px;
-    background: #e0e0e0;
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden; /* For filled background */
-}
-
-/* Custom thumb for progress bar */
-.progress-bar::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #007aff; /* Apple Blue */
-    cursor: pointer;
-    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3); /* Ring around thumb */
-    transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.progress-bar::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #007aff;
-    cursor: pointer;
-    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3);
-    transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-/* Custom track for progress bar (filled portion) */
-.progress-bar::-webkit-slider-runnable-track {
-    background: linear-gradient(to right, #007aff 0%, #007aff var(--progress-value, 0%), #e0e0e0 var(--progress-value, 0%), #e0e0e0 100%);
-    border-radius: 3px;
-    height: 6px;
-}
-
-.progress-bar::-moz-range-track {
-    background: linear-gradient(to right, #007aff 0%, #007aff var(--progress-value, 0%), #e0e0e0 var(--progress-value, 0%), #e0e0e0 100%);
-    border-radius: 3px;
-    height: 6px;
-}
-
-
-/* Volume Control */
-.volume-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.volume-container .fas {
-    font-size: 1.1em;
-    color: #777;
-}
-
-.volume-slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 4px;
-    background: #e0e0e0;
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #007aff;
-    cursor: pointer;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
-    transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.volume-slider::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #007aff;
-    cursor: pointer;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
-    transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.volume-slider::-webkit-slider-runnable-track {
-    background: linear-gradient(to right, #007aff 0%, #007aff var(--volume-value, 0%), #e0e0e0 var(--volume-value, 0%), #e0e0e0 100%);
-    border-radius: 2px;
-    height: 4px;
-}
-
-.volume-slider::-moz-range-track {
-    background: linear-gradient(to right, #007aff 0%, #007aff var(--volume-value, 0%), #e0e0e0 var(--volume-value, 0%), #e0e0e0 100%);
-    border-radius: 2px;
-    height: 4px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .podcast-player-container {
-        margin: 20px;
-        padding: 20px;
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: #333;
     }
+
+    .podcast-player-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        width: 100%;
+        max-width: 500px;
+        box-sizing: border-box;
+    }
+
     .podcast-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .podcast-cover {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+        margin-right: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .episode-info {
+        display: flex;
         flex-direction: column;
+    }
+
+    .podcast-title {
+        font-size: 0.9em;
+        color: #555;
+        margin-bottom: 3px;
+    }
+
+    .episode-title {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #222;
+    }
+
+    /* Controls Section */
+    .controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .control-button {
+        background: none;
+        border: none;
+        font-size: 2.2em;
+        color: #333;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        transition: color 0.2s ease-in-out;
+        outline: none;
+        /* Remove outline on focus */
+    }
+
+    .control-button:hover {
+        color: #007aff;
+        /* Apple Blue */
+    }
+
+    .control-button:active {
+        transform: translateY(1px);
+        /* Slight press effect */
+    }
+
+    /* Progress Bar */
+    .progress-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .time-display {
+        font-size: 0.8em;
+        color: #777;
+        width: 40px;
+        /* Fixed width to prevent jumping */
         text-align: center;
     }
-    .podcast-cover {
-        margin-right: 0;
-        margin-bottom: 15px;
+
+    .progress-bar {
+        -webkit-appearance: none;
+        /* Remove default styling */
+        width: 100%;
+        height: 6px;
+        background: #e0e0e0;
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        /* For filled background */
     }
-}
-</style>
-<main>
-  <h1></h1>
-  <section>
 
-<body>
-  
-  <!-- <iframe src="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width" width="90%" height="1000hv" frameborder="0">
-    This browser does not support PDFs. Please <a href="views/midea/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf">download the PDF</a> instead.
-  </iframe>
- <hr> -->
- <hr>
- <hr>
-</body>
+    /* Custom thumb for progress bar */
+    .progress-bar::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #007aff;
+        /* Apple Blue */
+        cursor: pointer;
+        box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3);
+        /* Ring around thumb */
+        transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
 
-<body>
+    .progress-bar::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #007aff;
+        cursor: pointer;
+        box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3);
+        transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
 
-    <div class="podcast-player-container">
-        <div class="podcast-header">
-            <img src="/views/midea/images/image.png" alt="Podcast Episode Cover" class="podcast-cover">
-            <div class="episode-info">
-                <span class="podcast-title">My Awesome Podcast</span>
-                <span class="episode-title">Episode 1: The Beginning</span>
-            </div>
-        </div>
+    /* Custom track for progress bar (filled portion) */
+    .progress-bar::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, #007aff 0%, #007aff var(--progress-value, 0%), #e0e0e0 var(--progress-value, 0%), #e0e0e0 100%);
+        border-radius: 3px;
+        height: 6px;
+    }
 
-        <audio id="audioPlayer" src="/views/midea/sounds/JavaThreading.mp3" preload="metadata"></audio>
+    .progress-bar::-moz-range-track {
+        background: linear-gradient(to right, #007aff 0%, #007aff var(--progress-value, 0%), #e0e0e0 var(--progress-value, 0%), #e0e0e0 100%);
+        border-radius: 3px;
+        height: 6px;
+    }
 
-        <div class="controls">
-            <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
-                <img src="/views/midea/icons/play.png" alt="Play Icon">
-                </button>
 
-            <div class="progress-container">
-                <span id="currentTime" class="time-display">0:00</span>
-                <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100">
-                <span id="durationTime" class="time-display">0:00</span>
-            </div>
+    /* Volume Control */
+    .volume-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+    }
 
-            <div class="volume-container">
-                <i class="fas fa-volume-down"></i>
-                <input type="range" id="volumeControl" class="volume-slider" value="100" min="0" max="100">
-                <i class="fas fa-volume-up"></i>
-            </div>
-        </div>
-    </div>
+    .volume-container .fas {
+        font-size: 1.1em;
+        color: #777;
+    }
 
-    <script>
-        // --- Utility Functions ---
-        // This function needs to be defined BEFORE it's used
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = Math.floor(seconds % 60);
-            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    .volume-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 4px;
+        background: #e0e0e0;
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #007aff;
+        cursor: pointer;
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+        transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .volume-slider::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #007aff;
+        cursor: pointer;
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+        transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .volume-slider::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, #007aff 0%, #007aff var(--volume-value, 0%), #e0e0e0 var(--volume-value, 0%), #e0e0e0 100%);
+        border-radius: 2px;
+        height: 4px;
+    }
+
+    .volume-slider::-moz-range-track {
+        background: linear-gradient(to right, #007aff 0%, #007aff var(--volume-value, 0%), #e0e0e0 var(--volume-value, 0%), #e0e0e0 100%);
+        border-radius: 2px;
+        height: 4px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .podcast-player-container {
+            margin: 20px;
+            padding: 20px;
         }
 
-        // Wrap your code in DOMContentLoaded to ensure elements are loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Get references to HTML elements ---
-            // Declare all variables using const or let
-            const audioPlayer = document.getElementById('audioPlayer');
-            const playPauseButton = document.getElementById('playPauseButton');
-            // This line assumes you're still using Font Awesome <i> tag for the icon.
-            // If you changed to <img>, you'll need to adapt this.
-            // For the <img> tag, you'd change the src directly.
-            const playPauseIcon = playPauseButton.querySelector('img'); // Change to img if using <img>
-            const progressBar = document.getElementById('progressBar');
-            const currentTimeSpan = document.getElementById('currentTime');
-            const durationTimeSpan = document.getElementById('durationTime');
-            const volumeControl = document.getElementById('volumeControl');
+        .podcast-header {
+            flex-direction: column;
+            text-align: center;
+        }
 
-            let isSeeking = false; // Flag to prevent timeupdate from overriding manual seek
+        .podcast-cover {
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+    }
+</style>
+<main>
+    <h1></h1>
+    <section>
 
+        <body>
 
-            // --- Event Listeners ---
+            <!-- <iframe src="views/media/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width" width="90%" height="1000hv" frameborder="0">
+    This browser does not support PDFs. Please <a href="views/media/pdfs/modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf">download the PDF</a> instead.
+  </iframe>
+ <hr> -->
+            <hr>
+            <hr>
+        </body>
 
-            // Play/Pause functionality
-            playPauseButton.addEventListener('click', () => {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    // If using <img>, change the src to 'pause.png'
-                    playPauseIcon.src = '/views/midea/icons/pause.png'; // Assuming you have a pause.png
-                    playPauseButton.setAttribute('aria-label', 'Pause');
-                } else {
-                    audioPlayer.pause();
-                    // If using <img>, change the src to 'play.png'
-                    playPauseIcon.src = '/views/midea/icons/play.png'; // Assuming you have a play.png
-                    playPauseButton.setAttribute('aria-label', 'Play');
+        <body>
+
+            <div class="podcast-player-container">
+                <div class="podcast-header">
+                    <img src="/views/media/images/image.png" alt="Podcast Episode Cover" class="podcast-cover">
+                    <div class="episode-info">
+                        <span class="podcast-title">My Awesome Podcast</span>
+                        <span class="episode-title">Episode 1: The Beginning</span>
+                    </div>
+                </div>
+
+                <audio id="audioPlayer" src="/views/media/sounds/JavaThreading.mp3" preload="metadata"></audio>
+
+                <div class="controls">
+                    <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
+                        <img src="/views/media/icons/play.png" alt="Play Icon">
+                    </button>
+
+                    <div class="progress-container">
+                        <span id="currentTime" class="time-display">0:00</span>
+                        <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100">
+                        <span id="durationTime" class="time-display">0:00</span>
+                    </div>
+
+                    <div class="volume-container">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" id="volumeControl" class="volume-slider" value="100" min="0" max="100">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // --- Utility Functions ---
+                // This function needs to be defined BEFORE it's used
+                function formatTime(seconds) {
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = Math.floor(seconds % 60);
+                    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
                 }
-            });
 
-            // Update progress bar and current time
-            audioPlayer.addEventListener('timeupdate', () => {
-                if (!isSeeking) {
-                    const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                    progressBar.value = progress;
-                    progressBar.style.setProperty('--progress-value', `${progress}%`); // For custom track fill
-                    currentTimeSpan.textContent = formatTime(audioPlayer.currentTime);
-                }
-            });
+                // Wrap your code in DOMContentLoaded to ensure elements are loaded
+                document.addEventListener('DOMContentLoaded', () => {
+                    // --- Get references to HTML elements ---
+                    // Declare all variables using const or let
+                    const audioPlayer = document.getElementById('audioPlayer');
+                    const playPauseButton = document.getElementById('playPauseButton');
+                    // This line assumes you're still using Font Awesome <i> tag for the icon.
+                    // If you changed to <img>, you'll need to adapt this.
+                    // For the <img> tag, you'd change the src directly.
+                    const playPauseIcon = playPauseButton.querySelector('img'); // Change to img if using <img>
+                    const progressBar = document.getElementById('progressBar');
+                    const currentTimeSpan = document.getElementById('currentTime');
+                    const durationTimeSpan = document.getElementById('durationTime');
+                    const volumeControl = document.getElementById('volumeControl');
 
-            // Set duration when audio metadata is loaded
-            audioPlayer.addEventListener('loadedmetadata', () => {
-                durationTimeSpan.textContent = formatTime(audioPlayer.duration);
-                progressBar.max = 100; // Ensure max is 100 for percentage
-                progressBar.value = 0; // Reset progress bar
-                progressBar.style.setProperty('--progress-value', '0%');
-            });
+                    let isSeeking = false; // Flag to prevent timeupdate from overriding manual seek
 
-            // Handle audio ending
-            audioPlayer.addEventListener('ended', () => {
-                // If using <img>, change the src to 'play.png'
-                playPauseIcon.src = '/views/midea/icons/play.png';
-                playPauseButton.setAttribute('aria-label', 'Play');
-                audioPlayer.currentTime = 0; // Reset to start
-                progressBar.value = 0; // Reset progress bar
-                progressBar.style.setProperty('--progress-value', '0%');
-                currentTimeSpan.textContent = formatTime(0);
-            });
 
-            // Manual scrubbing (drag/click on progress bar)
-            progressBar.addEventListener('input', () => { // 'input' fires continuously while dragging
-                isSeeking = true;
-                const seekTime = (progressBar.value / 100) * audioPlayer.duration;
-                currentTimeSpan.textContent = formatTime(seekTime);
-                progressBar.style.setProperty('--progress-value', `${progressBar.value}%`); // Update visual fill
-            });
+                    // --- Event Listeners ---
 
-            progressBar.addEventListener('change', () => { // 'change' fires when drag is released
-                const seekTime = (progressBar.value / 100) * audioPlayer.duration;
-                audioPlayer.currentTime = seekTime;
-                isSeeking = false;
-            });
+                    // Play/Pause functionality
+                    playPauseButton.addEventListener('click', () => {
+                        if (audioPlayer.paused) {
+                            audioPlayer.play();
+                            // If using <img>, change the src to 'pause.png'
+                            playPauseIcon.src = '/views/media/icons/pause.png'; // Assuming you have a pause.png
+                            playPauseButton.setAttribute('aria-label', 'Pause');
+                        } else {
+                            audioPlayer.pause();
+                            // If using <img>, change the src to 'play.png'
+                            playPauseIcon.src = '/views/media/icons/play.png'; // Assuming you have a play.png
+                            playPauseButton.setAttribute('aria-label', 'Play');
+                        }
+                    });
 
-            // Volume control
-            volumeControl.addEventListener('input', () => {
-                const volume = volumeControl.value / 100;
-                audioPlayer.volume = volume;
-                volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`); // For custom track fill
-            });
+                    // Update progress bar and current time
+                    audioPlayer.addEventListener('timeupdate', () => {
+                        if (!isSeeking) {
+                            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                            progressBar.value = progress;
+                            progressBar.style.setProperty('--progress-value', `${progress}%`); // For custom track fill
+                            currentTimeSpan.textContent = formatTime(audioPlayer.currentTime);
+                        }
+                    });
 
-            // Initialize volume slider position based on default audio volume
-            volumeControl.value = audioPlayer.volume * 100;
-            volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`);
-        }); // End of DOMContentLoaded
-    </script>
-</body>
+                    // Set duration when audio metadata is loaded
+                    audioPlayer.addEventListener('loadedmetadata', () => {
+                        durationTimeSpan.textContent = formatTime(audioPlayer.duration);
+                        progressBar.max = 100; // Ensure max is 100 for percentage
+                        progressBar.value = 0; // Reset progress bar
+                        progressBar.style.setProperty('--progress-value', '0%');
+                    });
 
-  </section>
+                    // Handle audio ending
+                    audioPlayer.addEventListener('ended', () => {
+                        // If using <img>, change the src to 'play.png'
+                        playPauseIcon.src = '/views/media/icons/play.png';
+                        playPauseButton.setAttribute('aria-label', 'Play');
+                        audioPlayer.currentTime = 0; // Reset to start
+                        progressBar.value = 0; // Reset progress bar
+                        progressBar.style.setProperty('--progress-value', '0%');
+                        currentTimeSpan.textContent = formatTime(0);
+                    });
+
+                    // Manual scrubbing (drag/click on progress bar)
+                    progressBar.addEventListener('input', () => { // 'input' fires continuously while dragging
+                        isSeeking = true;
+                        const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+                        currentTimeSpan.textContent = formatTime(seekTime);
+                        progressBar.style.setProperty('--progress-value', `${progressBar.value}%`); // Update visual fill
+                    });
+
+                    progressBar.addEventListener('change', () => { // 'change' fires when drag is released
+                        const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+                        audioPlayer.currentTime = seekTime;
+                        isSeeking = false;
+                    });
+
+                    // Volume control
+                    volumeControl.addEventListener('input', () => {
+                        const volume = volumeControl.value / 100;
+                        audioPlayer.volume = volume;
+                        volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`); // For custom track fill
+                    });
+
+                    // Initialize volume slider position based on default audio volume
+                    volumeControl.value = audioPlayer.volume * 100;
+                    volumeControl.style.setProperty('--volume-value', `${volumeControl.value}%`);
+                }); // End of DOMContentLoaded
+            </script>
+        </body>
+
+    </section>
 </main>
 <?php require('views/partials/footer.php') ?>

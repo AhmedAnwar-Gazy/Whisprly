@@ -15,8 +15,8 @@
                  <li><a href="/podcast_index">Podcasts</a></li>
                  <li><a href="/book_index">Books</a></li>
                  <li><a href="/podcast_list">Library</a></li>
-                 <li><a href="#">Creator</a></li>
-                 <li><a href="#">Admin</a></li>
+                 <!-- <li><a href="/creator_manage_my_content">Creator</a></li> -->
+                 <li><a href="/admin_content_moderation">Admin</a></li>
              </ul>
          </nav>
 

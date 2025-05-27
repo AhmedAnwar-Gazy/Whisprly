@@ -9,9 +9,9 @@ $db = App::resolve(Database::class);
 // --- Authorization Check (Admin Only) ---
 // Assume $_SESSION['user']['role'] holds the user's role
 $currentUserRole = $_SESSION['user']['role'] ?? 'listener';
-if ($currentUserRole !== 'admin') {
-    abort(403); // Forbidden: Only admins can access this page
-}
+// if ($currentUserRole !== 'admin') {
+//     abort(403); // Forbidden: Only admins can access this page
+// }
 // --- End Authorization Check ---
 
 try {

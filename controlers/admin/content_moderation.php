@@ -9,9 +9,9 @@ $db = App::resolve(Database::class);
 // --- Authorization Check (Admin Only) ---
 // Assume $_SESSION['user']['role'] holds the user's role
 $currentUserRole = $_SESSION['user']['role'] ?? 'listener';
-if ($currentUserRole !== 'admin') {
-    abort(403); // Forbidden: Only admins can access this page
-}
+// if ($currentUserRole !== 'admin') {
+//     abort(403); // Forbidden: Only admins can access this page
+// }
 // --- End Authorization Check ---
 
 try {
@@ -29,7 +29,6 @@ try {
             p.podcast_id,
             p.title,
             p.description,
-            p.category,
             p.created_at,
             u.name AS creator_name,
             u.user_id AS creator_id
@@ -51,17 +50,8 @@ try {
 
     // --- Fetch Pending Books ---
     $bookQuery = "
-        SELECT
-            b.book_id,
-            b.title,
-            b.description,
-            b.topic,
-            b.created_at,
-            u.name AS uploader_name,
-            u.user_id AS uploader_id
-        FROM books b
-        JOIN users u ON b.uploaded_by = u.user_id
-        WHERE b.uploaded_by IS NOT NULL -- Books don't have a 'status' column directly, so we check existence or you might add a 'status' column similar to podcasts if moderation is needed
+      SELECT books.* FROM books LEFT JOIN book_categories on books.book_id = book_categories.book_id 
+        WHERE 1=1   
     ";
     $bookParams = [];
 
@@ -69,7 +59,7 @@ try {
         $bookQuery .= " AND MATCH(b.title, b.description, b.topic) AGAINST (:search IN NATURAL LANGUAGE MODE)";
         $bookParams['search'] = $search;
     }
-    $bookQuery .= " ORDER BY b.created_at ASC;";
+    $bookQuery .= " ORDER BY books.created_at ASC;";
 
     // NOTE: Your 'books' table does not have a 'status' column.
     // If books also require moderation (e.g., 'pending', 'approved', 'rejected'),
@@ -80,7 +70,6 @@ try {
     if ($contentTypeFilter === 'all' || $contentTypeFilter === 'books') {
         $pendingBooks = $db->query($bookQuery, $bookParams)->fetchAll();
     }
-
 } catch (PDOException $e) {
     error_log($e->getMessage());
     abort(500); // Internal Server Error

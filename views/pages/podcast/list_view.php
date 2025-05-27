@@ -393,7 +393,7 @@
 
                         <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($podcast['podcast_id']) ?>">
                             <div class="podcast-series-card">
-                                <img src="/views/midea/images/<?= htmlspecialchars($podcast['cover_image'] ?? "image.png") ?>" alt="Podcast Series Cover" class="series-cover">
+                                <img src="/views/media/images/<?= htmlspecialchars($podcast['cover_image'] ?? "image.png") ?>" alt="Podcast Series Cover" class="series-cover">
                                 <div class="series-info">
                                     <h3 class="series-title"><?= htmlspecialchars($podcast['title']) ?></h3>
                                     <p class="series-creator"><?= htmlspecialchars($podcast['created_by']) ?></p>

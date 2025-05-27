@@ -316,7 +316,7 @@
 </style>
 <?php //dd($podcasts) 
 ?>
-<?php require('views/partials/search.php') ?>
+<?php  require('views/partials/search.php')  ?>
 
 <h1 class="page-title">Whisprly Home</h1>
 
@@ -328,12 +328,13 @@
             <div class="podcast-series-grid" id="content-container">
                 <?php if (isset($podcasts)): foreach ($podcasts as $podcast): ?>
 
-                        <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($podcast['podcast_id']) ?>">
+                        <a href="/podcast_show?podcast_id=<?= htmlspecialchars($podcast['podcast_id']) ?>">
                             <div class="podcast-series-card">
-                                <img src="/views/midea/images/<?= htmlspecialchars($podcast['cover_image'] ?? "image.png") ?>" alt="Podcast Series Cover" class="series-cover">
+                                
+                                <img src="/views/media/images/<?=  htmlspecialchars($podcast['cover_image'] ?? "image.png") ?>" alt="Podcast Series Cover" class="series-cover">
                                 <div class="series-info">
                                     <h3 class="series-title"><?= htmlspecialchars($podcast['title']) ?></h3>
-                                    <p class="series-creator"><?= htmlspecialchars($podcast['creator_name']) ?></p>
+                                    <p class="series-creator"><?= htmlspecialchars($podcast['created_by']) ?></p>
                                     <p class="series-description"><?= htmlspecialchars($podcast['description']) ?></p>
                                     <!-- <p class="series-episode"><?= htmlspecialchars($podcast['episode_count']) ?></p> -->
                                 </div>

@@ -264,7 +264,7 @@ unset($_SESSION['errors']); ?>
 
 
                 <div class="form-group submit-group">
-                    <button type="submit" class="submit-button"><i class="fas fa-user-plus"></i> Create Account</button>
+                    <button type="submit" name="submit" class="submit-button"><i class="fas fa-user-plus"></i> Create Account</button>
                 </div>
 
             </form>

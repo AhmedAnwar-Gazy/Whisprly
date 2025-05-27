@@ -12,10 +12,10 @@ $db = App::resolve(Database::class);
 $currentUserId = $_SESSION['user']['user_id'] ?? null;
 $currentUserRole = $_SESSION['user']['role'] ?? 'listener';
 
-if (!$currentUserId || ($currentUserRole !== 'creator' && $currentUserRole !== 'admin')) {
-    // If unauthorized, stop execution and show a forbidden error page.
-    abort(403);
-}
+// if (!$currentUserId || ($currentUserRole !== 'creator' && $currentUserRole !== 'admin')) {
+//     // If unauthorized, stop execution and show a forbidden error page.
+//     abort(403);
+// }
 // --- End Authorization Check ---
 
 try {

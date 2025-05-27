@@ -1,4 +1,7 @@
 <?php 
+
+//dd( $_FILES['photo']['size']);
+
 if (isset($_POST["submit"])) {
 
 $file = $_FILES['photo']['name'];
@@ -9,7 +12,6 @@ $error = $_FILES['photo']['error'];
 $fileExt = explode('.', $file);
 $fileActual = strtolower(end($fileExt));
 $allow = array('jpg', 'jpeg', 'png', 'pdf');
-dd( $_FILES['photo']['size']);
 if (in_array($fileActual, $allow)) {
     if ($error === 0) {
         if ($size < 10000000) {

@@ -40,13 +40,13 @@ $router->get('/data', 'controlers/data.php');
 
 
 
-$router->get('/admin/content_moderation', 'controlers/admin/content_moderation.php');
-$router->get('/admin/category_management', 'controlers/admin/category_management.php');
+$router->get('/admin_content_moderation', 'controlers/admin/content_moderation.php');
+$router->get('/admin_category_management', 'controlers/admin/category_management.php');
 
 
 
-$router->get('/creator/manage_my_content', 'controlers/creator/manage_my_content.php');
-$router->get('/creator/creator_dashboard', 'controlers/creator/creator_dashboard.php');
+$router->get('/creator_manage_my_content', 'controlers/creator/manage_my_content.php');
+$router->get('/creator_creator_dashboard', 'controlers/creator/creator_dashboard.php');
 
 
 

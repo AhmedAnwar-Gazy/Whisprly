@@ -1,6 +1,6 @@
 <?php require('views/partials/head.php') ?>
 <?php require('views/partials/nav.php') ?>
-<?php require('views/partials/header.php') ?>
+<?php require('views/partials/header.php') ;?>
 
 
 <style>
@@ -758,11 +758,11 @@
     <section class="podcast-series-detail-section">
         <div class="containerr">
             <div class="series-header">
-                <img src="views\media\images/<?php echo $podcast[0]["cover_image"] ?>" alt="Podcast Series Cover" class="series-cover-large">
+                <img src="views/media/images/<?= $podcast["cover_image"] ?? "image.png"?>" alt="Podcast Series Cover" class="series-cover-large">
                 <div class="series-info-large">
-                    <h1 class="series-title-large"><?php echo $podcast[0]["title"] ?></h1>
-                    <p class="series-creator-large">By <?php echo $podcast[0]["creator_name"] ?></p>
-                    <p class="series-description-large"><?php echo $podcast[0]["description"] ?></p>
+                    <h1 class="series-title-large"><?= $podcast["title"] ?></h1>
+                    <p class="series-creator-large">By <?php echo $podcast["creator_name"] ?></p>
+                    <p class="series-description-large"><?php echo $podcast["description"] ?></p>
                     <!-- <div class="series-meta-tags">
                         <span class="meta-tag">Technology</span>
                         <span class="meta-tag">Innovation</span>
@@ -771,7 +771,8 @@
                     <div class="action-buttons-group"> <button class="subscribe-button">
                             <i class="fas fa-plus-circle"></i> Subscribe
                         </button>
-                        <button id="readBookButton" class="read-book-button" data-pdf-src="/views/midea/pdfs/<?php echo $books[0]["pdf_file"] ?>#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
+                        <!-- يجب تعدبل هذا الرابط  -->
+                        <button id="readBookButton" class="read-book-button" data-pdf-src="/views/media/pdfs/<?= $books[0]["pdf_file"] ?? "modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf" ?>#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
                             <i class="fas fa-book-reader"></i> Read Full Book
                         </button>
                     </div>
@@ -780,18 +781,18 @@
 
             <div class="podcast-player-container">
                 <div class="podcast-header">
-                    <img src="/views/midea/images/image.png" alt="Podcast Episode Cover" class="podcast-cover">
+                    <img src="/views/media/images/image.png" alt="Podcast Episode Cover" class="podcast-cover">
                     <div class="episode-info">
-                        <span class="podcast-title"><?php echo $podcast[0]["title"] ?></span>
+                        <span class="podcast-title"><?php echo $podcast["title"] ?></span>
                         <span class="episode-title"><?php echo $episodes[0]["title"] ?></span>
                     </div>
                 </div>
 
-                <audio id="audioPlayer" src="/views/midea/sounds/<?php echo $episodes[0]["audio_file"] ?>" preload="metadata"></audio>
+                <audio id="audioPlayer" src="/views/media/sounds/<?php echo $podcast["audio_file"] ?? "JavaThreading.mp3"?>" preload="metadata"></audio>
 
                 <div class="controls">
                     <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
-                        <img src="/views/midea/icons/play.png" alt="Play Icon" class="play-pause-icon">
+                        <img src="/views/media/icons/play.png" alt="Play Icon" class="play-pause-icon">
                     </button>
 
                     <div class="progress-container">
@@ -861,7 +862,7 @@
                     <?php if (isset($books)): foreach ($books as $book): ?>
                             <a href="book_show?book_id=<?= htmlspecialchars($book['book_id']) ?>" class="related-book-link">
                                 <div class="related-book-card">
-                                    <img src="/views/midea/images/image.png" alt="Related Book Cover" class="related-book-cover">
+                                    <img src="/views/media/images/image.png" alt="Related Book Cover" class="related-book-cover">
                                     <div class="related-book-info">
                                         <h3 class="related-book-title"><?= htmlspecialchars($book['title']) ?></h3>
                                         <p class="related-book-author"><?= htmlspecialchars($book['created_by']) ?></p>
@@ -877,7 +878,7 @@
                 <h2>Read Along (<?php echo $books[0]["pdf_file"] ?>)</h2>
                 <div class="pdf-viewer-container">
                     <iframe id="pdfViewerIframe" src="" width="100%" height="700px" frameborder="0">
-                        This browser does not support PDFs. Please <a href="/views/midea/pdfs/<?php echo $books[0]["pdf_file"] ?>">download the PDF</a> instead.
+                        This browser does not support PDFs. Please <a href="/views/media/pdfs/<?php echo $books[0]["pdf_file"] ?? "modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf"?>">download the PDF</a> instead.
                     </iframe>
                 </div>
             </div>
@@ -921,11 +922,11 @@
         playPauseButton.addEventListener('click', () => {
             if (audioPlayer.paused) {
                 audioPlayer.play();
-                playPauseIcon.src = '/views/midea/icons/pause.png';
+                playPauseIcon.src = '/views/media/icons/pause.png';
                 playPauseButton.setAttribute('aria-label', 'Pause');
             } else {
                 audioPlayer.pause();
-                playPauseIcon.src = '/views/midea/icons/play.png';
+                playPauseIcon.src = '/views/media/icons/play.png';
                 playPauseButton.setAttribute('aria-label', 'Play');
             }
         });
@@ -951,7 +952,7 @@
 
         // Handle audio ending
         audioPlayer.addEventListener('ended', () => {
-            playPauseIcon.src = '/views/midea/icons/play.png';
+            playPauseIcon.src = '/views/media/icons/play.png';
             playPauseButton.setAttribute('aria-label', 'Play');
             audioPlayer.currentTime = 0;
             progressBar.value = 0;

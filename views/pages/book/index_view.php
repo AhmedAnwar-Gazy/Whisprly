@@ -340,7 +340,7 @@
 
                         <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($book['book_id']) ?>">
                             <div class="book-card">
-                                <img src="/views/midea/images/<?= htmlspecialchars($book['cover_image'] ?? "image.png") ?>" alt="Book Cover" class="book-cover">
+                                <img src="/views/media/images/<?= htmlspecialchars($book['cover_image'] ?? "image.png") ?>" alt="Book Cover" class="book-cover">
                                 <div class="book-info">
                                     <h3 class="book-title"><?= htmlspecialchars($book['title']) ?></h3>
                                     <p class="book-author"><?= htmlspecialchars($book['created_by']) ?></p>
