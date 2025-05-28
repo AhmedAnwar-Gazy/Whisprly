@@ -23,11 +23,7 @@ body {
     padding: 1.5rem 1.5rem; /* Add padding */
 }
 
-/* Container for layout */
-.container {
-    max-width: 1000px; /* Container width for content */
-    margin: 0 auto; /* Center the container */
-}
+
 
 .page-title {
     font-size: 2.5rem;
@@ -68,7 +64,7 @@ body {
      margin-bottom: 0; /* Remove default form group margin */
      padding-bottom: 0; /* Remove default form group padding */
      border-bottom: none; /* Remove default form group border */
-     flex-grow: 1; /* Allow form groups to grow in flex container */
+     flex-grow: 1; /* Allow form groups to grow in flex container_page */
 }
 
 .form-label {
@@ -165,7 +161,7 @@ body {
 
 <main class="main-content-wrapper">
         <section class="reports-section">
-            <div class="container">
+            <div class="container_page">
                 <h1 class="page-title">Reports</h1>
 
                 <div class="report-controls">

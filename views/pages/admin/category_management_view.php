@@ -13,7 +13,7 @@ body {
     padding: 0;
     line-height: 1.6;
     display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack children vertically */
+    flex-direction: row; /* Stack children vertically */
     min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
 
@@ -240,7 +240,7 @@ body {
 
 <main class="main-content-wrapper">
         <section class="category-management-section">
-            <div class="container">
+            <div class="container_page">
                 <h1 class="page-title">Category Management</h1>
 
                 <div class="existing-categories">

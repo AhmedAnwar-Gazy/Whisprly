@@ -220,7 +220,7 @@ body {
 
 <main class="main-content-wrapper">
         <section class="content-moderation-section">
-            <div class="container">
+            <div class="container_page">
                 <h1 class="page-title">Content Moderation</h1>
 
                 <div class="moderation-queue">

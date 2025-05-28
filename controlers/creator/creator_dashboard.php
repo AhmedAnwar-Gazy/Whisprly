@@ -17,47 +17,47 @@ $currentUserRole = $_SESSION['user']['role'] ?? 'listener'; // Default to listen
 // }
 // --- End Authorization Check ---
 
-try {
-    // 1. Get total podcasts created by this user
-    $totalPodcasts = $db->query("
-        SELECT COUNT(podcast_id) AS count
-        FROM podcasts
-        WHERE created_by = :user_id
-    ", [
-        'user_id' => $currentUserId
-    ])->fetch()['count'];
+// try {
+//     // 1. Get total podcasts created by this user
+//     $totalPodcasts = $db->query("
+//         SELECT COUNT(podcast_id) AS count
+//         FROM podcasts
+//         WHERE created_by = :user_id
+//     ", [
+//         'user_id' => $currentUserId
+//     ])->fetch()['count'];
 
-    // 2. Get total podcasts in 'pending' status by this user
-    $pendingPodcasts = $db->query("
-        SELECT COUNT(podcast_id) AS count
-        FROM podcasts
-        WHERE created_by = :user_id AND status = 'pending'
-    ", [
-        'user_id' => $currentUserId
-    ])->fetch()['count'];
+//     // 2. Get total podcasts in 'pending' status by this user
+//     $pendingPodcasts = $db->query("
+//         SELECT COUNT(podcast_id) AS count
+//         FROM podcasts
+//         WHERE created_by = :user_id AND status = 'pending'
+//     ", [
+//         'user_id' => $currentUserId
+//     ])->fetch()['count'];
 
-    // 3. Get total episodes across all podcasts created by this user
-    $totalEpisodes = $db->query("
-        SELECT COUNT(e.episode_id) AS count
-        FROM episodes e
-        JOIN podcasts p ON e.podcast_id = p.podcast_id
-        WHERE p.created_by = :user_id
-    ", [
-        'user_id' => $currentUserId
-    ])->fetch()['count'];
+//     // 3. Get total episodes across all podcasts created by this user
+//     $totalEpisodes = $db->query("
+//         SELECT COUNT(e.episode_id) AS count
+//         FROM episodes e
+//         JOIN podcasts p ON e.podcast_id = p.podcast_id
+//         WHERE p.created_by = :user_id
+//     ", [
+//         'user_id' => $currentUserId
+//     ])->fetch()['count'];
 
-    // 4. Get total books uploaded by this user
-    $totalBooks = $db->query("
-        SELECT COUNT(book_id) AS count
-        FROM books
-        WHERE uploaded_by = :user_id
-    ", [
-        'user_id' => $currentUserId
-    ])->fetch()['count'];
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    abort(500); // Internal Server Error
-}
+//     // 4. Get total books uploaded by this user
+//     $totalBooks = $db->query("
+//         SELECT COUNT(book_id) AS count
+//         FROM books
+//         WHERE uploaded_by = :user_id
+//     ", [
+//         'user_id' => $currentUserId
+//     ])->fetch()['count'];
+// } catch (PDOException $e) {
+//     error_log($e->getMessage());
+//     abort(500); // Internal Server Error
+// }
 
 require "views/pages/creator/dashboard_view.php";
 

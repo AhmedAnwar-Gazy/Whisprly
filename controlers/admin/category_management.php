@@ -21,25 +21,25 @@ try {
     // If you had a 'categories' table, you would query that instead:
     // "SELECT category_id, name FROM categories WHERE 1=1"
     $query = "
-        SELECT DISTINCT category
-        FROM podcasts
+        SELECT DISTINCT *
+        FROM categories
         WHERE 1=1
     ";
 
     $params = [];
 
-    // 🔎 Add Search Filter for categories
-    if (!empty($search)) {
-        // Using LIKE for partial matches since it's a VARCHAR field
-        $query .= " AND category LIKE :search";
-        $params['search'] = '%' . $search . '%';
-    }
+    // // 🔎 Add Search Filter for categories
+    // if (!empty($search)) {
+    //     // Using LIKE for partial matches since it's a VARCHAR field
+    //     $query .= " AND category LIKE :search";
+    //     $params['search'] = '%' . $search . '%';
+    // }
 
     // Finalize Query
-    $query .= " ORDER BY category ASC;";
+    //$query .= " ORDER BY category_id ASC;";
 
     // Execute the query
-    $categories = $db->query($query, $params)->fetchAll();
+    $categories = $db->query($query)->fetchAll();
 
     // If you had a 'categories' table, the fetch above would be:
     // $categories = $db->query($query, $params)->fetchAll();

@@ -1,6 +1,6 @@
 <?php require('views/partials/head.php') ?>
 <?php require('views/partials/nav.php') ?>
-<?php require('views/partials/header.php') ;?>
+<?php require('views/partials/header.php'); ?>
 
 
 <style>
@@ -758,7 +758,7 @@
     <section class="podcast-series-detail-section">
         <div class="containerr">
             <div class="series-header">
-                <img src="views/media/images/<?= $podcast["cover_image"] ?? "image.png"?>" alt="Podcast Series Cover" class="series-cover-large">
+                <img src="views/media/images/<?= $podcast["cover_image"] ?? "image.png" ?>" alt="Podcast Series Cover" class="series-cover-large">
                 <div class="series-info-large">
                     <h1 class="series-title-large"><?= $podcast["title"] ?></h1>
                     <p class="series-creator-large">By <?php echo $podcast["creator_name"] ?></p>
@@ -772,7 +772,10 @@
                             <i class="fas fa-plus-circle"></i> Subscribe
                         </button>
                         <!-- يجب تعدبل هذا الرابط  -->
-                        <button id="readBookButton" class="read-book-button" data-pdf-src="/views/media/pdfs/<?= $books[0]["pdf_file"] ?? "modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf" ?>#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
+                        <!-- <button id="readBookButton" class="read-book-button" data-pdf-src="/views/media/pdfs/<?= $books[0]["pdf_file"] ?? "modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf" ?>#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
+                            <i class="fas fa-book-reader"></i> Read Full Book
+                        </button>  -->
+                        <button id="readBookButton" class="read-book-button" data-pdf-src="/views/media/pdfs/clean-code.pdf#toolbar=1&navpanes=0&scrollbar=0&zoom=page-width">
                             <i class="fas fa-book-reader"></i> Read Full Book
                         </button>
                     </div>
@@ -788,7 +791,7 @@
                     </div>
                 </div>
 
-                <audio id="audioPlayer" src="/views/media/sounds/<?php echo $podcast["audio_file"] ?? "JavaThreading.mp3"?>" preload="metadata"></audio>
+                <audio id="audioPlayer" src="/views/media/sounds/<?php echo $podcast["audio_file"] ?? "JavaThreading.mp3" ?>" preload="metadata"></audio>
 
                 <div class="controls">
                     <button id="playPauseButton" class="control-button" aria-label="Play/Pause">
@@ -813,21 +816,21 @@
                 <ul>
                     <li class="episode-item">
                         <?php if (isset($episodes)): foreach ($episodes as $episode): ?>
-                            <a href="episode_show?episode_id=<?htmlspecialchars($episode['episode_id']) ?>" class="episode_item">
-                                
-                                <div class="episode-details">
-                                    <span class="episode-number"><?= htmlspecialchars($episode['episode_id']) ?></span>
-                                    <h3 class="episode-title"><?= htmlspecialchars($episode['title']) ?></h3>
-                                    <span class="episode-duration"><?= htmlspecialchars($episode['duration']) ?> min</span>
-                                    <span class="episode-date">Released: <?= htmlspecialchars($episode['release_date']) ?></span>
-                                </div>
-                                <div class="episode-actions">
-                                    <button class="play-button"><i class="fas fa-play"></i> Play</button>
-                                    <button class="download-button"><i class="fas fa-download"></i> Download</button>
-                                </div>
-                            </a>
-                             <?php endforeach; ?>
-                    <?php endif; ?>
+                                <a href="episode_show?episode_id=<? htmlspecialchars($episode['episode_id']) ?>" class="episode_item">
+
+                                    <div class="episode-details">
+                                        <span class="episode-number"><?= htmlspecialchars($episode['episode_id']) ?></span>
+                                        <h3 class="episode-title"><?= htmlspecialchars($episode['title']) ?></h3>
+                                        <span class="episode-duration"><?= htmlspecialchars($episode['duration']) ?> min</span>
+                                        <span class="episode-date">Released: <?= htmlspecialchars($episode['release_date']) ?></span>
+                                    </div>
+                                    <div class="episode-actions">
+                                        <button class="play-button"><i class="fas fa-play"></i> Play</button>
+                                        <button class="download-button"><i class="fas fa-download"></i> Download</button>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </li>
                     <!-- <li class="episode-item">
                         <div class="episode-details">
@@ -878,7 +881,7 @@
                 <h2>Read Along (<?php echo $books[0]["pdf_file"] ?>)</h2>
                 <div class="pdf-viewer-container">
                     <iframe id="pdfViewerIframe" src="" width="100%" height="700px" frameborder="0">
-                        This browser does not support PDFs. Please <a href="/views/media/pdfs/<?php echo $books[0]["pdf_file"] ?? "modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf"?>">download the PDF</a> instead.
+                        This browser does not support PDFs. Please <a href="/views/media/pdfs/<?php echo $books[0]["pdf_file"] ?? "modern-java-in-action-lambda-streams-functional-and-reactive-programming_compress (4).pdf" ?>">download the PDF</a> instead.
                     </iframe>
                 </div>
             </div>

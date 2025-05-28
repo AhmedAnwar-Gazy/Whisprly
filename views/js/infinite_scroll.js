@@ -21,17 +21,21 @@ document.addEventListener('DOMContentLoaded', function() {
       
                 if (data.success) {
                     if (data.products.length > 0) {
+                        //console.log(data.products);
                         data.products.forEach(product => {
                             var productItem = document.createElement('div');
+                            //alert(product.podcast_id);
                             productItem.classList.add('product-item');
-                            productItem.dataset.id = product.id;
+                            productItem.dataset.id = product.podcast_id;
                             productItem.innerHTML = `
-                            <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($podcast['podcast_id']) ?>">
+                            <a href="/podcast_show?podcast_id=${product.podcast_id}">
                                 <div class="podcast-series-card">
-                                    <img src="/views/midea/images/image.png" alt="Podcast Series Cover" class="series-cover">
-                                    <h2>${product.podcast_id}</h2>
-                                    <p>${product.title}</p>
-                                    <p>${product.description}</p>
+                                    <img src="/views/media/images/image.png" alt="Podcast Series Cover" class="series-cover">
+                                        <div class="series-info" >
+                                            <h3 class="series-title">${product.title}</h3>
+                                            <p class="series-creator">${product.podcast_id}</p>
+                                            <p class="series-description">${product.description}</p>
+                                        </div>
                                 </div>
                             </a>
                             `;

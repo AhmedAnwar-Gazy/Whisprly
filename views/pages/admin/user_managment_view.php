@@ -202,7 +202,7 @@ body {
 
  <main class="main-content-wrapper">
         <section class="user-management-section">
-            <div class="container">
+            <div class="container_page">
                 <h1 class="page-title">User Management</h1>
 
                 <div class="search-filter-area">

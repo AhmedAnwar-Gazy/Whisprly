@@ -54,7 +54,8 @@ function logIn($user)
         'email' => $user['email'],
         'id' => $user['user_id'],
         'type' => $user['type'],
-        'photo' => $user['photo']
+        'photo' => $user['photo'],
+        'user_id' => $user['user_id']
     ];
 
     session_regenerate_id(true);
