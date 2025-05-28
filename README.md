@@ -9,4 +9,4 @@ Ahmed Anwar (Structure and Additional Technologies)<br>
 ![](design/ui3.jpg)
 ![](design/ui4.jpg)
 ![](design/ui5.jpg)
-![](design/ui6.jpg)
+![](design/ui6.png)
