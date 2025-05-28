@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
+// الامان هنه صفر بس يمشي الحال 
 if(isset($_COOKIE['email']) && !isset($_SESSION['user']['email'])){
     $_SESSION['user'] = $_COOKIE;
 }

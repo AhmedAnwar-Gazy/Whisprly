@@ -64,6 +64,7 @@ function logIn($user)
     setcookie('name',$user['name'] );
     setcookie('email',$user['email'] );
     setcookie('password',$user['password'] );
+    setcookie('type',$user['role'] );
     $cookie_name = "user_preference";
     $cookie_value = "dark_mode";
     $expiration_time = time() + (86400 * 30); 

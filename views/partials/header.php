@@ -31,7 +31,7 @@
                  </svg>
              </button>
          </div>
-         <?php if ($_SESSION['user'] ?? false) : ?>
+         <?php if ($_SESSION['user']['user_id'] ?? false) : ?>
              <a class="btn" href="/user_show?user_id=<?= $_SESSION['user']['user_id'] ?>"><img class="profile" src="views/media/images/<?= $_SESSION['user']['photo'] ?? 'user.png' ?>" alt="profil"></a>
              <form action="/logout" class="but_sgin" method="post">
                  <input type="hidden" name="_method" value="DELETE">
