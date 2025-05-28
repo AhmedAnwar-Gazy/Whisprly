@@ -1,11 +1,12 @@
 <?php
+//dd("episode");
 $heading = "Manage Episodes";
 
 use core\App;
 use core\Database;
 
 $db = App::resolve(Database::class);
-$episodes=$db->query(" select * from episodes;")->fetchAll();
+$episodes=$db->query(" SELECT episodes.* ,podcasts.title as podcast_title from episodes LEFT join podcasts on episodes.podcast_id = podcasts.podcast_id ;")->fetchAll();
 
 
 

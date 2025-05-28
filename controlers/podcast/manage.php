@@ -1,4 +1,5 @@
 <?php
+// dd("podcast");
 $heading = "Manage My Podcasts";
 
 $heading = "All Podcasts";
@@ -24,11 +25,7 @@ try {
     // --- 2. Construct the Base SQL Query ---
     $query = "
         SELECT
-            p.podcast_id,
-            p.title,
-            p.description,
-            p.cover_image,
-            p.created_at,
+            p.* ,
             u.name AS creator_name,
             COUNT(e.episode_id) AS episode_count
         FROM podcasts p

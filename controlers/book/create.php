@@ -8,7 +8,7 @@ use core\Database ;
 
 
 $db = App::resolve(Database::class);
-
+$allCategories = $db->query("SELECT * FROM categories")->fetchAll();
 
 
 

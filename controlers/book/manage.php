@@ -1,61 +1,71 @@
 <?php
-$heading = "Manage My Books";
+$heading = "All Books";
 
 use core\App;
 use core\Database;
 
+// Resolve the Database instance from the application container
 $db = App::resolve(Database::class);
 
-$currentUserId = $_SESSION['user']['user_id'] ?? 1; // Current logged-in user
-
 try {
+    // Get the search term from the URL query parameter 'search'. Default to empty string.
     $search = $_GET['search'] ?? '';
-    $topicFilter = $_GET['topic'] ?? 'all';
+    // Get the topic filter from the URL query parameter 'topic'. Default to 'all'.
+    $topicFilter = $_GET['category'] ?? 'all';
+    // Get the sorting order for 'created_at'. Default to 'desc' (newest first).
+    $sortByCreatedAt = $_GET['sort_by_created_at'] ?? 'desc'; // 'asc' for oldest first, 'desc' for newest first
+
+    // --- 1. Fetch all distinct topics for the filter dropdown ---
+    // This allows you to populate a <select> dropdown in your HTML view.
     $allCategories = $db->query("SELECT * FROM categories")->fetchAll();
-    // Optionally fetch distinct topics for a filter dropdown
-    $topics = $db->query("SELECT DISTINCT topic FROM books WHERE uploaded_by = :current_user_id ORDER BY topic", [
-        'current_user_id' => $currentUserId
-    ])->fetchAll();
+
+    // --- 2. Construct the Base SQL Query ---
 
     $query = "
-        SELECT
-            book_id,
-            title,
-            description,
-            pdf_file,
-            topic,
-            uploaded_by,
-            linked_podcast_id,
-            created_at
-        FROM books
-        WHERE uploaded_by = :current_user_id
+        SELECT books.* FROM books LEFT JOIN book_categories on books.book_id = book_categories.book_id 
+        WHERE 1=1
     ";
 
-    $params = [
-        'current_user_id' => $currentUserId
-    ];
+    // Initialize an array to hold parameters for the prepared statement
+    $params = [];
 
-    // Add Search Filter
+    // --- 3. Add Full-Text Search Filter ---
+    // If a search term is provided, add the MATCH() AGAINST() clause.
+    // IMPORTANT: For this to work efficiently, you MUST have a FULLTEXT index on
+    // 'title', 'description', and 'topic' columns in your 'books' table.
+    // Example SQL to add index: ALTER TABLE books ADD FULLTEXT(title, description, topic);
     if (!empty($search)) {
-        $query .= " AND MATCH(title, description, topic) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
-        $params['search'] = $search;
+        $query .= " AND MATCH(books.title, books.description) AGAINST (:search IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)";
+        $params['search'] = $search; // Bind the search term parameter
     }
 
-    // Add Topic Filter
+    // --- 4. Add Topic Filtering ---
+    // If a specific topic is selected (not 'all'), add the topic filter.
     if ($topicFilter !== 'all' && !empty($topicFilter)) {
-        $query .= " AND topic = :topic_filter";
-        $params['topic_filter'] = $topicFilter;
+        $query .= " AND book_categories.category_id = :topic_filter";
+        $params['topic_filter'] = $topicFilter; // Bind the topic filter parameter
     }
 
-    // Finalize Query
-    $query .= " ORDER BY created_at DESC;";
+    // --- 5. Finalize Query with Ordering ---
+    // Add ordering by 'created_at' based on the 'sort_by_created_at' parameter
+    if ($sortByCreatedAt === 'asc') {
+        $query .= " ORDER BY books.created_at ASC;";
+    } else {
+        // Default to descending order (newest first)
+        $query .= " ORDER BY books.created_at DESC;";
+    }
 
+    // --- 6. Execute the Query ---
     $books = $db->query($query, $params)->fetchAll();
 
 } catch (PDOException $e) {
+    // Log any database errors for debugging
     error_log($e->getMessage());
-    abort(500);
+    // Abort and show a 500 error page to the user
+    abort(500); // Assumes your application has an 'abort' function for error handling
 }
+//dd($books);
+
 
 require "views/pages/book/manage_view.php";
 

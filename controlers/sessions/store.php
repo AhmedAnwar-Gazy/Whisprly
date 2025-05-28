@@ -26,7 +26,7 @@ if (! empty($erorrs)) {
 $user = $db->query("select * from users where email = :email ; ", [
     "email" => $email
 ])->fetch();
-
+//dd($user);
 if ($user) {
     if (password_verify($password, $user['password'])) {
         logIn($user);

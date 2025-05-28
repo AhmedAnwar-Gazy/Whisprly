@@ -338,7 +338,7 @@
                 <?php if (isset($books)): foreach ($books as $book): ?>
 
 
-                        <a href="/views/pages/podcast/show_view?id=<?= htmlspecialchars($book['book_id']) ?>">
+                        <a href="/book_show?book_id=<?= htmlspecialchars($book['book_id']) ?>">
                             <div class="book-card">
                                 <img src="/views/media/images/<?= htmlspecialchars($book['cover_image'] ?? "image.png") ?>" alt="Book Cover" class="book-cover">
                                 <div class="book-info">

@@ -1,4 +1,5 @@
 <?php
+dd("categorie");
 $heading = "Manage My Books";
 
 use core\App;

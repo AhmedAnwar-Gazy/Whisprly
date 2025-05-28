@@ -1,4 +1,5 @@
 <?php
+//dd($_POST['podcast_id']);
 $heading = "one test";
 
 use core\App;

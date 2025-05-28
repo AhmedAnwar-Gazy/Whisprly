@@ -26,21 +26,11 @@ if (empty($_POST['description'])) {
     $errors['description'] = "Description must be at least 20 characters.";
 }
 
-// 3. Validate Category
-if (empty($_POST['category'])) {
-    $errors['category'] = "Category is required.";
-} elseif (!Validator::string($_POST['category'] ?? '', 2, 100)) {
-    $errors['category'] = "Category must be between 2 and 100 characters.";
-}
+// 
 
 // 4. Validate Cover Image (assuming it's a URL or file path)
 // For file uploads, you'd need a separate file upload handler like your image_loader.php
-if (empty($_POST['cover_image'])) {
-    // This could be optional, or you could require it and validate as a URL/path
-    $errors['cover_image'] = "Cover image URL/path is required.";
-} elseif (!Validator::string($_POST['cover_image'] ?? '', 5, 255)) { // Simple string validation
-    $errors['cover_image'] = "Invalid cover image path.";
-}
+
 
 
 // If there are validation errors, store them in session and redirect back
@@ -51,22 +41,18 @@ if (!empty($errors)) {
 }
 
 try {
-    // Assuming you have an image_loader.php or similar for file uploads if needed
-    // For now, let's just use the URL provided. If it's a file upload, integrate that logic here.
-    $cover_image_path = htmlspecialchars($_POST['cover_image']);
+    require "controlers/parts/image_loader.php"; 
 
     $db->query(
         "INSERT INTO podcasts (
             title,
             description,
-            category,
             cover_image,
             created_by,
             status
         ) VALUES (
             :title,
             :description,
-            :category,
             :cover_image,
             :created_by,
             :status
@@ -74,15 +60,14 @@ try {
         [
             'title' => htmlspecialchars($_POST['title']),
             'description' => htmlspecialchars($_POST['description']),
-            'category' => htmlspecialchars($_POST['category']),
-            'cover_image' => $cover_image_path,
+            'cover_image' => $filenamenew,
             'created_by' => $currentUserId,
             'status' => 'pending' // New podcasts usually start as 'pending' for admin review
         ]
     );
 
     // Redirect to a success page or the manage podcasts page
-    header("Location: /podcast/manage");
+    header("Location: " . $_SERVER["HTTP_REFERER"]); 
     exit();
 
 } catch (PDOException $e) {
@@ -92,7 +77,8 @@ try {
 
 
 
-
+header("Location: " . $_SERVER["HTTP_REFERER"]); // Redirect back to the form
+exit();
 
 
 

@@ -40,17 +40,18 @@ if ($user) {
 
 
 try {
-    require "controlers/parts/image_loader.php"; ;
+    require "controlers/parts/image_loader.php"; 
 
 
    
     $db->query(
-        'INSERT INTO users (name , email , password ,role ) VALUES (:username ,:email , :password , :admin);',
+        'INSERT INTO users (name , email , password ,role ,photo) VALUES (:username ,:email , :password , :admin ,:photo);',
         [
             'username' => $_POST['name'],
             'email' => $email,
             'password' => password_hash($password, PASSWORD_BCRYPT),
-            'admin' => 'listener'
+            'admin' => 'listener' ,
+            'photo' => $filenamenew
         ]
     );
 

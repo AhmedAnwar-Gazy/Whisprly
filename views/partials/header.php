@@ -16,7 +16,11 @@
                  <li><a href="/book_index">Books</a></li>
                  <li><a href="/podcast_list">Library</a></li>
                  <!-- <li><a href="/creator_manage_my_content">Creator</a></li> -->
-                 <li><a href="/admin_content_moderation">Admin</a></li>
+            <?php  if ($_SESSION['user'] ?? false) : ?> 
+                <?php if($_SESSION['user']['type'] == "admin" ) : ?>         
+                       <li><a href="/dashboard_admin">Admin</a></li>
+                    <?php endif ?>
+                       <?php endif ?>
              </ul>
          </nav>
 
@@ -28,7 +32,7 @@
              </button>
          </div>
          <?php if ($_SESSION['user'] ?? false) : ?>
-             <a class="btn" href="/users_show"><img class="btn" src="views/media/images/<?= $_SESSION['user']['photo'] ?? 'user.png' ?>" alt="profil"></a>
+             <a class="btn" href="/user_show?user_id=<?= $_SESSION['user']['user_id'] ?>"><img class="profile" src="views/media/images/<?= $_SESSION['user']['photo'] ?? 'user.png' ?>" alt="profil"></a>
              <form action="/logout" class="but_sgin" method="post">
                  <input type="hidden" name="_method" value="DELETE">
                  <button class="btn" type="submit" aria-label="logout">LogOut</button>

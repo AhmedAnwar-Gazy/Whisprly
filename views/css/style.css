@@ -349,3 +349,18 @@ body {
     background-color: #F8F5F0;
     cursor: pointer;
 }
+
+.container_page {
+    display: flex;
+    /* Use flexbox for icon and text */
+    flex-direction: column;
+    max-width: 1000px;
+    /* Container width for dashboard content */
+    margin: 0 auto;
+    /* Center the container */
+}
+
+.profile{
+    width :2rem ;
+    height: 2rem;
+}

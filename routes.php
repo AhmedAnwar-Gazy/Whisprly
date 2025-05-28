@@ -22,7 +22,6 @@
 
 $router->get('/register', 'controlers/registertion/create.php');
 $router->post('/register', 'controlers/registertion/store.php');
-
 $router->get('/login', 'controlers/sessions/create.php');
 $router->delete('/logout', 'controlers/sessions/destroy.php');
 $router->post('/login', 'controlers/sessions/store.php');
@@ -40,6 +39,7 @@ $router->get('/data', 'controlers/data.php');
 
 
 
+$router->get('/dashboard_admin', 'controlers/admin/dashboard.php');
 $router->get('/admin_content_moderation', 'controlers/admin/content_moderation.php');
 $router->get('/admin_category_management', 'controlers/admin/category_management.php');
 
@@ -76,15 +76,19 @@ $router->get('/episode_update', 'controlers/episode/update.php');
 
 
 $router->get('/podcast_create', 'controlers/podcast/create.php');
-$router->get('/podcast_destroy', 'controlers/podcast/destroy.php');
+$router->delete('/podcast_destroy', 'controlers/podcast/destroy.php');
 $router->get('/podcast_edit', 'controlers/podcast/edit.php');
 $router->get('/podcast_index', 'controlers/podcast/index.php');
 $router->get('/podcast_list', 'controlers/podcast/list.php');
 $router->get('/podcast_manage', 'controlers/podcast/manage.php');
 $router->get('/podcast_show', 'controlers/podcast/show.php');
-$router->get('/podcast_store', 'controlers/podcast/store.php');
+$router->post('/podcast_store', 'controlers/podcast/store.php');
 $router->get('/podcast_update', 'controlers/podcast/update.php');
 
+
+
+$router->get('/user_manage', 'controlers/user/manage.php');
+$router->get('/user_show', 'controlers/user/show.php');
 
 // -----------------------------------------------------------------------------
 
@@ -112,6 +116,7 @@ $router->get('/category_management_view', 'views/pages/admin/category_management
 $router->get('/dashboard_admin_view', 'views/pages/admin/dashboard_admin_view.php');
 $router->get('/reports_view', 'views/pages/admin/reports_view.php');
 $router->get('/user_managment_view', 'views/pages/admin/user_managment_view.php');
+$router->get('/admin__view', 'views/pages/admin/user_managment_view.php');
 
 
 
