@@ -232,4 +232,4 @@
         </div>
     </section>
 </main>
-<?php require('views/parts/footer.php') ?>
+<?php require('views/partials/footer.php') ?>

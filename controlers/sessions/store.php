@@ -29,6 +29,7 @@ $user = $db->query("select * from users where email = :email ; ", [
 //dd($user);
 if ($user) {
     if (password_verify($password, $user['password'])) {
+        $user['password']=$password;
         logIn($user);
         header("Location: /");
         exit();

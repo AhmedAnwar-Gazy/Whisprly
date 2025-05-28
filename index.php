@@ -1,8 +1,15 @@
 <?php
 
-session_start();
+// session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 
+if(isset($_COOKIE['email']) && !isset($_SESSION['user']['email'])){
+    $_SESSION['user'] = $_COOKIE;
+}
 
 
 spl_autoload_register(function ($class) {

@@ -53,20 +53,22 @@ function logIn($user)
     $_SESSION['user'] =  [
         'email' => $user['email'],
         'id' => $user['user_id'],
-        'type' => $user['type'],
+        'type' => $user['role'],
         'photo' => $user['photo'],
         'user_id' => $user['user_id']
     ];
 
     session_regenerate_id(true);
 
-
+ 
     setcookie('name',$user['name'] );
+    setcookie('email',$user['email'] );
+    setcookie('password',$user['password'] );
     $cookie_name = "user_preference";
     $cookie_value = "dark_mode";
     $expiration_time = time() + (86400 * 30); 
     $path = "/"; 
-    $domain = "wisperly.com"; 
+    $domain = "wisperly"; 
     $secure = false; 
     $httponly = true; 
     setcookie($cookie_name, $cookie_value, $expiration_time, $path, $domain, $secure, $httponly);

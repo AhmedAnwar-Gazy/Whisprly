@@ -16,7 +16,11 @@
                  <li><a href="/book_index">Books</a></li>
                  <li><a href="/podcast_list">Library</a></li>
                  <!-- <li><a href="/creator_manage_my_content">Creator</a></li> -->
-                 <li><a href="/dashboard_admin">Admin</a></li>
+            <?php  if ($_SESSION['user'] ?? false) : ?> 
+                <?php if($_SESSION['user']['type'] == "admin" ) : ?>         
+                       <li><a href="/dashboard_admin">Admin</a></li>
+                    <?php endif ?>
+                       <?php endif ?>
              </ul>
          </nav>
 

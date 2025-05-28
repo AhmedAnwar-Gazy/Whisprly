@@ -54,8 +54,8 @@ try {
             'photo' => $filenamenew
         ]
     );
-
-
+   
+    $user['password']=$password;
     logIn($user);
 } catch (PDOException $e) {
     error_log($e->getMessage());

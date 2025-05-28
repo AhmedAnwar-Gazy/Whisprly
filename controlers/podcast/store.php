@@ -42,7 +42,6 @@ if (!empty($errors)) {
 
 try {
     require "controlers/parts/image_loader.php"; 
-    dd($errors);
 
     $db->query(
         "INSERT INTO podcasts (
